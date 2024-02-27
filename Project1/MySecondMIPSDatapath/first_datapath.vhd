@@ -36,7 +36,7 @@ architecture structural of datapath is
         );
     end component;
 
-    component add_sub_N is
+    component AddSub_N is
         port (
             iC : in std_logic;
             iA : in std_logic_vector(N - 1 downto 0);
@@ -80,7 +80,7 @@ begin
         i_D1 => i_Imm,
         o_O => w_mux_rtn);
 
-    addsub : add_sub_N port map(
+    addsub : AddSub_N port map(
         iC => i_C,
         iA => w_rt_data,
         iB => w_mux_rtn,
