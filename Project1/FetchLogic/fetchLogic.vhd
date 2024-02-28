@@ -5,8 +5,8 @@
 -------------------------------------------------------------------------
 -- fetchLogic.vhd
 -------------------------------------------------------------------------
--- DESCRIPTION: This file contains an implementation of an N-bit wide Adder
--- subtractor using structural VHDL.
+-- DESCRIPTION: This file contains an implementation of the fetch logic
+-- for our MIPS processor.
 -------------------------------------------------------------------------
 
 library IEEE;
@@ -15,11 +15,10 @@ use IEEE.std_logic_1164.all;
 entity fetchLogic is
     generic (N : integer := 32);
     port (
-        iC : in std_logic;
-        iA : in std_logic_vector(N - 1 downto 0);
-        iB : in std_logic_vector(N - 1 downto 0);
-        oC : out std_logic;
-        oS : out std_logic_vector(N - 1 downto 0));
+        i_jump_C : in std_logic;
+        i_w_branch_n_ALUo : in std_logic;
+        i_instr_25t0 : in std_logic_vector(25 downto 0);
+        i_ext_imm : in std_logic_vector(N - 1 downto 0));
 end fetchLogic;
 
 architecture structural of fetchLogic is
@@ -42,9 +41,52 @@ architecture structural of fetchLogic is
             o_O : out std_logic_vector(N - 1 downto 0));
     end component;
 
-
+    -- Same signal as w_add0_add1
+    signal w_add0_mux : std_logic_vector(N - 1 downto 0);
+    signal w_pc_add0 : std_logic_vector(N - 1 downto 0);
+    signal w_shift_add1 : std_logic_vector(N - 1 downto 0);
+    signal w_add1_mux2 : std_logic_vector(N - 1 downto 0);
+    signal w_mux2_mux3 : std_logic_vector(N - 1 downto 0);
+    signal w_pc_next : std_logic_vector(N - 1 downto 0);
+    signal w_s120_o : std_logic_vector(27 downto 0);
+    signal w_pc4_s120_o : std_logic_vector(N - 1 downto 0);
+    signal s_add0_overflow: std_logic;  -- 1 if overflow
+    signal s_add1_overflow: std_logic;  -- 1 if overflow
 
 begin
 
+    add0 : AddSub_N port map(
+        iC => '0',
+        iA => w_pc_add0,
+        iB => x"00000004",
+        oC => s_add0_overflow,
+        oS => w_add0_mux);
+
+    -- Jump location
+    w_s120_o <= i_instr_25t0 & b"00"; -- shift_left2_0
+
+    w_shift_add1 <= i_ext_imm(29 downto 0) & b"00"; -- shift_left2_1
+
+    add1 : AddSub_N port map(
+        iC => '0',
+        iA => w_add0_mux,
+        iB => w_shift_add1,
+        oC => s_add1_overflow,
+        oS => w_add1_mux2);
+
+    mux2 : mux2t1_N port map(
+        i_S => i_w_branch_n_ALUo,
+        i_D0 => w_add0_mux,
+        i_D1 => w_add1_mux2,
+        o_O => w_mux2_mux3);
+
+    -- Upper 4 bits don't change, add to jump location
+    w_pc4_s120_o <= w_add0_mux(31 downto 28) & w_s120_o;
+
+    mux3 : mux2t1_N port map(
+        i_S => i_jump_C,
+        i_D0 => w_mux2_mux3,
+        i_D1 => w_pc4_s120_o,
+        o_O => w_pc_next);
 
 end structural;
