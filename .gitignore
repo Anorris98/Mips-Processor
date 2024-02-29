@@ -1,8 +1,4 @@
 Project1/*/modelsim.ini
-Project1/*/work/_info
-Project1/*/work/_lib.qdb
-Project1/*/work/_lib1_0.qdb
-Project1/*/work/_lib1_0.qpg
-Project1/*/work/_lib1_0.qtl
-Project1/*/work/_vmake
+Project1/*/work/*
 Project1/*/transcript
+Project1/*/vsim.wlf
