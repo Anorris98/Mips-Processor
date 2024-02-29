@@ -1,8 +1,8 @@
-Project1/FetchLogic/modelsim.ini
-Project1/FetchLogic/work/_info
-Project1/FetchLogic/work/_lib.qdb
-Project1/FetchLogic/work/_lib1_0.qdb
-Project1/FetchLogic/work/_lib1_0.qpg
-Project1/FetchLogic/work/_lib1_0.qtl
-Project1/FetchLogic/work/_vmake
-Project1/FetchLogic/transcript
+Project1/*/modelsim.ini
+Project1/*/work/_info
+Project1/*/work/_lib.qdb
+Project1/*/work/_lib1_0.qdb
+Project1/*/work/_lib1_0.qpg
+Project1/*/work/_lib1_0.qtl
+Project1/*/work/_vmake
+Project1/*/transcript
