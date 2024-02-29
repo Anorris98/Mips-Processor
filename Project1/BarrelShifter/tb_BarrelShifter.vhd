@@ -40,31 +40,80 @@ begin
     -- Test process
     process
     begin
-        -- Test Case 1: Logical Right Shift by 1
-        data_in <= "11110000111100001111000011110000";
-        shift_type <= '0'; -- Logical shift
-        shift_amount <= "00001";
-        wait for 50 ns;
-        
-        -- Test Case 2: Logical Right Shift by 16
-        data_in <= "11110000111100001111000011110000";
-        shift_type <= '0'; -- Logical shift
-        shift_amount <= "10000";
-        wait for 50 ns;
-        
-        -- Test Case 3: Arithmetic Right Shift by 1 (Note: MSB should be preserved)
-        data_in <= "11110000111100001111000011110000";
-        shift_type <= '1'; -- Arithmetic shift
-        shift_amount <= "00001";
-        wait for 50 ns;
-
-        -- Test Case 4: Arithmetic Right Shift by 16 (Note: MSB should be preserved)
-        data_in <= "10000000111100001111000011110000";
-        shift_type <= '1'; -- Arithmetic shift
-        shift_amount <= "10000";
-        wait for 50 ns;
-        
         -- Add additional test cases as needed...
+        data_in <= x"7FFFFFFF";
+        shift_type <= '0'; -- Logical shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000000 by the end
+
+        data_in <= x"7FFFFFFF";
+        shift_type <= '1'; -- Arithmetic shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000000 by the end
+
+        data_in <= x"80000000";
+        shift_type <= '0'; -- Logical shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000001 by the end
+
+        data_in <= x"80000000";
+        shift_type <= '1'; -- Arithmetic shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0xFFFFFFFF by the end
+
+        data_in <= x"00000000";
+        shift_type <= '0'; -- Logical shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000001 by the end
+
+        data_in <= x"00000000";
+        shift_type <= '1'; -- Arithmetic shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000000 by the end
+
+        -- Add additional test cases as needed...
+        data_in <= x"FFFFFFFF";
+        shift_type <= '0'; -- Logical shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000000 by the end
+
+        data_in <= x"FFFFFFFF";
+        shift_type <= '1'; -- Arithmetic shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0xFFFFFFFF by the end
+        -- run 13200
 
         -- End simulation
         wait;
