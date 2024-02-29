@@ -43,28 +43,28 @@ BEGIN
     stimulus: PROCESS
     BEGIN
         -- Test Case 1: Logical Right Shift by 2
-        i_in <= "10000000000000000000000000000000";
+        i_in <= x"80000000";
         i_shift_C <= '0';  -- Logical shift
         i_direction <= '1'; -- Right shift
         i_shamt <= "00010"; -- Shift by 2
         WAIT FOR 100 ns;
         
         -- Test Case 2: Logical Left Shift by 4
-        i_in <= "00000000000000000000000000000001";
+        i_in <= x"00000001";
         i_shift_C <= '0';  -- Logical shift
         i_direction <= '0'; -- Left shift
         i_shamt <= "00100"; -- Shift by 4
         WAIT FOR 100 ns;
 
         -- Test Case 3: Arithmetic Right Shift by 3
-        i_in <= "10000000000000000000000000000000";
+        i_in <= x"80000000";
         i_shift_C <= '1';  -- Arithmetic shift
         i_direction <= '1'; -- Right shift
         i_shamt <= "00011"; -- Shift by 3
         WAIT FOR 100 ns;
 
         -- Test Case 4: Arithmetic Left Shift (should behave like logical) by 2
-        i_in <= "00000000000000000000000000000001";
+        i_in <= x"00000001";
         i_shift_C <= '1';  -- Arithmetic shift
         i_direction <= '0'; -- Left shift
         i_shamt <= "00010"; -- Shift by 2
