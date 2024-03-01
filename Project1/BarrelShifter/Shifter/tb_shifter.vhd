@@ -1,24 +1,24 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-ENTITY tb_Shifter IS
-END tb_Shifter;
+entity tb_Shifter is
+end tb_Shifter;
 
-ARCHITECTURE behavior OF tb_Shifter IS 
+architecture behavior of tb_Shifter is
 
     -- Component Declaration for the Unit Under Test (UUT)
-    COMPONENT Shifter
-    GENERIC(N : INTEGER := 32);
-    PORT(
-        i_in       : IN  std_logic_vector(31 DOWNTO 0);
-        i_shift_C  : IN  std_logic;
-        i_direction : IN  std_logic;
-        i_shamt    : IN  std_logic_vector(4 DOWNTO 0);
-        o_Out      : OUT std_logic_vector(31 DOWNTO 0)
+    component Shifter
+        generic (N : integer := 32);
+        port (
+            i_in : in std_logic_vector(31 downto 0);
+            i_shift_C : in std_logic;
+            i_direction : in std_logic;
+            i_shamt : in std_logic_vector(4 downto 0);
+            o_Out : out std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
-   
+    end component;
+
     --Inputs
     signal i_in : std_logic_vector(31 downto 0) := (others => '0');
     signal i_shift_C : std_logic := '0';
@@ -28,50 +28,51 @@ ARCHITECTURE behavior OF tb_Shifter IS
     --Outputs
     signal o_Out : std_logic_vector(31 downto 0);
 
-BEGIN 
+begin
 
     -- Instantiate the Unit Under Test (UUT)
-    uut: Shifter GENERIC MAP (N => 32) PORT MAP (
-          i_in => i_in,
-          i_shift_C => i_shift_C,
-          i_direction => i_direction,
-          i_shamt => i_shamt,
-          o_Out => o_Out
-        );
+    uut : Shifter generic map(
+        N => 32) port map (
+        i_in => i_in,
+        i_shift_C => i_shift_C,
+        i_direction => i_direction,
+        i_shamt => i_shamt,
+        o_Out => o_Out
+    );
 
     -- Stimulus process to apply test vectors
-    stimulus: PROCESS
-    BEGIN
+    stimulus : process
+    begin
         -- Test Case 1: Logical Right Shift by 2
         i_in <= x"80000000";
-        i_shift_C <= '0';  -- Logical shift
+        i_shift_C <= '0'; -- Logical shift
         i_direction <= '1'; -- Right shift
         i_shamt <= "00010"; -- Shift by 2
-        WAIT FOR 100 ns;
-        
+        wait for 100 ns;
+
         -- Test Case 2: Logical Left Shift by 4
         i_in <= x"00000001";
-        i_shift_C <= '0';  -- Logical shift
+        i_shift_C <= '0'; -- Logical shift
         i_direction <= '0'; -- Left shift
         i_shamt <= "00100"; -- Shift by 4
-        WAIT FOR 100 ns;
+        wait for 100 ns;
 
         -- Test Case 3: Arithmetic Right Shift by 3
         i_in <= x"80000000";
-        i_shift_C <= '1';  -- Arithmetic shift
+        i_shift_C <= '1'; -- Arithmetic shift
         i_direction <= '1'; -- Right shift
         i_shamt <= "00011"; -- Shift by 3
-        WAIT FOR 100 ns;
+        wait for 100 ns;
 
         -- Test Case 4: Arithmetic Left Shift (should behave like logical) by 2
         i_in <= x"00000001";
-        i_shift_C <= '1';  -- Arithmetic shift
+        i_shift_C <= '1'; -- Arithmetic shift
         i_direction <= '0'; -- Left shift
         i_shamt <= "00010"; -- Shift by 2
-        WAIT FOR 100 ns;
+        wait for 100 ns;
 
         -- End simulation
-        WAIT;
-    END PROCESS;
+        wait;
+    end process;
 
-END behavior;
+end behavior;
