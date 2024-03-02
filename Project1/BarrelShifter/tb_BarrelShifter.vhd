@@ -38,7 +38,7 @@ begin
 
 
     -- Test process
-    process
+    P_TB : process
     begin
         -- Add additional test cases as needed...
         data_in <= x"7FFFFFFF";

@@ -40,38 +40,13 @@ begin
         o_Out => o_Out
     );
 
-    -- Stimulus process to apply test vectors
-    stimulus : process
+    -- Test bench
+    P_TB : process
     begin
-        -- Test Case 1: Logical Right Shift by 2
-        i_in <= x"80000000";
-        i_shift_C <= '0'; -- Logical shift
-        i_direction <= '1'; -- Right shift
-        i_shamt <= "00010"; -- Shift by 2
-        wait for 100 ns;
-
-        -- Test Case 2: Logical Left Shift by 4
-        i_in <= x"00000001";
-        i_shift_C <= '0'; -- Logical shift
-        i_direction <= '0'; -- Left shift
-        i_shamt <= "00100"; -- Shift by 4
-        wait for 100 ns;
-
-        -- Test Case 3: Arithmetic Right Shift by 3
-        i_in <= x"80000000";
-        i_shift_C <= '1'; -- Arithmetic shift
-        i_direction <= '1'; -- Right shift
-        i_shamt <= "00011"; -- Shift by 3
-        wait for 100 ns;
-
-        -- Test Case 4: Arithmetic Left Shift (should behave like logical) by 2
-        i_in <= x"00000001";
-        i_shift_C <= '1'; -- Arithmetic shift
-        i_direction <= '0'; -- Left shift
-        i_shamt <= "00010"; -- Shift by 2
-        wait for 100 ns;
-
-        -- Add additional test cases as needed...
+        --------------------------------------------------
+        -- Left shift tests
+        -- run 3300 for just left shift tests
+        --------------------------------------------------
         i_in <= x"00000001";
         i_shift_C <= '0'; -- Logical shift
         i_direction <= '0'; -- Left shift
@@ -83,7 +58,7 @@ begin
         -- data_out should be 0x80000000 by the end
 
         i_in <= x"00000001";
-        i_shift_C <= '1'; -- Logical shift on left shift should still produce 0 filled values
+        i_shift_C <= '1'; -- Arithmetic shift on left shift should still produce 0 filled values
         i_direction <= '0'; -- Left shift
         for i in 0 to 31 loop
             i_shamt <= std_logic_vector(to_unsigned(i, 5));
@@ -91,6 +66,30 @@ begin
         end loop;
         wait for 50 ns;
         -- data_out should be 0x80000000 by the end
+
+        --------------------------------------------------
+        -- Right shift tests
+        -- run 6600 for right shift tests, start at 3300 ns
+        --------------------------------------------------
+        i_in <= x"80000000";
+        i_shift_C <= '0'; -- Logical shift
+        i_direction <= '1'; -- Right shift
+        for i in 0 to 31 loop
+            i_shamt <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x00000001 by the end
+
+        i_in <= x"80000000";
+        i_shift_C <= '1'; -- Arithmetic shift
+        i_direction <= '1'; -- Right shift
+        for i in 0 to 31 loop
+            i_shamt <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0xFFFFFFFF by the end
 
         -- End simulation
         wait;
