@@ -77,7 +77,7 @@ begin
     -- Obtain arithmetic shift or logical shift
     -- 0 if logical, 1 if arithmetic.
     -- can only be 1 if i_direction = 1 (right shift) AND i_shift_C = 1 (arithmetic shift)
-    shiftType : andg2
+    ShiftType : andg2
     port map(
         i_A => i_shift_C,
         i_B => i_direction,
