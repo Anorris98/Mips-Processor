@@ -71,6 +71,27 @@ begin
         i_shamt <= "00010"; -- Shift by 2
         wait for 100 ns;
 
+        -- Add additional test cases as needed...
+        i_in <= x"00000001";
+        i_shift_C <= '0'; -- Logical shift
+        i_direction <= '0'; -- Left shift
+        for i in 0 to 31 loop
+            i_shamt <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x80000000 by the end
+
+        i_in <= x"00000001";
+        i_shift_C <= '1'; -- Logical shift on left shift should still produce 0 filled values
+        i_direction <= '0'; -- Left shift
+        for i in 0 to 31 loop
+            i_shamt <= std_logic_vector(to_unsigned(i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0x80000000 by the end
+
         -- End simulation
         wait;
     end process;
