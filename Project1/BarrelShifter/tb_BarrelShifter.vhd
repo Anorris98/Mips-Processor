@@ -38,7 +38,7 @@ begin
 
 
     -- Test process
-    process
+    P_TB : process
     begin
         -- Add additional test cases as needed...
         data_in <= x"7FFFFFFF";
@@ -114,6 +114,15 @@ begin
         wait for 50 ns;
         -- data_out should be 0xFFFFFFFF by the end
         -- run 13200
+
+        data_in <= x"80000000";
+        shift_type <= '0'; -- Arithmetic shift
+        for i in 0 to 31 loop
+            shift_amount <= std_logic_vector(to_signed(-i, 5));
+            wait for 50 ns;
+        end loop;
+        wait for 50 ns;
+        -- data_out should be 0xFFFFFFFF by the end
 
         -- End simulation
         wait;
