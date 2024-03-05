@@ -116,13 +116,13 @@ begin
         i_D1 => i_jr_ra_pc_next,
         o_O => w_pc_next);
 
-    o_pc_next <= w_pc_next;
-
     pc : pc_dffg port map(
         i_CLK => i_CLK,
         i_RST => i_RST,
         i_WE => '1',
         i_D => w_pc_next,
         o_Q => w_pc_add0);
+
+    o_pc_next <= w_pc_add0;
 
 end structural;
