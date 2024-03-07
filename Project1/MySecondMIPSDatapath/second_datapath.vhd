@@ -105,7 +105,7 @@ begin
 
     ALU_mux : mux2t1_N port map(
         i_S => i_ALU_C,
-        i_D0 => w_rs_data,
+        i_D0 => w_rt_data,
         i_D1 => w_ext_o,
         o_O => w_mux_alu_rtn);
 
@@ -117,7 +117,7 @@ begin
 
     addsub : AddSub_N port map(
         iC => i_adsb_C,
-        iA => w_rt_data,
+        iA => w_rs_data,
         iB => w_mux_alu_rtn,
         oC => o_C,
         oS => w_adsb_o);
@@ -125,7 +125,7 @@ begin
     dmem : mem port map(
         clk => i_CLK,
         addr => w_adsb_o(11 downto 2),
-        data => w_rs_data,
+        data => w_rt_data,
         we => i_mem_WE,
         q => w_mem_o);
 
