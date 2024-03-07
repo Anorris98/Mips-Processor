@@ -17,7 +17,6 @@ entity fetchLogic is
     generic (N : integer := 32);
     port (
         i_jump_C : in std_logic;
-        i_jal_C : in std_logic;
         i_jr_ra_C : in std_logic;
         i_CLK : in std_logic;
         i_RST : in std_logic;

@@ -19,7 +19,6 @@ architecture behavior of tb_fetch_logic is
         generic (N : integer := 32);
         port (
             i_jump_C : in std_logic;
-            i_jal_C : in std_logic;
             i_jr_ra_C : in std_logic;
             i_CLK : in std_logic;
             i_RST : in std_logic;
@@ -33,7 +32,6 @@ architecture behavior of tb_fetch_logic is
 
     --Inputs
     signal s_jump_C : std_logic;
-    signal s_jal_C : std_logic;
     signal s_jr_ra_C : std_logic;
     signal s_CLK : std_logic;
     signal s_RST : std_logic;
@@ -53,7 +51,6 @@ begin
     generic map(N => N)
     port map(
         i_jump_C => s_jump_C,
-        i_jal_C => s_jal_C,
         i_jr_ra_C => s_jr_ra_C,
         i_CLK => s_CLK,
         i_RST => s_RST,
@@ -75,25 +72,67 @@ begin
         wait for gCLK_HPER;
     end process;
 
+    -----------------------------------------------
+    -- Reset data in the registers
+    ----------------------------------------------- 
+    P_RST : process
+    begin
+        s_RST <= '1';
+        wait for cCLK_PER/2;
+        s_RST <= '0';
+        wait;
+    end process;
+
     ----------------------------------
     -- Test bench
     ----------------------------------
     P_TB : process
     begin
 
-        s_RST <= '1';
-        wait for cCLK_PER/2;
-        s_RST <= '0';
-        -- o_pc_next = 0x00400000
-
         s_jump_C <= '0';
-        s_jal_C <= '0';
         s_jr_ra_C <= '0';
         s_w_branch_n_ALUo <= '0';
         s_instr_25t0 <= b"00" & x"000000"; -- b"00" bits 25-24, x"000000" bits 23-0
         s_ext_imm <= x"00000000";
         s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
         -- o_pc_next = 0x00400004
+
+        s_jump_C <= '1'; -- unconditional jump
+        s_jr_ra_C <= '0';
+        s_w_branch_n_ALUo <= '0';
+        s_instr_25t0 <= b"00" & x"101400"; -- b"00" bits 25-24, x"101400" bits 23-0
+        s_ext_imm <= x"00000000";
+        s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x00401400
+
+        s_jump_C <= '0';
+        s_jr_ra_C <= '1'; -- jump return
+        s_w_branch_n_ALUo <= '0';
+        s_instr_25t0 <= b"00" & x"101400"; -- b"00" bits 25-24, x"001400" bits 23-0
+        s_ext_imm <= x"00000000";
+        s_jr_ra_pc_next <= x"00400008";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x00400008
+
+        s_jump_C <= '0';
+        s_jr_ra_C <= '0';
+        s_w_branch_n_ALUo <= '1'; -- branch
+        s_instr_25t0 <= b"00" & x"000000"; -- b"00" bits 25-24, x"000000" bits 23-0
+        s_ext_imm <= x"00000003";
+        s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x00400018
+
+        s_jump_C <= '0';
+        s_jr_ra_C <= '0';
+        s_w_branch_n_ALUo <= '0'; -- no more branching
+        s_instr_25t0 <= b"00" & x"000000"; -- b"00" bits 25-24, x"000000" bits 23-0
+        s_ext_imm <= x"00000000";
+        s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x0040001C
 
         wait;
     end process;
