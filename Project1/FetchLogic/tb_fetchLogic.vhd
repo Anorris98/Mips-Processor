@@ -110,7 +110,7 @@ begin
         s_jump_C <= '0';
         s_jr_ra_C <= '1'; -- jump return
         s_w_branch_n_ALUo <= '0';
-        s_instr_25t0 <= b"00" & x"101400"; -- b"00" bits 25-24, x"001400" bits 23-0
+        s_instr_25t0 <= b"00" & x"101400"; -- shouldn't matter since jr not jump
         s_ext_imm <= x"00000000";
         s_jr_ra_pc_next <= x"00400008";
         wait for cCLK_PER;
