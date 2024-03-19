@@ -13,7 +13,7 @@ library IEEE;
 entity Controller is
   port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
         i_instruct5_0   : in  std_logic_vector(5 downto 0);
-        o_ALU_Ctl     : out std_logic_vector(3 downto 0);
+        o_ALU_Ctl     : out std_logic_vector(4 downto 0);
         o_RegWrite    : out std_logic;
         o_MemtoReg    : out std_logic;
         o_MemWrite    : out std_logic;
@@ -36,14 +36,14 @@ architecture structure of Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_Output        : out std_logic_vector(15 downto 0)
+      o_Output        : out std_logic_vector(16 downto 0)
     );
   end component;
 
   --Signals
-  signal DecoderOutput : std_logic_vector(15 downto 0);
+  signal DecoderOutput : std_logic_vector(16 downto 0);
   signal w_Alu_Src     : std_logic;
-  signal w_ALU_Ctl     : std_logic_vector(3 downto 0);
+  signal w_ALU_Ctl     : std_logic_vector(4 downto 0);
   signal w_RegWrite    : std_logic;
   signal w_MemtoReg    : std_logic;
   signal w_MemWrite    : std_logic;
@@ -88,8 +88,8 @@ begin
   o_jr          <= w_jr;
 
 -- signals hooking up and stripping the correct bit.
-  w_Alu_Src     <= DecoderOutput(15);
-  w_ALU_Ctl     <= DecoderOutput(14 downto 11);
+  w_Alu_Src     <= DecoderOutput(16);
+  w_ALU_Ctl     <= DecoderOutput(15 downto 11);
   w_MemtoReg    <= DecoderOutput(10);
   w_MemWrite    <= DecoderOutput(9);
   w_RegWrite    <= DecoderOutput(8);

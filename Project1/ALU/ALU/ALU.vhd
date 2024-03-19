@@ -14,11 +14,11 @@ entity ALU is
   generic (N : integer := 32);
   port (i_ALU_A               : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
         i_ALU_B               : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-        i_ALU_Ctl             : in  std_logic_vector(3 downto 0);     -- ALU Control Input
+        i_ALU_Ctl             : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
         o_ALU_Carry           : out std_logic;                        -- ALU Indicator for a carry out bit.
         o_ALU_Zero            : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
         o_ALU_Overflow        : out std_logic;                        -- ALU Indicator that an overflow has occured.
-        o_ALU_I_Result : out std_logic_vector(N - 1 downto 0)); -- ALU add Sub Results.
+        o_ALU_I_Result : out std_logic_vector(N - 1 downto 0));       -- ALU add Sub Results.
 end entity;
 
 architecture structure of ALU is
@@ -32,6 +32,12 @@ architecture structure of ALU is
           o_AddSub_Cout     : out std_logic;
           o_AddSub_Overflow : out std_logic;
           o_AddSub_Zero     : out std_logic);
+  end component;
+
+  component and_1
+    port (i_A : in  std_logic;
+          i_B : in  std_logic;
+          o_F : out std_logic);
   end component;
 
   component or_1
@@ -90,6 +96,7 @@ architecture structure of ALU is
   -- Component Declarations
   -- Signals
   signal w_AND, w_OR, w_XOR, w_NOR, w_Shift, w_AddSub, w_Lui : std_logic_vector(N - 1 downto 0);
+  signal w_OVERFLOW, w_SignedOrUnsigned : std_logic;
 
 begin
 
@@ -97,6 +104,7 @@ begin
   -- Level 0: Direct Connections from Inputs
   ---------------------------------------------------------------------------
   w_Lui <= i_ALU_B(15 downto 0) & x"0000"; -- LUI
+  w_SignedOrUnsigned <= i_ALU_Ctl(4); -- (1)Signed, (0)Unsigned
 
 
   -- Adder/Subtractor Component
@@ -107,11 +115,17 @@ begin
       i_AddSub_nAdd_Sub => i_ALU_Ctl(3), --(0)Add, (1)subtract
       o_AddSub_Sum      => w_AddSub,
       o_AddSub_Cout     => o_ALU_Carry,
-      o_AddSub_Overflow => o_ALU_Overflow,
+      o_AddSub_Overflow => w_OVERFLOW,
       o_AddSub_Zero     => o_ALU_Zero
     );
 
   -- Logical Operation Components
+  and_01: and_1
+    port map (
+      i_A => w_OVERFLOW,
+      i_B => w_SignedOrUnsigned,    -- (1)Signed, (0)Unsigned
+      o_F => o_ALU_Overflow
+    );
   and_32: and_N
     port map (
       i_A   => i_ALU_A,

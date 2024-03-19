@@ -11,7 +11,7 @@ architecture behavior of tb_Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_ALU_Ctl       : out std_logic_vector(3 downto 0);
+      o_ALU_Ctl       : out std_logic_vector(4 downto 0);
       o_RegWrite      : out std_logic;
       o_MemtoReg      : out std_logic;
       o_MemWrite      : out std_logic;
@@ -31,7 +31,7 @@ architecture behavior of tb_Controller is
   signal w_instruct5_0   : std_logic_vector(5 downto 0) := (others => '0');
 
   -- Outputs
-  signal w_ALU_Ctl  : std_logic_vector(3 downto 0);
+  signal w_ALU_Ctl  : std_logic_vector(4 downto 0);
   signal w_RegWrite : std_logic;
   signal w_MemtoReg : std_logic;
   signal w_MemWrite : std_logic;
@@ -87,6 +87,16 @@ begin
     wait for 10 ns;
     w_instruct31_26 <= "000000"; -- must be zero
     w_instruct5_0 <= "101011"; -- Sw
+    wait for 10 ns;
+
+    wait for 10 ns;
+    w_instruct31_26 <= "000000"; -- must be zero
+    w_instruct5_0 <= "101011"; -- add (should be able to give overflow)
+    wait for 10 ns;
+
+    wait for 10 ns;
+    w_instruct31_26 <= "000000"; -- must be zero
+    w_instruct5_0 <= "101011"; -- addu (shouldn't be able togive overflow) --not finished testing
     wait for 10 ns;
 
     wait;
