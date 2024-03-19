@@ -134,6 +134,26 @@ begin
         wait for cCLK_PER;
         -- o_pc_next = 0x0040001C
 
+        s_jump_C <= '1'; -- unconditional jump
+        s_jr_ra_C <= '0';
+        s_w_branch_n_ALUo <= '0';
+        s_instr_25t0 <= b"00" & x"101400"; -- b"00" bits 25-24, x"101400" bits 23-0
+        s_ext_imm <= x"00000000";
+        s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x00401400
+
+        s_jump_C <= '0'; -- no more jumping
+        s_jr_ra_C <= '0';
+        s_w_branch_n_ALUo <= '0';
+        s_instr_25t0 <= b"00" & x"000000"; -- b"00" bits 25-24, x"000000" bits 23-0
+        s_ext_imm <= x"00000000";
+        s_jr_ra_pc_next <= x"00000000";
+        wait for cCLK_PER;
+        -- o_pc_next = 0x00401404
+
+        
+
         wait;
     end process;
 
