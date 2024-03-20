@@ -24,7 +24,7 @@ end Adder;
 architecture structure of Adder is
 
 --Component define----------------------------------------------------------
-component and_1 is --And Gate
+component andg2 is --And Gate
 
   port(i_A          : in std_logic;
        i_B          : in std_logic;
@@ -32,7 +32,7 @@ component and_1 is --And Gate
 
 end component;
 
-component xor_1 is --Xor Gate
+component xorg2 is --Xor Gate
 
   port(i_A          : in std_logic;
        i_B          : in std_logic;
@@ -40,7 +40,7 @@ component xor_1 is --Xor Gate
 
 end component;
 
-component or_1 is  --Or gate
+component org2 is  --Or gate
 
   port(i_A          : in std_logic;
        i_B          : in std_logic;
@@ -62,31 +62,31 @@ begin
   ---------------------------------------------------------------------------
   -- Level 0: All connection from input
   ---------------------------------------------------------------------------
-Xor0: xor_1
+Xor0: xorg2
     port MAP(i_A             => i_D0,
              i_B             => i_D1,
              o_F             => D0XorD1);
              
-and0: and_1
+and0: andg2
     port MAP(i_A             => i_D0,
              i_B             => i_D1,
              o_F             => D0andD1);
   ---------------------------------------------------------------------------
   -- Level 1: All inputs atleast one gate deep
   ---------------------------------------------------------------------------
-and1: and_1
+and1: andg2
     port MAP(i_A             => D0XorD1,
              i_B             => i_Cin,
              o_F             => CinAndD0XorD1);
 
-Xor1: xor_1
+Xor1: xorg2
     port MAP(i_A             => D0XorD1,
              i_B             => i_Cin,
              o_F             => o_S);
   ---------------------------------------------------------------------------
   -- Level 2: all inputs atleast 2 gates deep
   ---------------------------------------------------------------------------
-or0: or_1
+or0: org2
     port MAP(i_A             => CinAndD0XorD1,
              i_B             => D0andD1,
              o_F             => o_C);

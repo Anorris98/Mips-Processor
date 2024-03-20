@@ -12,16 +12,16 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity nor_N is
+entity norg_N is
   generic(N : integer := 32);
   port(i_A	    : in std_logic_vector(N-1 downto 0);
        i_B	    : in std_logic_vector(N-1 downto 0);
        o_Out    : out std_logic_vector(N-1 downto 0));
-end nor_N;
+end norg_N;
 
-architecture structure of nor_N is
+architecture structure of norg_N is
 
-component or_1
+component org2
   port(i_A          : in std_logic;
        i_B          : in std_logic;
        o_F          : out std_logic);
@@ -31,7 +31,7 @@ signal w_Out : std_logic_vector(N-1 downto 0);
 
 begin
 G1: for i in 0 to N-1 generate
-  or_i: or_1 port map(i_A(i),i_B(i),w_Out(i));
+  or_i: org2 port map(i_A(i),i_B(i),w_Out(i));
   o_Out(i) <= NOT w_Out(i); 
 end generate;
 end structure;

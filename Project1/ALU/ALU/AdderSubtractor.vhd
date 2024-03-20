@@ -54,13 +54,13 @@ component mux2t1_N is
           o_O   :   out std_logic_vector(N-1 downto 0));
 end component;
 
-component or_1 is
+component org2 is
     Port (i_A   :   in std_logic;
           i_B   :   in std_logic;
           o_F   :   out std_logic);
 end component;
 
-component or_N is
+component org_N is
     Port (i_A   :   in std_logic;
           i_B   :   in std_logic;
           o_Out   :   out std_logic);
@@ -120,13 +120,13 @@ one_bit_extended <=  "00000000000000000000000000000001"; -- must be adjusted acc
   ---------------------------------------------------------------------------
   -- Level 1: All inputs atleast one gate deep
   ---------------------------------------------------------------------------
-  Or0: or_1                       --takes in one of 2 carry signals, either form adder 1 or adder 2.
+  Or0: org2                       --takes in one of 2 carry signals, either form adder 1 or adder 2.
         Port map (
                   i_A   =>  w_A1Carry,
                   i_B   =>  w_A0Carry,
                   o_F   =>  o_AddSub_Cout);
 
-  Or1: or_1                       --takes in the two overflow signals, and lets us know if an overflow occured.
+  Or1: org2                       --takes in the two overflow signals, and lets us know if an overflow occured.
         Port map (
                   i_A   =>  w_adder0Overflow,
                   i_B   =>  w_adder1Overflow,
