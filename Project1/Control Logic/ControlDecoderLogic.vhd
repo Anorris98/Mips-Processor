@@ -12,7 +12,7 @@ entity ControlDecoderLogic is
   port (
     i_instruct31_26 : in  std_logic_vector(5 downto 0); -- Instruction bits 31-26
     i_instruct5_0   : in  std_logic_vector(5 downto 0); -- Instruction bits 5-0
-    o_Output        : out std_logic_vector(16 downto 0)
+    o_Output        : out std_logic_vector(17 downto 0)
   );
 end entity;
 
@@ -33,42 +33,42 @@ architecture sel_when of ControlDecoderLogic is
   --   w_jr          <= DecoderOutput(0);
 
 begin
-  op: process (i_instruct31_26, i_instruct5_0) --R Type
+  op: process (i_instruct31_26, i_instruct5_0) --I Or J Type
   begin
 
     if i_instruct31_26 = "000000" then
       -- i_instruct31_26 are all zeros, select based on i_instruct5_0
       case i_instruct5_0 is --I and J type
         when "001000" => -- addi
-          o_Output <= "11000000100000100";
+          o_Output <= "011000000100000100";
         when "001001" => -- addiu
-          o_Output <= "10000000100000100"; -- need to implement no overflow detection for this one.
+          o_Output <= "010000000100000100"; -- need to implement no overflow detection for this one.
         when "001100" => -- andi
-          o_Output <= "11001100100000100";
+          o_Output <= "011001100100000100";
         when "001111" => -- lui
-          o_Output <= "10011100100000100";
+          o_Output <= "010011100100000100";
         when "100011" => -- lw
-          o_Output <= "11000010100001000"; 
+          o_Output <= "011000010100001000"; 
         when "001110" => -- xori
-          o_Output <= "11010100100000100";
+          o_Output <= "011010100100000100";
         when "001101" => -- ori
-          o_Output <= "11010000100000100";
+          o_Output <= "011010000100000100";
         when "001010" => -- slti
-          o_Output <= "11100000100000100"; -- Verify this output
+          o_Output <= "011100000100000100"; -- Verify this output
         when "101011" => -- sw
-          o_Output <= "11000001000000000";
+          o_Output <= "011000001000000000";
         when "000100" => -- beq
-          o_Output <= "11100000000010100";
+          o_Output <= "011100000000010100";
         when "000101" => -- bne
-          o_Output <= "11100000000010100";
+          o_Output <= "011100000000010100";
         when "100000" => -- lb
-          o_Output <= "11000010100001000";
+          o_Output <= "011000010100001000";
         when "100001" => -- lh
-          o_Output <= "11000010100001000";
+          o_Output <= "011000010100001000";
         when "100100" => -- lbu
-          o_Output <= "10000010100001000";
+          o_Output <= "010000010100001000";
         when "100101" => -- lhu
-          o_Output <= "10000010100001000";
+          o_Output <= "010000010100001000";
         when others =>
           o_Output <= (others => '0');  --default case
       end case;
@@ -77,37 +77,37 @@ begin
       -- i_instruct31_26 are not all zeros, select based on i_instruct31_26 R type
       case i_instruct31_26 is
         when "100000" => -- add
-          o_Output <= "01000000101000000";
+          o_Output <= "001000000101000000";
         when "100001" => -- addu
-          o_Output <= "00000000101000000";
+          o_Output <= "000000000101000000";
         when "100100" => -- and
-          o_Output <= "01001100101000000";
+          o_Output <= "001001100101000000";
         when "101111" => -- nor
-          o_Output <= "01011000101000000";
+          o_Output <= "001011000101000000";
         when "100110" => -- xor
-          o_Output <= "11010100101000000";
+          o_Output <= "011010100101000000";
         when "100101" => -- or
-          o_Output <= "01010000101000000";
+          o_Output <= "001010000101000000";
         when "101010" => -- slt
-          o_Output <= "01100000101000000"; -- Verify this output
+          o_Output <= "001100000101000000"; -- Verify this output
         when "000000" => -- sll
-          o_Output <= "01001000101000000"; 
+          o_Output <= "101001000101000000"; 
         when "000010" => -- srl
-          o_Output <= "01000100101000000"; 
+          o_Output <= "101000100101000000"; 
         when "000011" => -- sra
-          o_Output <= "11100100101000000";
+          o_Output <= "101100100101000000";
         when "000100" => -- sllv
-          o_Output <= "11001000101000000"; -- Verify this output
+          o_Output <= "001001000101000000"; -- Verify this output
         when "000110" => -- srlv
-          o_Output <= "11000100101000000"; -- Verify this output
+          o_Output <= "001000100101000000"; -- Verify this output
         when "000111" => -- srav
-          o_Output <= "11100100101000000"; -- Verify this output
+          o_Output <= "001100100101000000"; -- Verify this output
         when "100010" => -- sub
-          o_Output <= "01100000101000000";
+          o_Output <= "001100000101000000";
         when "100011" => -- subu
-          o_Output <= "00100000101000000";
+          o_Output <= "000100000101000000";
         when "001000" => -- jr
-          o_Output <= "01000000001000001";
+          o_Output <= "001000000001000001";
         when others =>
           o_Output <= (others => '0'); -- Default cases
       end case;

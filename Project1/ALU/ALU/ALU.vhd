@@ -34,40 +34,40 @@ architecture structure of ALU is
           o_AddSub_Zero     : out std_logic);
   end component;
 
-  component and_1
+  component andg2
     port (i_A : in  std_logic;
           i_B : in  std_logic;
           o_F : out std_logic);
   end component;
 
-  component or_1
+  component org2
     port (i_A : in  std_logic;
           i_B : in  std_logic;
           o_F : out std_logic);
   end component;
 
-  component and_N
+  component andg_N
     generic (N : integer := 32);
     port (i_A   : in  std_logic_vector(N - 1 downto 0);
           i_B   : in  std_logic_vector(N - 1 downto 0);
           o_Out : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component or_N
+  component org_N
     generic (N : integer := 32);
     port (i_A   : in  std_logic_vector(N - 1 downto 0);
           i_B   : in  std_logic_vector(N - 1 downto 0);
           o_Out : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component xor_N
+  component xorg_N
     generic (N : integer := 32);
     port (i_A   : in  std_logic_vector(N - 1 downto 0);
           i_B   : in  std_logic_vector(N - 1 downto 0);
           o_Out : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component nor_N
+  component norg_N
     generic (N : integer := 32);
     port (i_A   : in  std_logic_vector(N - 1 downto 0);
           i_B   : in  std_logic_vector(N - 1 downto 0);
@@ -120,34 +120,34 @@ begin
     );
 
   -- Logical Operation Components
-  and_01: and_1
+  and_01: andg2
     port map (
       i_A => w_OVERFLOW,
       i_B => w_SignedOrUnsigned,    -- (1)Signed, (0)Unsigned
       o_F => o_ALU_Overflow
     );
-  and_32: and_N
+  and_32: andg_N
     port map (
       i_A   => i_ALU_A,
       i_B   => i_ALU_B,
       o_Out => w_AND
     );
 
-  or_32: or_N
+  or_32: org_N
     port map (
       i_A   => i_ALU_A,
       i_B   => i_ALU_B,
       o_Out => w_OR
     );
 
-  xor_32: xor_N
+  xor_32: xorg_N
     port map (
       i_A   => i_ALU_A,
       i_B   => i_ALU_B,
       o_Out => w_XOR
     );
 
-  nor_32: nor_N
+  nor_32: norg_N
     port map (
       i_A   => i_ALU_A,
       i_B   => i_ALU_B,

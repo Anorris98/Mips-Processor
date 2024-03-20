@@ -43,7 +43,7 @@ architecture behavior of Shifter is
         );
     end component;
 
-    component and_1 is
+    component andg2 is
         port (
             i_A : in std_logic;
             i_B : in std_logic;
@@ -77,7 +77,7 @@ begin
     -- Obtain arithmetic shift or logical shift
     -- 0 if logical, 1 if arithmetic.
     -- can only be 1 if i_direction = 1 (right shift) AND i_shift_C = 1 (arithmetic shift)
-    ShiftType : and_1
+    ShiftType : andg2
     port map(
         i_A => i_shift_C,
         i_B => i_direction,
