@@ -13,6 +13,7 @@ library IEEE;
 entity Controller is
   port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
         i_instruct5_0   : in  std_logic_vector(5 downto 0);
+        o_STD_SHIFT   : out std_logic;  -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
         o_ALU_Ctl     : out std_logic_vector(4 downto 0);
         o_RegWrite    : out std_logic;
         o_MemtoReg    : out std_logic;
@@ -36,12 +37,13 @@ architecture structure of Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_Output        : out std_logic_vector(16 downto 0)
+      o_Output        : out std_logic_vector(17 downto 0)
     );
   end component;
 
   --Signals
-  signal DecoderOutput : std_logic_vector(16 downto 0);
+  signal DecoderOutput : std_logic_vector(17 downto 0);
+  signal w_STD_SHIFT   : std_logic;
   signal w_Alu_Src     : std_logic;
   signal w_ALU_Ctl     : std_logic_vector(4 downto 0);
   signal w_RegWrite    : std_logic;
@@ -74,6 +76,7 @@ begin
   -- Level 1: All inputs atleast one gate deep
   ---------------------------------------------------------------------------
   --Output map to signals.
+  o_STD_SHIFT   <= w_STD_SHIFT;
   o_ALU_Ctl     <= w_ALU_Ctl;
   o_RegWrite    <= w_RegWrite;
   o_MemtoReg    <= w_MemtoReg;
@@ -88,6 +91,7 @@ begin
   o_jr          <= w_jr;
 
 -- signals hooking up and stripping the correct bit.
+  w_STD_SHIFT   <= DecoderOutput(17);
   w_Alu_Src     <= DecoderOutput(16);
   w_ALU_Ctl     <= DecoderOutput(15 downto 11);
   w_MemtoReg    <= DecoderOutput(10);

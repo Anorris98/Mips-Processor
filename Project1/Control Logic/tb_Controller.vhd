@@ -11,6 +11,7 @@ architecture behavior of tb_Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
+      o_STD_SHIFT     : out std_logic;
       o_ALU_Ctl       : out std_logic_vector(4 downto 0);
       o_RegWrite      : out std_logic;
       o_MemtoReg      : out std_logic;
@@ -31,6 +32,7 @@ architecture behavior of tb_Controller is
   signal w_instruct5_0   : std_logic_vector(5 downto 0) := (others => '0');
 
   -- Outputs
+  signal w_STD_SHIFT : std_logic;
   signal w_ALU_Ctl  : std_logic_vector(4 downto 0);
   signal w_RegWrite : std_logic;
   signal w_MemtoReg : std_logic;
@@ -50,6 +52,7 @@ begin
     port map (
       i_instruct31_26 => w_instruct31_26,
       i_instruct5_0   => w_instruct5_0,
+      o_STD_SHIFT     => w_STD_SHIFT,
       o_Alu_Src       => w_Alu_Src,
       o_ALU_Ctl       => w_ALU_Ctl,
       o_MemtoReg      => w_MemtoReg,
