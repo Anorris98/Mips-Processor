@@ -7,7 +7,7 @@
 -------------------------------------------------------------------------
 -- DESCRIPTION: This file contains an implementation of an edge-triggered
 -- flip-flop with parallel access and reset.
---
+-------------------------------------------------------------------------
 
 
 
