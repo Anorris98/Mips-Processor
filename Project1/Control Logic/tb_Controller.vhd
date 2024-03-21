@@ -33,7 +33,7 @@ architecture behavior of tb_Controller is
 
   -- Outputs
   signal w_STD_SHIFT : std_logic;
-  signal w_ALU_Ctl  : std_logic_vector(4 downto 0);
+  signal w_ALU_Ctl  : std_logic_vector(5 downto 0);
   signal w_RegWrite : std_logic;
   signal w_MemtoReg : std_logic;
   signal w_MemWrite : std_logic;

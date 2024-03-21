@@ -54,7 +54,7 @@ begin
         when "001101" => -- ori
           o_Output <= "0101010000100000100";
         when "001010" => -- slti
-          o_Output <= "0101100000100000100"; -- Verify this output
+          o_Output <= "0111100000100000100"; -- Verify this output
         when "101011" => -- sw
           o_Output <= "0101000001000000000";
         when "000100" => -- beq
@@ -89,7 +89,7 @@ begin
         when "100101" => -- or
           o_Output <= "0001010000101000000";
         when "101010" => -- slt
-          o_Output <= "0001100000101000000"; -- Verify this output
+          o_Output <= "0011100000101000000"; -- Verify this output
         when "000000" => -- sll
           o_Output <= "1001001000101000000"; 
         when "000010" => -- srl
