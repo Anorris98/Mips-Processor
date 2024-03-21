@@ -30,28 +30,6 @@ end entity;
 
 architecture structure of MIPS_Processor is
 
-  -- Required data memory signals
-  signal s_DMemWr   : std_logic;                        -- TODO: use this signal as the final active high data memory write enable signal
-  signal s_DMemAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory address input
-  signal s_DMemData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
-  signal s_DMemOut  : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the data memory output
-
-  -- Required register file signals 
-  signal s_RegWr     : std_logic;                        -- TODO: use this signal as the final active high write enable input to the register file
-  signal s_RegWrAddr : std_logic_vector(4 downto 0);     -- TODO: use this signal as the final destination register address input
-  signal s_RegWrData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
-
-  -- Required instruction memory signals
-  signal s_IMemAddr     : std_logic_vector(N - 1 downto 0); -- Do not assign this signal, assign to s_NextInstAddr instead
-  signal s_NextInstAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as your intended final instruction memory address input.
-  signal s_Inst         : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the instruction signal 
-
-  -- Required halt signal -- for simulation
-  signal s_Halt : std_logic; -- TODO: this signal indicates to the simulation that intended program execution has completed. (Opcode: 01 0100)
-
-  -- Required overflow signal -- for overflow exception detection
-  signal s_Ovfl : std_logic; -- TODO: this signal indicates an overflow exception would have been initiated
-
   component mem is
     generic (ADDR_WIDTH : integer;
              DATA_WIDTH : integer);
@@ -245,6 +223,28 @@ architecture structure of MIPS_Processor is
       o_Output        : out std_logic_vector(17 downto 0)
     );
   end component;
+
+  -- Required data memory signals
+  signal s_DMemWr   : std_logic;                        -- TODO: use this signal as the final active high data memory write enable signal
+  signal s_DMemAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory address input
+  signal s_DMemData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
+  signal s_DMemOut  : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the data memory output
+
+  -- Required register file signals 
+  signal s_RegWr     : std_logic;                        -- TODO: use this signal as the final active high write enable input to the register file
+  signal s_RegWrAddr : std_logic_vector(4 downto 0);     -- TODO: use this signal as the final destination register address input
+  signal s_RegWrData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
+
+  -- Required instruction memory signals
+  signal s_IMemAddr     : std_logic_vector(N - 1 downto 0); -- Do not assign this signal, assign to s_NextInstAddr instead
+  signal s_NextInstAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as your intended final instruction memory address input.
+  signal s_Inst         : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the instruction signal 
+
+  -- Required halt signal -- for simulation
+  signal s_Halt : std_logic; -- TODO: this signal indicates to the simulation that intended program execution has completed. (Opcode: 01 0100)
+
+  -- Required overflow signal -- for overflow exception detection
+  signal s_Ovfl : std_logic; -- TODO: this signal indicates an overflow exception would have been initiated
 
   -- TODO: You may add any additional signals or components your implementation 
   --       requires below this comment
