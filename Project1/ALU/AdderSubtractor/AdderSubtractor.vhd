@@ -90,15 +90,15 @@ one_bit_extended <=  "00000000000000000000000000000001"; -- must be adjusted acc
   mux0: mux2t1_N                 -- allows selection of 0(add), or 1(sub)
         generic map(N => N)
         Port map (    
-                  i_D0  =>  i_AddSub_B,        --selector 0(add)
+                  i_D0  =>  iB,        --selector 0(add)
                   i_D1  =>  w_A0toM0,          --selector 1(sub)
-                  i_S   =>  i_AddSub_nAdd_Sub,
+                  i_S   =>  iC,
                   o_O   =>  w_M0toA1);
 
   adder1: RippleCarryAdder        --Adds A and B together, B is either 0(i_B) or is 1(the inverted +1 of i_B)
         generic map(N => N)
         Port map ( 
-                  A     =>  i_AddSub_A,
+                  A     =>  iA,
                   B     =>  w_M0toA1,
                   Sum   =>  w_sum,
                   Carry =>  w_A1Carry,
@@ -109,13 +109,13 @@ one_bit_extended <=  "00000000000000000000000000000001"; -- must be adjusted acc
       --assign w_zero when w_sum is all 0's, else w_zero is 0.
   w_Zero <= '1' when w_sum = (x"00000000") else '0';
   o_AddSub_Zero <= w_Zero;    --output hooked up to result.
-  o_AddSub_Sum <= w_sum;      --sum hooked up to sum.
+  oS <= w_sum;      --sum hooked up to sum.
 
 
   Complementor0: OnesComplementor --inverts the bits from i_B, then sends it to Adder0
         generic map(N => N)
         Port map (
-                  i_D0  =>  i_AddSub_B,
+                  i_D0  =>  iB,
                   o_O   =>  w_C0toA0);
   ---------------------------------------------------------------------------
   -- Level 1: All inputs atleast one gate deep
@@ -124,7 +124,7 @@ one_bit_extended <=  "00000000000000000000000000000001"; -- must be adjusted acc
         Port map (
                   i_A   =>  w_A1Carry,
                   i_B   =>  w_A0Carry,
-                  o_F   =>  o_AddSub_Cout);
+                  o_F   =>  oC);
 
   Or1: or_1                       --takes in the two overflow signals, and lets us know if an overflow occured.
         Port map (
