@@ -12,7 +12,7 @@ architecture behavior of tb_Controller is
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
       o_STD_SHIFT     : out std_logic;
-      o_ALU_Ctl       : out std_logic_vector(4 downto 0);
+      o_ALU_Ctl       : out std_logic_vector(5 downto 0);
       o_RegWrite      : out std_logic;
       o_MemtoReg      : out std_logic;
       o_MemWrite      : out std_logic;
