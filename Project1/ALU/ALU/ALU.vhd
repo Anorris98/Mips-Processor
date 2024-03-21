@@ -12,26 +12,27 @@ library IEEE;
 
 entity ALU is
   generic (N : integer := 32);
-  port (i_ALU_A               : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
-        i_ALU_B               : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-        i_ALU_Ctl             : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
-        o_ALU_Carry           : out std_logic;                        -- ALU Indicator for a carry out bit.
-        o_ALU_Zero            : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
-        o_ALU_Overflow        : out std_logic;                        -- ALU Indicator that an overflow has occured.
-        o_ALU_I_Result : out std_logic_vector(N - 1 downto 0));       -- ALU add Sub Results.
+  port (i_ALU_A        : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
+        i_ALU_B        : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
+        i_ALU_Ctl      : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
+        o_ALU_Carry    : out std_logic;                        -- ALU Indicator for a carry out bit.
+        o_ALU_Zero     : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
+        o_ALU_Overflow : out std_logic;                        -- ALU Indicator that an overflow has occured.
+        o_ALU_I_Result : out std_logic_vector(N - 1 downto 0)); -- ALU add Sub Results.
 end entity;
 
 architecture structure of ALU is
 
   component AdderSubtractor is
     generic (N : integer := 32);
-    port (i_AddSub_A        : in  std_logic_vector(N - 1 downto 0);
-          i_AddSub_B        : in  std_logic_vector(N - 1 downto 0);
-          i_AddSub_nAdd_sub : in  std_logic;
-          o_AddSub_Sum      : out std_logic_vector(N - 1 downto 0);
-          o_AddSub_Cout     : out std_logic;
-          o_AddSub_Overflow : out std_logic;
-          o_AddSub_Zero     : out std_logic);
+    port (
+      iC                : in  std_logic;
+      iA                : in  std_logic_vector(N - 1 downto 0);
+      iB                : in  std_logic_vector(N - 1 downto 0);
+      oC                : out std_logic;
+      oS                : out std_logic_vector(N - 1 downto 0);
+      o_AddSub_Overflow : out std_logic;
+      o_AddSub_Zero     : out std_logic);
   end component;
 
   component andg2
@@ -96,25 +97,24 @@ architecture structure of ALU is
   -- Component Declarations
   -- Signals
   signal w_AND, w_OR, w_XOR, w_NOR, w_Shift, w_AddSub, w_Lui : std_logic_vector(N - 1 downto 0);
-  signal w_OVERFLOW, w_SignedOrUnsigned : std_logic;
+  signal w_OVERFLOW, w_SignedOrUnsigned                      : std_logic;
 
 begin
 
   ---------------------------------------------------------------------------
   -- Level 0: Direct Connections from Inputs
   ---------------------------------------------------------------------------
-  w_Lui <= i_ALU_B(15 downto 0) & x"0000"; -- LUI
-  w_SignedOrUnsigned <= i_ALU_Ctl(4); -- (1)Signed, (0)Unsigned
-
+  w_Lui              <= i_ALU_B(15 downto 0) & x"0000"; -- LUI
+  w_SignedOrUnsigned <= i_ALU_Ctl(4);                   -- (1)Signed, (0)Unsigned
 
   -- Adder/Subtractor Component
   addsub: AdderSubtractor
     port map (
-      i_AddSub_A        => i_ALU_A,
-      i_AddSub_B        => i_ALU_B,
-      i_AddSub_nAdd_Sub => i_ALU_Ctl(3), --(0)Add, (1)subtract
-      o_AddSub_Sum      => w_AddSub,
-      o_AddSub_Cout     => o_ALU_Carry,
+      iC                => i_ALU_Ctl(3), --(0)Add, (1)subtract
+      iA                => i_ALU_A,
+      iB                => i_ALU_B,
+      oC                => o_ALU_Carry,
+      oS                => w_AddSub,
       o_AddSub_Overflow => w_OVERFLOW,
       o_AddSub_Zero     => o_ALU_Zero
     );
@@ -123,7 +123,7 @@ begin
   and_01: andg2
     port map (
       i_A => w_OVERFLOW,
-      i_B => w_SignedOrUnsigned,    -- (1)Signed, (0)Unsigned
+      i_B => w_SignedOrUnsigned, -- (1)Signed, (0)Unsigned
       o_F => o_ALU_Overflow
     );
   and_32: andg_N
@@ -161,10 +161,10 @@ begin
   shift: Shifter
     port map (
       i_in        => i_ALU_B,
-      i_shift_C   => i_ALU_Ctl(3),          -- (0) Logical, (1) Arithmatic
-      i_Direction => i_ALU_Ctl(0),          -- (0) left, (1) Right
-      i_Shamt     => i_ALU_A(4 downto 0),   -- amount to shift/ shamt we get the shift amount from A every time, so we know how much to shift.           
-      o_Out       => w_Shift                      --we can shift using imm value, shift amount 
+      i_shift_C   => i_ALU_Ctl(3),        -- (0) Logical, (1) Arithmatic
+      i_Direction => i_ALU_Ctl(0),        -- (0) left, (1) Right
+      i_Shamt     => i_ALU_A(4 downto 0), -- amount to shift/ shamt we get the shift amount from A every time, so we know how much to shift.           
+      o_Out       => w_Shift --we can shift using imm value, shift amount 
     );
 
   ---------------------------------------------------------------------------

@@ -220,6 +220,32 @@ architecture structure of MIPS_Processor is
       o_Q   : out std_logic_vector(N - 1 downto 0)); -- Data value output
   end component;
 
+  component controller is
+    port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
+          i_instruct5_0   : in  std_logic_vector(5 downto 0);
+          o_STD_SHIFT     : out std_logic; -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
+          o_ALU_Ctl       : out std_logic_vector(4 downto 0);
+          o_RegWrite      : out std_logic;
+          o_MemtoReg      : out std_logic;
+          o_MemWrite      : out std_logic;
+          o_MemRead       : out std_logic;
+          o_RegDst        : out std_logic_vector(1 downto 0);
+          o_Branch        : out std_logic;
+          o_Alu_Src       : out std_logic;
+          o_ext_ctl       : out std_logic;
+          o_Jump          : out std_logic;
+          o_jr            : out std_logic;
+          o_jal           : out std_logic);
+  end component;
+
+  component ControlDecoderLogic is
+    port (
+      i_instruct31_26 : in  std_logic_vector(5 downto 0);
+      i_instruct5_0   : in  std_logic_vector(5 downto 0);
+      o_Output        : out std_logic_vector(17 downto 0)
+    );
+  end component;
+
   -- TODO: You may add any additional signals or components your implementation 
   --       requires below this comment
 
