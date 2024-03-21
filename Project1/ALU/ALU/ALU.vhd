@@ -14,7 +14,7 @@ entity ALU is
   generic (N : integer := 32);
   port (i_ALU_A               : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
         i_ALU_B               : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-        i_ALU_Ctl             : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
+        i_ALU_Ctl             : in  std_logic_vector(5 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
         o_ALU_Carry           : out std_logic;                        -- ALU Indicator for a carry out bit.
         o_ALU_Zero            : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
         o_ALU_Overflow        : out std_logic;                        -- ALU Indicator that an overflow has occured.
@@ -79,7 +79,7 @@ architecture structure of ALU is
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
           i_shift_C   : in  std_logic; --0 = Logical, 1 = Arithmetic
           i_Direction : in  std_logic; --0 = left, 1 = right
-          i_Shamt     : in  std_logic_vector(4 downto 0);
+          i_Shamt     : in  std_logic_vector(5 downto 0);
           o_Out       : out std_logic_vector(N - 1 downto 0));
   end component;
 
