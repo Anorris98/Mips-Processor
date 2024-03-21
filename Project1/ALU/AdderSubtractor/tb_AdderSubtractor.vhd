@@ -24,11 +24,11 @@ architecture mixed of tb_AdderSubtractor is
 begin
     DUT0: entity work.AdderSubtractor
     generic map (N => s_N)
-    port map   (i_AddSub_A         => s_A, 
-                i_AddSub_B         => s_B, 
-                i_AddSub_nAdd_Sub  => s_nAdd_Sub,
-                o_AddSub_Sum       => s_Sum,
-                o_AddSub_Cout      => s_Cout,
+    port map   (iA         => s_A, 
+                iB         => s_B, 
+                iC  => s_nAdd_Sub,
+                oS       => s_Sum,
+                oC      => s_Cout,
                 o_AddSub_Overflow  => s_Overflow,
                 o_AddSub_Zero      => s_Zero
                 );

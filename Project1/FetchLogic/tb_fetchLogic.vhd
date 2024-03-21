@@ -105,7 +105,7 @@ begin
         s_ext_imm <= x"00000000";
         s_jr_ra_pc_next <= x"00000000";
         wait for cCLK_PER;
-        -- o_pc_next = 0x00401400
+        -- o_pc_next = 0x00405000
 
         s_jump_C <= '0';
         s_jr_ra_C <= '1'; -- jump return
@@ -141,7 +141,7 @@ begin
         s_ext_imm <= x"00000000";
         s_jr_ra_pc_next <= x"00000000";
         wait for cCLK_PER;
-        -- o_pc_next = 0x00401400
+        -- o_pc_next = 0x00405000
 
         s_jump_C <= '0'; -- no more jumping
         s_jr_ra_C <= '0';
@@ -150,7 +150,7 @@ begin
         s_ext_imm <= x"00000000";
         s_jr_ra_pc_next <= x"00000000";
         wait for cCLK_PER;
-        -- o_pc_next = 0x00401404
+        -- o_pc_next = 0x00405004
 
         
 
