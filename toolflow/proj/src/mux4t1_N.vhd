@@ -13,10 +13,9 @@ library IEEE;
   use ieee.numeric_std.all;
 
 entity mux4t1_N is
-  generic (N : integer := 32);
-  port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
+  port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(4 downto 0);
         i_s0, i_s1             : in  std_logic;
-        o_Y                    : out std_logic_vector(N - 1 downto 0));
+        o_Y                    : out std_logic_vector(4 downto 0));
 end entity;
 
 architecture Dataflow of mux4t1_N is

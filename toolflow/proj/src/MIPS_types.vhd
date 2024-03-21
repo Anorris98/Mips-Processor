@@ -24,13 +24,10 @@ package MIPS_types is
     reg_to_mem : std_logic;
   end record control_t;
 
+  constant four_bit_zero : std_logic_vector := "0000";
+  type t_bus_32x32 is array (0 to 31) of std_logic_vector(31 downto 0);
 end package MIPS_types;
 
 package body MIPS_types is
   -- Probably won't need anything here... function bodies, etc.
 end package body MIPS_types;
-
-package body my_package is  
-    constant four_bit_zero : std_logic_vector := "0000";
-    type t_bus_32x32 is array (0 to 31) of std_logic_vector(31 downto 0);
-end package body my_package;

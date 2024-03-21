@@ -12,6 +12,7 @@
 
 library IEEE;
   use IEEE.std_logic_1164.all;
+  use IEEE.numeric_std.all;
 
 library work;
   use work.MIPS_types.all;
@@ -29,6 +30,30 @@ end entity;
 
 architecture structure of MIPS_Processor is
 
+  -- Required data memory signals
+  signal s_DMemWr   : std_logic;                        -- TODO: use this signal as the final active high data memory write enable signal
+  signal s_DMemAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory address input
+  signal s_DMemData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
+  signal s_DMemOut  : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the data memory output
+
+  -- Required register file signals 
+  signal s_RegWr     : std_logic;                        -- TODO: use this signal as the final active high write enable input to the register file
+  signal s_RegWrAddr : std_logic_vector(4 downto 0);     -- TODO: use this signal as the final destination register address input
+  signal s_RegWrData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
+
+  -- Required instruction memory signals
+  signal s_IMemAddr     : std_logic_vector(N - 1 downto 0); -- Do not assign this signal, assign to s_NextInstAddr instead
+  signal s_NextInstAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as your intended final instruction memory address input.
+  signal s_Inst         : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the instruction signal 
+
+  -- Required halt signal -- for simulation
+  signal s_Halt : std_logic; -- TODO: this signal indicates to the simulation that intended program execution has completed. (Opcode: 01 0100)
+
+  -- Required overflow signal -- for overflow exception detection
+  signal s_Ovfl : std_logic; -- TODO: this signal indicates an overflow exception would have been initiated
+
+  -- TODO: You may add any additional signals or components your implementation 
+  --       requires below this comment
   component mem is
     generic (ADDR_WIDTH : integer;
              DATA_WIDTH : integer);
@@ -67,10 +92,16 @@ architecture structure of MIPS_Processor is
     );
   end component;
 
-  component mux4t1 is
-    port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
+  component mux4t1_N is
+    port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(4 downto 0);
           i_s0, i_s1             : in  std_logic;
-          o_Y                    : out std_logic_vector(N - 1 downto 0));
+          o_Y                    : out std_logic_vector(4 downto 0));
+  end component;
+
+  component andg2 is
+    port (i_A : in  std_logic;
+          i_B : in  std_logic;
+          o_F : out std_logic);
   end component;
 
   component fetchLogic is
@@ -105,30 +136,52 @@ architecture structure of MIPS_Processor is
           o_jal           : out std_logic);
   end component;
 
-  -- Required data memory signals
-  signal s_DMemWr   : std_logic;                        -- TODO: use this signal as the final active high data memory write enable signal
-  signal s_DMemAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory address input
-  signal s_DMemData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
-  signal s_DMemOut  : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the data memory output
+  component reg is
+    port (
+      i_CLK      : in  std_logic;                        -- Clock input
+      i_RST      : in  std_logic;                        -- Reset input
+      i_WE       : in  std_logic;                        -- Write enable input
+      i_rs_addrs : in  std_logic_vector(4 downto 0);     -- addresss for rs
+      i_rt_addrs : in  std_logic_vector(4 downto 0);     -- addresss for rt
+      i_rd_addrs : in  std_logic_vector(4 downto 0);     -- addresss for rd
+      i_rd_data  : in  std_logic_vector(N - 1 downto 0); -- data for rd
+      o_rs_data  : out std_logic_vector(N - 1 downto 0); -- data from rs
+      o_rt_data  : out std_logic_vector(N - 1 downto 0)  -- data from rt
+    );
+  end component;
 
-  -- Required register file signals 
-  signal s_RegWr     : std_logic;                        -- TODO: use this signal as the final active high write enable input to the register file
-  signal s_RegWrAddr : std_logic_vector(4 downto 0);     -- TODO: use this signal as the final destination register address input
-  signal s_RegWrData : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the final data memory data input
+  component extender16t32 is
+    port (
+      i_Imm16 : in  std_logic_vector(15 downto 0);
+      i_ctl   : in  std_logic;
+      o_Imm32 : out std_logic_vector(31 downto 0));
+  end component;
 
-  -- Required instruction memory signals
-  signal s_IMemAddr     : std_logic_vector(N - 1 downto 0); -- Do not assign this signal, assign to s_NextInstAddr instead
-  signal s_NextInstAddr : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as your intended final instruction memory address input.
-  signal s_Inst         : std_logic_vector(N - 1 downto 0); -- TODO: use this signal as the instruction signal 
-
-  -- Required halt signal -- for simulation
-  signal s_Halt : std_logic; -- TODO: this signal indicates to the simulation that intended program execution has completed. (Opcode: 01 0100)
-
-  -- Required overflow signal -- for overflow exception detection
-  signal s_Ovfl : std_logic; -- TODO: this signal indicates an overflow exception would have been initiated
-
-  -- TODO: You may add any additional signals or components your implementation 
-  --       requires below this comment
+  -- control signals
+  signal s_STD_SHIFT : std_logic;
+  signal s_ALU_Ctl   : std_logic_vector(4 downto 0);
+  signal s_MemtoReg  : std_logic;
+  signal s_RegDst    : std_logic_vector(1 downto 0);
+  signal s_Branch    : std_logic;
+  signal s_Alu_Src   : std_logic;
+  signal s_ext_ctl   : std_logic;
+  signal s_Jump      : std_logic;
+  signal s_jr        : std_logic;
+  signal s_jal       : std_logic;
+  -- wires
+  signal w_b_n_ALUo     : std_logic;
+  signal w_mux_reg_rtn  : std_logic_vector(N - 1 downto 0);
+  signal w_mux1_alu_rtn : std_logic_vector(N - 1 downto 0);
+  signal w_mux7_alu_rtn : std_logic_vector(N - 1 downto 0);
+  signal w_ra_pc_next   : std_logic_vector(N - 1 downto 0);
+  -- outputs of main resources
+  signal s_pc_p4        : std_logic_vector(N - 1 downto 0);
+  signal s_rs_data_o    : std_logic_vector(N - 1 downto 0);
+  signal s_rt_data_o    : std_logic_vector(N - 1 downto 0);
+  signal s_ext_o        : std_logic_vector(N - 1 downto 0);
+  signal s_ALU_Carry    : std_logic;
+  signal s_ALU_Overflow : std_logic;
+  signal s_ALU_Zero     : std_logic;
 
 begin
 
@@ -158,5 +211,108 @@ begin
   -- TODO: Ensure that s_Halt is connected to an output control signal produced from decoding the Halt instruction (Opcode: 01 0100)
   -- TODO: Ensure that s_Ovfl is connected to the overflow output of your ALU
   -- TODO: Implement the rest of your processor below this comment! 
+  fetch: fetchLogic
+    port map (
+      i_jump_C          => s_Jump,
+      i_jr_ra_C         => s_jr,
+      i_CLK             => iCLK,
+      i_RST             => iRST,
+      i_w_branch_n_ALUo => w_b_n_ALUo,
+      i_instr_25t0      => s_Inst(25 downto 0),
+      i_ext_imm         => s_ext_o,
+      i_jr_ra_pc_next   => w_ra_pc_next,
+      o_pc_p4           => s_pc_p4,
+      o_pc_next         => s_NextInstAddr);
+
+  control: controller
+    port map (
+      i_instruct31_26 => s_Inst(31 downto 26),
+      i_instruct5_0   => s_Inst(5 downto 0),
+      o_STD_SHIFT     => s_STD_SHIFT,
+      o_ALU_Ctl       => s_ALU_Ctl,
+      o_RegWrite      => s_RegWr,
+      o_MemtoReg      => s_MemtoReg,
+      o_MemWrite      => s_DMemWr,
+      o_MemRead       => s_MemRead,
+      o_RegDst        => s_RegDst,
+      o_Branch        => s_Branch,
+      o_Alu_Src       => s_Alu_Src,
+      o_ext_ctl       => s_ext_ctl,
+      o_Jump          => s_Jump,
+      o_jr            => s_jr,
+      o_jal           => s_jal);
+
+  mux0: mux4t1_N
+    port map (
+      i_w0 => s_Inst(20 downto 16),
+      i_w1 => s_Inst(15 downto 11),
+      i_w2 => std_logic_vector(to_unsigned(31, 5)), -- hardcoded address of $ra
+      i_w3 => std_logic_vector(to_unsigned(31, 5)), -- hardcoded address of $ra
+      i_s0 => s_RegDst(0),
+      i_s1 => s_RegDst(1),
+      o_Y  => s_RegWrAddr);
+
+  mux6: mux2t1_N
+    port map (
+      i_S  => s_jal,
+      i_D0 => w_mux_reg_rtn,
+      i_D1 => s_pc_p4,
+      o_O  => s_RegWrData);
+
+  regist: reg
+    port map (
+      i_CLK      => iCLK,
+      i_RST      => iRST,
+      i_WE       => s_RegWr,
+      i_rs_addrs => s_Inst(25 downto 21),
+      i_rt_addrs => s_Inst(20 downto 16),
+      i_rd_addrs => s_RegWrAddr,
+      i_rd_data  => s_RegWrData,
+      o_rs_data  => s_rs_data_o,
+      o_rt_data  => s_rt_data_o);
+
+  ext: extender16t32
+    port map (
+      i_Imm16 => s_Inst(15 downto 0),
+      i_ctl   => s_ext_ctl,
+      o_Imm32 => s_ext_o);
+
+  mux1: mux2t1_N
+    port map (
+      i_S  => s_Alu_Src,
+      i_D0 => s_rt_data_o,
+      i_D1 => s_ext_o,
+      o_O  => w_mux1_alu_rtn);
+
+  mux7: mux2t1_N
+    port map (
+      i_S  => s_STD_SHIFT,
+      i_D0 => s_rs_data_o,
+      i_D1 => (b"000000" & s_ext_o(31 downto 6)), -- makes bits 5-0 the shamt field
+      o_O  => w_mux7_alu_rtn);
+
+  ALU0: ALU
+    port map (
+      i_ALU_A        => w_mux7_alu_rtn,
+      i_ALU_B        => w_mux1_alu_rtn,
+      i_ALU_Ctl      => s_ALU_Ctl,
+      o_ALU_Carry    => s_ALU_Carry,
+      o_ALU_Zero     => s_ALU_Zero,
+      o_ALU_Overflow => s_ALU_Overflow,
+      o_ALU_I_Result => s_DMemAddr);
+
+  and0: andg2
+    port map (
+      i_A => s_Branch,
+      i_B => s_ALU_Zero,
+      o_F => w_b_n_ALUo);
+
+  mux4: mux2t1_N
+    port map (
+      i_S => s_MemtoReg,
+      i_D0 => s_DMemAddr,
+      i_D1 => s_DMemOut,
+      o_O => w_mux_reg_rtn);
+
 end architecture;
 
