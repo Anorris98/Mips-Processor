@@ -15,7 +15,6 @@ library IEEE;
 
 library work;
   use work.MIPS_types.all;
-  use work.my_package.all;
 
 entity MIPS_Processor is
   generic (N : integer := DATA_WIDTH);
@@ -42,7 +41,6 @@ architecture structure of MIPS_Processor is
   end component;
 
   component ALU is
-    generic (N : integer := 32);
     port (i_ALU_A        : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
           i_ALU_B        : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
           i_ALU_Ctl      : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
@@ -53,7 +51,6 @@ architecture structure of MIPS_Processor is
   end component;
 
   component AdderSubtractor is
-    generic (N : integer := 32);
     port (i_AddSub_A        : in  std_logic_vector(N - 1 downto 0);
           i_AddSub_B        : in  std_logic_vector(N - 1 downto 0);
           i_AddSub_nAdd_sub : in  std_logic;
@@ -64,7 +61,6 @@ architecture structure of MIPS_Processor is
   end component;
 
   component RippleCarryAdder is
-    generic (N : integer := 32); -- Configurable bit width
     port (A        : in  std_logic_vector(N - 1 downto 0);
           B        : in  std_logic_vector(N - 1 downto 0);
           Sum      : out std_logic_vector(N - 1 downto 0);
@@ -74,69 +70,11 @@ architecture structure of MIPS_Processor is
   end component;
 
   component OnesComplementor is
-    generic (N : integer := 32);
     port (i_D0 : in  std_logic_vector(N - 1 downto 0);
           o_O  : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component andg2 is
-    port (i_A : in  std_logic;
-          i_B : in  std_logic;
-          o_F : out std_logic);
-  end component;
-
-  component andg_N is
-    generic (N : integer := 32);
-    port (i_A   : in  std_logic_vector(N - 1 downto 0);
-          i_B   : in  std_logic_vector(N - 1 downto 0);
-          o_Out : out std_logic_vector(N - 1 downto 0));
-  end component;
-
-  component org2 is
-    port (i_A : in  std_logic;
-          i_B : in  std_logic;
-          o_F : out std_logic);
-  end component;
-
-  component org_N is
-    generic (N : integer := 32);
-    port (i_A   : in  std_logic_vector(N - 1 downto 0);
-          i_B   : in  std_logic_vector(N - 1 downto 0);
-          o_Out : out std_logic_vector(N - 1 downto 0));
-  end component;
-
-  component xorg2 is --Xor Gate
-    port (i_A : in  std_logic;
-          i_B : in  std_logic;
-          o_F : out std_logic);
-  end component;
-
-  component xorg_N is
-    generic (N : integer := 32);
-    port (i_A   : in  std_logic_vector(N - 1 downto 0);
-          i_B   : in  std_logic_vector(N - 1 downto 0);
-          o_Out : out std_logic_vector(N - 1 downto 0));
-  end component;
-
-  component norg_N is
-    generic (N : integer := 32);
-    port (i_A   : in  std_logic_vector(N - 1 downto 0);
-          i_B   : in  std_logic_vector(N - 1 downto 0);
-          o_Out : out std_logic_vector(N - 1 downto 0));
-  end component;
-
-  component BarrelShifter is
-    generic (N : integer := 32);
-    port (
-      i_in      : in  std_logic_vector(N - 1 downto 0);
-      i_shift_C : in  std_logic;
-      i_shamt   : in  std_logic_vector(4 downto 0);
-      o_out     : out std_logic_vector(N - 1 downto 0)
-    );
-  end component;
-
   component Shifter is
-    generic (N : integer := 32);
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
           i_shift_C   : in  std_logic; --0 = Logical, 1 = Arithmetic
           i_Direction : in  std_logic; --0 = left, 1 = right
@@ -144,17 +82,7 @@ architecture structure of MIPS_Processor is
           o_Out       : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component mux2t1 is
-    port (
-      i_D0 : in  std_logic; -- Input 0
-      i_D1 : in  std_logic; -- Input 1
-      i_S  : in  std_logic; -- Selector
-      o_O  : out std_logic  -- Output
-    );
-  end component;
-
   component mux2t1_N is
-    generic (N : integer := 32);
     port (
       i_s  : in  std_logic;
       i_D0 : in  std_logic_vector(N - 1 downto 0);
@@ -164,7 +92,6 @@ architecture structure of MIPS_Processor is
   end component;
 
   component mux8t1_N is
-    generic (N : integer := 32);
     port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
           i_w4, i_w5, i_w6, i_w7 : in  std_logic_vector(N - 1 downto 0);
           i_s0                   : in  std_logic;
@@ -174,7 +101,6 @@ architecture structure of MIPS_Processor is
   end component;
 
   component fetchLogic is
-    generic (N : integer := 32);
     port (
       i_jump_C          : in  std_logic;
       i_jr_ra_C         : in  std_logic;
@@ -186,16 +112,6 @@ architecture structure of MIPS_Processor is
       i_jr_ra_pc_next   : in  std_logic_vector(N - 1 downto 0);
       o_pc_p4           : out std_logic_vector(N - 1 downto 0);
       o_pc_next         : out std_logic_vector(N - 1 downto 0));
-  end component;
-
-  component pc_dffg is
-    generic (N : integer := 32);
-    port (
-      i_CLK : in  std_logic;                        -- Clock input
-      i_RST : in  std_logic;                        -- Reset input
-      i_WE  : in  std_logic;                        -- Write enable input
-      i_D   : in  std_logic_vector(N - 1 downto 0); -- Data value input
-      o_Q   : out std_logic_vector(N - 1 downto 0)); -- Data value output
   end component;
 
   component controller is
@@ -214,14 +130,6 @@ architecture structure of MIPS_Processor is
           o_Jump          : out std_logic;
           o_jr            : out std_logic;
           o_jal           : out std_logic);
-  end component;
-
-  component ControlDecoderLogic is
-    port (
-      i_instruct31_26 : in  std_logic_vector(5 downto 0);
-      i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_Output        : out std_logic_vector(17 downto 0)
-    );
   end component;
 
   -- Required data memory signals
