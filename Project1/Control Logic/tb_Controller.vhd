@@ -16,7 +16,6 @@ architecture behavior of tb_Controller is
       o_RegWrite      : out std_logic;
       o_MemtoReg      : out std_logic;
       o_MemWrite      : out std_logic;
-      o_MemRead       : out std_logic;
       o_RegDst        : out std_logic_vector(1 downto 0);
       o_Branch        : out std_logic;
       o_Alu_Src       : out std_logic;
@@ -37,7 +36,6 @@ architecture behavior of tb_Controller is
   signal w_RegWrite : std_logic;
   signal w_MemtoReg : std_logic;
   signal w_MemWrite : std_logic;
-  signal w_MemRead  : std_logic;
   signal w_RegDst   : std_logic_vector(1 downto 0);
   signal w_Branch   : std_logic;
   signal w_Alu_Src  : std_logic;
@@ -61,7 +59,6 @@ begin
       o_RegDst        => w_RegDst,
       o_Jump          => w_Jump,
       o_Branch        => w_Branch,
-      o_MemRead       => w_MemRead,
       o_ext_ctl       => w_ext_ctl,
       o_jal           => w_jal,
       o_jr            => w_jr
