@@ -50,30 +50,6 @@ architecture structure of MIPS_Processor is
           o_ALU_I_Result : out std_logic_vector(N - 1 downto 0)); -- ALU add Sub Results.
   end component;
 
-  component AdderSubtractor is
-    port (i_AddSub_A        : in  std_logic_vector(N - 1 downto 0);
-          i_AddSub_B        : in  std_logic_vector(N - 1 downto 0);
-          i_AddSub_nAdd_sub : in  std_logic;
-          o_AddSub_Sum      : out std_logic_vector(N - 1 downto 0);
-          o_AddSub_Cout     : out std_logic;
-          o_AddSub_Overflow : out std_logic;
-          o_AddSub_Zero     : out std_logic);
-  end component;
-
-  component RippleCarryAdder is
-    port (A        : in  std_logic_vector(N - 1 downto 0);
-          B        : in  std_logic_vector(N - 1 downto 0);
-          Sum      : out std_logic_vector(N - 1 downto 0);
-          Carry    : out std_logic; -- Final carry out
-          --           Zero    : out std_logic; -- Indicates if Sum is zero
-          Overflow : out std_logic); -- Indicates overflow condition
-  end component;
-
-  component OnesComplementor is
-    port (i_D0 : in  std_logic_vector(N - 1 downto 0);
-          o_O  : out std_logic_vector(N - 1 downto 0));
-  end component;
-
   component Shifter is
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
           i_shift_C   : in  std_logic; --0 = Logical, 1 = Arithmetic
@@ -91,12 +67,9 @@ architecture structure of MIPS_Processor is
     );
   end component;
 
-  component mux8t1_N is
+  component mux4t1 is
     port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
-          i_w4, i_w5, i_w6, i_w7 : in  std_logic_vector(N - 1 downto 0);
-          i_s0                   : in  std_logic;
-          i_s1                   : in  std_logic;
-          i_s2                   : in  std_logic;
+          i_s0, i_s1             : in  std_logic;
           o_Y                    : out std_logic_vector(N - 1 downto 0));
   end component;
 
