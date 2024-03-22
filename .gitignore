@@ -12,3 +12,5 @@ toolflow/proj/src/TopLevel/work
 toolflow/proj/src/TopLevel/modelsim.ini
 toolflow/proj/src/TopLevel/transcript
 toolflow/proj/src/TopLevel/vsim.wlf
+toolflow/internal/testpy
+toolflow/proj/src/transcript

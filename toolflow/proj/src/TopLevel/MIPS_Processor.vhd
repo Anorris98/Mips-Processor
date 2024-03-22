@@ -122,11 +122,10 @@ architecture structure of MIPS_Processor is
     port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
           i_instruct5_0   : in  std_logic_vector(5 downto 0);
           o_STD_SHIFT     : out std_logic; -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
-          o_ALU_Ctl       : out std_logic_vector(4 downto 0);
+          o_ALU_Ctl       : out std_logic_vector(5 downto 0);
           o_RegWrite      : out std_logic;
           o_MemtoReg      : out std_logic;
           o_MemWrite      : out std_logic;
-          o_MemRead       : out std_logic;
           o_RegDst        : out std_logic_vector(1 downto 0);
           o_Branch        : out std_logic;
           o_Alu_Src       : out std_logic;
@@ -159,7 +158,7 @@ architecture structure of MIPS_Processor is
 
   -- control signals
   signal s_STD_SHIFT : std_logic;
-  signal s_ALU_Ctl   : std_logic_vector(4 downto 0);
+  signal s_ALU_Ctl   : std_logic_vector(5 downto 0);
   signal s_MemtoReg  : std_logic;
   signal s_RegDst    : std_logic_vector(1 downto 0);
   signal s_Branch    : std_logic;
@@ -180,8 +179,9 @@ architecture structure of MIPS_Processor is
   signal s_rt_data_o    : std_logic_vector(N - 1 downto 0);
   signal s_ext_o        : std_logic_vector(N - 1 downto 0);
   signal s_ALU_Carry    : std_logic;
-  signal s_ALU_Overflow : std_logic;
   signal s_ALU_Zero     : std_logic;
+  -- Misc
+  signal s_mux7_iD1 : std_logic_vector(N - 1 downto 0);
 
 begin
 
@@ -218,7 +218,7 @@ begin
       i_CLK             => iCLK,
       i_RST             => iRST,
       i_w_branch_n_ALUo => w_b_n_ALUo,
-      i_instr_25t0      => s_Inst(25 downto 0),
+      i_instr_25t0      => s_Inst(25 downto 0), -- jump address
       i_ext_imm         => s_ext_o,
       i_jr_ra_pc_next   => w_ra_pc_next,
       o_pc_p4           => s_pc_p4,
@@ -226,14 +226,13 @@ begin
 
   control: controller
     port map (
-      i_instruct31_26 => s_Inst(31 downto 26),
-      i_instruct5_0   => s_Inst(5 downto 0),
+      i_instruct31_26 => s_Inst(31 downto 26), -- opcode
+      i_instruct5_0   => s_Inst(5 downto 0),   -- funct field
       o_STD_SHIFT     => s_STD_SHIFT,
       o_ALU_Ctl       => s_ALU_Ctl,
       o_RegWrite      => s_RegWr,
       o_MemtoReg      => s_MemtoReg,
       o_MemWrite      => s_DMemWr,
-      o_MemRead       => s_MemRead,
       o_RegDst        => s_RegDst,
       o_Branch        => s_Branch,
       o_Alu_Src       => s_Alu_Src,
@@ -244,8 +243,8 @@ begin
 
   mux0: mux4t1_N
     port map (
-      i_w0 => s_Inst(20 downto 16),
-      i_w1 => s_Inst(15 downto 11),
+      i_w0 => s_Inst(20 downto 16), -- Non-R type write address (Rt)
+      i_w1 => s_Inst(15 downto 11), -- R type write address (Rd)
       i_w2 => std_logic_vector(to_unsigned(31, 5)), -- hardcoded address of $ra
       i_w3 => std_logic_vector(to_unsigned(31, 5)), -- hardcoded address of $ra
       i_s0 => s_RegDst(0),
@@ -264,16 +263,18 @@ begin
       i_CLK      => iCLK,
       i_RST      => iRST,
       i_WE       => s_RegWr,
-      i_rs_addrs => s_Inst(25 downto 21),
-      i_rt_addrs => s_Inst(20 downto 16),
+      i_rs_addrs => s_Inst(25 downto 21), -- Rs address
+      i_rt_addrs => s_Inst(20 downto 16), -- Rt address
       i_rd_addrs => s_RegWrAddr,
       i_rd_data  => s_RegWrData,
       o_rs_data  => s_rs_data_o,
       o_rt_data  => s_rt_data_o);
 
+  s_DMemData <= s_rt_data_o;
+
   ext: extender16t32
     port map (
-      i_Imm16 => s_Inst(15 downto 0),
+      i_Imm16 => s_Inst(15 downto 0), -- Immediate value
       i_ctl   => s_ext_ctl,
       o_Imm32 => s_ext_o);
 
@@ -284,11 +285,13 @@ begin
       i_D1 => s_ext_o,
       o_O  => w_mux1_alu_rtn);
 
+  s_mux7_iD1 <= (b"000000" & s_ext_o(31 downto 6));
+
   mux7: mux2t1_N
     port map (
       i_S  => s_STD_SHIFT,
       i_D0 => s_rs_data_o,
-      i_D1 => (b"000000" & s_ext_o(31 downto 6)), -- makes bits 5-0 the shamt field
+      i_D1 => s_mux7_iD1, -- makes bits 5-0 the shamt field
       o_O  => w_mux7_alu_rtn);
 
   ALU0: ALU
@@ -298,7 +301,7 @@ begin
       i_ALU_Ctl      => s_ALU_Ctl,
       o_ALU_Carry    => s_ALU_Carry,
       o_ALU_Zero     => s_ALU_Zero,
-      o_ALU_Overflow => s_ALU_Overflow,
+      o_ALU_Overflow => s_Ovfl,
       o_ALU_I_Result => s_DMemAddr);
 
   and0: andg2
@@ -309,10 +312,10 @@ begin
 
   mux4: mux2t1_N
     port map (
-      i_S => s_MemtoReg,
+      i_S  => s_MemtoReg,
       i_D0 => s_DMemAddr,
       i_D1 => s_DMemOut,
-      o_O => w_mux_reg_rtn);
+      o_O  => w_mux_reg_rtn);
 
 end architecture;
 
