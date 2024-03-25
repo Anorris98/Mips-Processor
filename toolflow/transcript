@@ -1,0 +1,31 @@
+# //  Questa Sim-64
+# //  Version 2023.2_2 linux_x86_64 Jun  9 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+add wave -position insertpoint vsim:/tb/MyMips/ALU0/*
+add wave -position insertpoint vsim1:/tb/MyMips/*
+add wave -position insertpoint vsim1:/tb/*
+add wave -position insertpoint vsim1:/tb/MyMips/ALU0/*
+add wave -position insertpoint vsim2:/tb/MyMips/ALU0/*
+add wave -position insertpoint  \
+vsim3:/tb/CLK
+add wave -position insertpoint vsim5:/tb/*
+add wave -position insertpoint vsim5:/tb/MyMips/ALU0/*
+add wave -position insertpoint vsim7:/tb/*
+add wave -position insertpoint vsim7:/tb/MyMips/ALU0/*
+# ** Error: (vish-7) Failed to open info file "/home/anorris/Desktop/cpre381-toolflow/containers/sim_container_0/work/_info" in read mode.
+# No such file or directory. (errno = ENOENT)
+# ** Error: (vish-7) Failed to open info file "/home/anorris/Desktop/cpre381-toolflow/containers/sim_container_0/work/_info" in read mode.
+# No such file or directory. (errno = ENOENT)
+add wave -position insertpoint  \
+vsim7:/tb/MyMips/control/i_instruct5_0

@@ -14,7 +14,7 @@ entity ALU is
   generic (N : integer := 32);
   port (i_ALU_A        : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
         i_ALU_B        : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-        i_ALU_Ctl      : in  std_logic_vector(5 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
+        i_ALU_Ctl      : in  std_logic_vector(5 downto 0);     -- ALU Control Input [5]SLT bit, used only for SLT. [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
         o_ALU_Carry    : out std_logic;                        -- ALU Indicator for a carry out bit.
         o_ALU_Zero     : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
         o_ALU_Overflow : out std_logic;                        -- ALU Indicator that an overflow has occured.
@@ -88,7 +88,7 @@ architecture structure of ALU is
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
           i_shift_C   : in  std_logic; --0 = Logical, 1 = Arithmetic
           i_Direction : in  std_logic; --0 = left, 1 = right
-          i_Shamt     : in  std_logic_vector(5 downto 0);
+          i_Shamt     : in  std_logic_vector(4 downto 0);
           o_Out       : out std_logic_vector(N - 1 downto 0));
   end component;
 
@@ -106,7 +106,7 @@ architecture structure of ALU is
   -- Signals
   signal w_AND, w_OR, w_XOR, w_NOR, w_Shift, w_AddSub, w_Lui, w_add_sub_slt : std_logic_vector(N - 1 downto 0); -- 31 downto 0
   signal w_OVERFLOW, w_SignedOrUnsigned                                     : std_logic;
-  signal w_SLT                                                              : std_logic_vector(N - 2 downto 0); -- 30 downto 0
+  signal w_SLT                                                              : std_logic_vector(N - 1 downto 0); -- 30 downto 0
 
 begin
 
@@ -115,6 +115,8 @@ begin
   ---------------------------------------------------------------------------
   w_Lui              <= i_ALU_B(15 downto 0) & x"0000"; -- LUI
   w_SignedOrUnsigned <= i_ALU_Ctl(4);                   -- (1)Signed, (0)Unsigned
+      w_SLT  <= "0000000000000000000000000000000" & w_AddSub(31); -- SLT, take 31 bits of zero, and add the msb to the end. 
+                                                                -- if negative, then true(1), if positive, then false(0).
   
 
   -- Adder/Subtractor Component
@@ -129,17 +131,15 @@ begin
       o_AddSub_Zero     => o_ALU_Zero
     );
 
-    w_SLT  <= "000000000000000000000000000000" & w_AddSub(31); -- SLT, take 31 bits of zero, and add the msb to the end. 
-                                                                -- if negative, then true(1), if positive, then false(0).
-
   mux2t1_N_0: mux2t1_N
-    generic map (N => N)
+    generic map (N => 32)
     port map (
       i_S  => i_ALU_Ctl(5), -- (0)normal operation(add/sub), (1)slt, slti, used with sub to determine negative.
       i_D0 => w_AddSub,
       i_D1 => w_SLT,
       o_O  => w_add_sub_slt
     );
+
   -- Logical Operation Components
   and_01: andg2
     port map (

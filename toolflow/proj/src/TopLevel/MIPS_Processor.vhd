@@ -68,7 +68,7 @@ architecture structure of MIPS_Processor is
   component ALU is
     port (i_ALU_A        : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
           i_ALU_B        : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-          i_ALU_Ctl      : in  std_logic_vector(4 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
+          i_ALU_Ctl      : in  std_logic_vector(5 downto 0);     -- ALU Control Input [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
           o_ALU_Carry    : out std_logic;                        -- ALU Indicator for a carry out bit.
           o_ALU_Zero     : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
           o_ALU_Overflow : out std_logic;                        -- ALU Indicator that an overflow has occured.
@@ -121,6 +121,7 @@ architecture structure of MIPS_Processor is
   component controller is
     port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
           i_instruct5_0   : in  std_logic_vector(5 downto 0);
+          o_halt          : out std_logic;
           o_STD_SHIFT     : out std_logic; -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
           o_ALU_Ctl       : out std_logic_vector(5 downto 0);
           o_RegWrite      : out std_logic;
@@ -180,6 +181,7 @@ architecture structure of MIPS_Processor is
   signal s_ext_o        : std_logic_vector(N - 1 downto 0);
   signal s_ALU_Carry    : std_logic;
   signal s_ALU_Zero     : std_logic;
+  signal s_oALU         : std_logic_vector(N - 1 downto 0);
   -- Misc
   signal s_mux7_iD1 : std_logic_vector(N - 1 downto 0);
 
@@ -228,6 +230,7 @@ begin
     port map (
       i_instruct31_26 => s_Inst(31 downto 26), -- opcode
       i_instruct5_0   => s_Inst(5 downto 0),   -- funct field
+      o_halt          => s_Halt,       
       o_STD_SHIFT     => s_STD_SHIFT,
       o_ALU_Ctl       => s_ALU_Ctl,
       o_RegWrite      => s_RegWr,
@@ -294,6 +297,8 @@ begin
       i_D1 => s_mux7_iD1, -- makes bits 5-0 the shamt field
       o_O  => w_mux7_alu_rtn);
 
+      oALUOut <= s_DMemAddr;  --signal for the alu out, is only read by the top level, so need no for extra name.
+
   ALU0: ALU
     port map (
       i_ALU_A        => w_mux7_alu_rtn,
@@ -303,7 +308,7 @@ begin
       o_ALU_Zero     => s_ALU_Zero,
       o_ALU_Overflow => s_Ovfl,
       o_ALU_I_Result => s_DMemAddr);
-
+      
   and0: andg2
     port map (
       i_A => s_Branch,
