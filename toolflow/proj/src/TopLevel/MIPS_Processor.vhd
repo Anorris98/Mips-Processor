@@ -204,6 +204,9 @@ begin
               we   => iInstLd,
               q    => s_Inst);
 
+  w_dmem_lh <= "0000000000000000" & s_DMemOut(31 downto 16);         -- for load half word (grab lsb 16 down to 0 bits of memory output)
+  w_dmem_lb <= "000000000000000000000000" & s_DMemOut(7 downto 0);  -- for load Byte (grab last lsb 8 down to 0 bits of memory output)
+                                                                    -- Used in conjunction with MemToReg to select what we are doing/wanting.
   DMem: mem
     generic map (ADDR_WIDTH => ADDR_WIDTH,
                  DATA_WIDTH => N)
@@ -213,9 +216,6 @@ begin
               we   => s_DMemWr,
               q    => s_DMemOut);
 
-  -- TODO: Ensure that s_Halt is connected to an output control signal produced from decoding the Halt instruction (Opcode: 01 0100)
-  -- TODO: Ensure that s_Ovfl is connected to the overflow output of your ALU
-  -- TODO: Implement the rest of your processor below this comment! 
   fetch: fetchLogic
     port map (
       i_jump_C          => s_Jump,
@@ -330,13 +330,6 @@ begin
       i_s1 => s_MemtoReg(1),
       o_Y  => w_mux_reg_rtn
     );
-
-  -- mux4: mux2t1_N
-  --   port map (
-  --     i_S  => s_MemtoReg,
-  --     i_D0 => s_DMemAddr,
-  --     i_D1 => s_DMemOut,
-  --     o_O  => w_mux_reg_rtn);
 
 end architecture;
 
