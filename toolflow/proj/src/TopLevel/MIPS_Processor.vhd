@@ -95,8 +95,9 @@ architecture structure of MIPS_Processor is
     component WordDecoder is
   port (
     i_word      : in  std_logic_vector(31 downto 0); -- Instruction bits 31-26
-    i_offset    : in  std_logic;                      -- 0 offset or 1 offset.
-    o_Output    : out std_logic_vector(31 downto 0)
+    i_offset    : in  std_logic;  -- two bits is all we need to represent 0 to 3 offsets.
+    o_Output    : out std_logic_vector(31 downto 0);
+    i_signed    : in  std_logic
   );
   end component;
 
@@ -344,8 +345,9 @@ begin
   WordDecoder0: WordDecoder
   port map(
     i_word     => s_DMemOut,
-    i_offset   => s_DMemAddr(0),
-    o_Output   => w_dmem_lh
+    i_offset   => s_DMemAddr(1),
+    o_Output   => w_dmem_lh,
+    i_signed   =>  s_ext_ctl
   );
 
   mux4: mux4t1_N          -- added for lb, lbu, lh, and lhu.

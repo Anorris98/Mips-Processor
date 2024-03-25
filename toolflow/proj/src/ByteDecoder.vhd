@@ -7,48 +7,6 @@
 -- -- ByteDecoder.vhd
 -- --------------------------------------------------------------------------
 
--- library IEEE;
--- use IEEE.STD_LOGIC_1164.ALL;
--- use IEEE.STD_LOGIC_ARITH.ALL;
--- use IEEE.STD_LOGIC_UNSIGNED.ALL;
-
--- entity ByteDecoder is
---   port (
---     i_word      : in  std_logic_vector(31 downto 0); -- Instruction bits
---     i_offset    : in  std_logic_vector(1 downto 0);  -- Two bits is all we need to represent 0 to 3 offsets.
---     o_Output    : out std_logic_vector(31 downto 0);  -- Output port
---     i_signed    : in  std_logic
---   );
--- end entity;
-
--- architecture behavior of ByteDecoder is
--- begin
---   op: process (i_word, i_offset) -- React on changes in the offset or the word.
---   begin
---     case i_offset is
---         when "00" => --byte [0]
---             o_Output <= x"000000" & i_word(7 downto 0); -- Pad with zeros, then grab first byte.
---         when "01" => --byte [1]
---             o_Output <= x"000000" & i_word(15 downto 8); -- Pad with zeros, then grab second byte.
---         when "10" => --byte [2]
---             o_Output <= x"000000" & i_word(23 downto 16); -- Pad with zeros, then grab third byte.
---         when "11" => --byte [3]
---             o_Output <= x"000000" & i_word(31 downto 24); -- Pad with zeros, then grab fourth byte.
---         when others =>
---             o_Output <= (others => '0'); -- Default case, set all to zeros.
---     end case;
---   end process;
--- end architecture;
-
---------------------------------------------------------------------------
--- @author Alek Norris
--- @Creation: 3/25/2024
--- Iowa State University
--- CPRE 381
--- Implementation of a Byte Decoder. Hooks up after the dmem to allow for byte addressable memory.
--- ByteDecoder.vhd
---------------------------------------------------------------------------
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
