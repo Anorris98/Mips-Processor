@@ -135,7 +135,7 @@ begin
       Sum      => w_A0toM0,
       Carry    => w_A0Carry,
       --                 Zero  =>  o_AddSub_Zero,
-      Overflow => w_adder0Overflow);
+      Overflow => open);
   ---------------------------------------------------------------------------
   -- Level 2: all inputs atleast 2 gates deep
   ---------------------------------------------------------------------------

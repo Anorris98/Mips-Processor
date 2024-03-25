@@ -2,6 +2,7 @@
 -------------------------------------------------------------------------
 -- @author Drew Kearns
 -- @Creation: 3/5/2024
+-- @Updated: by Alek Norris 3/25/2024 - made into a generic
 -- Iowa State University
 -- CPRE 381
 -- Implimentation of an N bit 4 to 1 mux.
@@ -13,9 +14,10 @@ library IEEE;
   use ieee.numeric_std.all;
 
 entity mux4t1_N is
-  port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(4 downto 0);
+  generic(N : integer := 5); 
+  port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
         i_s0, i_s1             : in  std_logic;
-        o_Y                    : out std_logic_vector(4 downto 0));
+        o_Y                    : out std_logic_vector(N - 1 downto 0));
 end entity;
 
 architecture Dataflow of mux4t1_N is
