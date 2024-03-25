@@ -83,6 +83,23 @@ architecture structure of MIPS_Processor is
           o_Out       : out std_logic_vector(N - 1 downto 0));
   end component;
 
+  component ByteDecoder is
+  port (
+    i_word      : in  std_logic_vector(31 downto 0); -- Instruction bits 31-26
+    i_offset    : in  std_logic_vector(1 downto 0);  -- two bits is all we need to represent 0 to 3 offsets.
+    o_Output    : out std_logic_vector(31 downto 0);
+    i_signed    : in  std_logic
+  );
+  end component;
+
+    component WordDecoder is
+  port (
+    i_word      : in  std_logic_vector(31 downto 0); -- Instruction bits 31-26
+    i_offset    : in  std_logic;                      -- 0 offset or 1 offset.
+    o_Output    : out std_logic_vector(31 downto 0)
+  );
+  end component;
+
   component mux2t1_N is
     port (
       i_s  : in  std_logic;
@@ -204,14 +221,11 @@ begin
               we   => iInstLd,
               q    => s_Inst);
 
-  w_dmem_lh <= "0000000000000000" & s_DMemOut(31 downto 16);         -- for load half word (grab lsb 16 down to 0 bits of memory output)
-  w_dmem_lb <= "000000000000000000000000" & s_DMemOut(7 downto 0);  -- for load Byte (grab last lsb 8 down to 0 bits of memory output)
-                                                                    -- Used in conjunction with MemToReg to select what we are doing/wanting.
   DMem: mem
     generic map (ADDR_WIDTH => ADDR_WIDTH,
                  DATA_WIDTH => N)
     port map (clk  => iCLK,
-              addr => s_DMemAddr(11 downto 2),
+              addr => s_DMemAddr(11 downto 2),    
               data => s_DMemData,
               we   => s_DMemWr,
               q    => s_DMemOut);
@@ -301,7 +315,7 @@ begin
       i_D1 => s_mux7_iD1, -- makes bits 5-0 the shamt field
       o_O  => w_mux7_alu_rtn);
 
-      oALUOut <= s_DMemAddr;  --signal for the alu out, is only read by the top level, so need no for extra name.
+      oALUOut <= w_mux_reg_rtn;  --signal for the alu out, is only read by the top level, so need no for extra name.
 
   ALU0: ALU
     port map (
@@ -318,6 +332,21 @@ begin
       i_A => s_Branch,
       i_B => s_ALU_Zero,
       o_F => w_b_n_ALUo);
+
+  ByteDecoder0: ByteDecoder
+  port map (
+    i_word     =>  s_DMemOut,
+    i_offset   =>  s_DMemAddr(1 downto 0),
+    o_Output   =>  w_dmem_lb,
+    i_signed   =>  s_ext_ctl
+  );
+ 
+  WordDecoder0: WordDecoder
+  port map(
+    i_word     => s_DMemOut,
+    i_offset   => s_DMemAddr(0),
+    o_Output   => w_dmem_lh
+  );
 
   mux4: mux4t1_N          -- added for lb, lbu, lh, and lhu.
     generic map (N => 32)

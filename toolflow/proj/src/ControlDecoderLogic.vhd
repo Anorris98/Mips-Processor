@@ -20,7 +20,7 @@ end entity;
 architecture sel_when of ControlDecoderLogic is
 
 begin
-  op: process (i_instruct31_26, i_instruct5_0) --I Or J Type
+  op: process (i_instruct31_26, i_instruct5_0) --I Or R Type
   begin
 
     if i_instruct31_26 = "000000" then
@@ -65,7 +65,7 @@ begin
       end case;
 
     else
-      -- i_instruct31_26 are not all zeros, select based on i_instruct31_26 R type
+      -- i_instruct31_26 are not all zeros, select based on i_instruct31_26 I Type
       case i_instruct31_26 is
       when "010100" => -- halt bit [18]
           o_Output <= "10000000000000000000";
@@ -92,13 +92,13 @@ begin
         when "000101" => -- bne
           o_Output <= "00101100000000001100";
         when "100000" => -- lb
-          o_Output <= "00100000001010000000";
+          o_Output <= "00100000001010000100";
         when "100001" => -- lh
           o_Output <= "00101000010010000000";
         when "100100" => -- lbu
-          o_Output <= "00100000001010000000";
+          o_Output <= "00101000001010000000";
         when "100101" => -- lhu
-          o_Output <= "00100000010010000000";
+          o_Output <= "00101000010010000100";
         when "000010" => -- jump
           o_Output <= "00101000000000010000";
         when "000011" => -- jal
