@@ -8,9 +8,9 @@ Project1/*/*/transcript
 Project1/*/*/vsim.wlf
 toolflow/output
 toolflow/internal/ModelSimContainer
+toolflow/internal/testpy/__pychach__
 toolflow/proj/src/TopLevel/work
 toolflow/proj/src/TopLevel/modelsim.ini
 toolflow/proj/src/TopLevel/transcript
 toolflow/proj/src/TopLevel/vsim.wlf
-toolflow/internal/testpy
 toolflow/proj/src/transcript
