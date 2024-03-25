@@ -1,5 +1,6 @@
 -------------------------------------------------------------------------
--- Alek Norris
+--@Author Alek Norris
+--@Creation 3/03/2024
 -- Department of Electrical and Computer Engineering
 -- Iowa State University
 -- implimentaition of a controller for a MIPS processor
@@ -17,7 +18,7 @@ entity Controller is
         o_STD_SHIFT   : out std_logic;  -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
         o_ALU_Ctl     : out std_logic_vector(5 downto 0);
         o_RegWrite    : out std_logic;
-        o_MemtoReg    : out std_logic;
+        o_MemtoReg    : out std_logic_vector(1 downto 0);
         o_MemWrite    : out std_logic;
         o_RegDst      : out std_logic_vector(1 downto 0);
         o_Branch      : out std_logic;
@@ -37,18 +38,18 @@ architecture structure of Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_Output        : out std_logic_vector(18 downto 0)
+      o_Output        : out std_logic_vector(19 downto 0)
     );
   end component;
 
   --Signals
-  signal DecoderOutput : std_logic_vector(18 downto 0);
+  signal DecoderOutput : std_logic_vector(19 downto 0);
   signal w_halt        : std_logic;
   signal w_STD_SHIFT   : std_logic;
   signal w_Alu_Src     : std_logic;
   signal w_ALU_Ctl     : std_logic_vector(5 downto 0);
   signal w_RegWrite    : std_logic;
-  signal w_MemtoReg    : std_logic;
+  signal w_MemtoReg    : std_logic_vector(1 downto 0);
   signal w_MemWrite    : std_logic;
   signal w_RegDst      : std_logic_vector(1 downto 0);
   signal w_Branch      : std_logic;
@@ -91,11 +92,11 @@ begin
   o_jr          <= w_jr;
 
 -- signals hooking up and stripping the correct bit.
-  w_halt        <= DecoderOutput(18);
-  w_STD_SHIFT   <= DecoderOutput(17);
-  w_Alu_Src     <= DecoderOutput(16);
-  w_ALU_Ctl     <= DecoderOutput(15 downto 10);
-  w_MemtoReg    <= DecoderOutput(9);
+  w_halt        <= DecoderOutput(19);
+  w_STD_SHIFT   <= DecoderOutput(18);
+  w_Alu_Src     <= DecoderOutput(17);
+  w_ALU_Ctl     <= DecoderOutput(16 downto 11);
+  w_MemtoReg    <= DecoderOutput(10 downto 9);    --upodated to 2 bits for the 4 bit mux for lb, lbu, lh, lhu
   w_MemWrite    <= DecoderOutput(8);
   w_RegWrite    <= DecoderOutput(7);
   w_RegDst      <= DecoderOutput(6 downto 5);

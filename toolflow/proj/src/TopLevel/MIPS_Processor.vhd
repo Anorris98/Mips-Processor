@@ -93,9 +93,10 @@ architecture structure of MIPS_Processor is
   end component;
 
   component mux4t1_N is
-    port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(4 downto 0);
+    generic (N : integer);
+    port (i_w0, i_w1, i_w2, i_w3 : in  std_logic_vector(N - 1 downto 0);
           i_s0, i_s1             : in  std_logic;
-          o_Y                    : out std_logic_vector(4 downto 0));
+          o_Y                    : out std_logic_vector(N - 1 downto 0));
   end component;
 
   component andg2 is
@@ -125,7 +126,7 @@ architecture structure of MIPS_Processor is
           o_STD_SHIFT     : out std_logic; -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
           o_ALU_Ctl       : out std_logic_vector(5 downto 0);
           o_RegWrite      : out std_logic;
-          o_MemtoReg      : out std_logic;
+          o_MemtoReg      : out std_logic_vector(1 downto 0);
           o_MemWrite      : out std_logic;
           o_RegDst        : out std_logic_vector(1 downto 0);
           o_Branch        : out std_logic;
@@ -160,7 +161,7 @@ architecture structure of MIPS_Processor is
   -- control signals
   signal s_STD_SHIFT : std_logic;
   signal s_ALU_Ctl   : std_logic_vector(5 downto 0);
-  signal s_MemtoReg  : std_logic;
+  signal s_MemtoReg  : std_logic_vector(1 downto 0);
   signal s_RegDst    : std_logic_vector(1 downto 0);
   signal s_Branch    : std_logic;
   signal s_Alu_Src   : std_logic;
@@ -174,6 +175,8 @@ architecture structure of MIPS_Processor is
   signal w_mux1_alu_rtn : std_logic_vector(N - 1 downto 0);
   signal w_mux7_alu_rtn : std_logic_vector(N - 1 downto 0);
   signal w_ra_pc_next   : std_logic_vector(N - 1 downto 0);
+  signal w_dmem_lh      : std_logic_vector(N - 1 downto 0);
+  signal w_dmem_lb      : std_logic_vector(N - 1 downto 0);
   -- outputs of main resources
   signal s_pc_p4        : std_logic_vector(N - 1 downto 0);
   signal s_rs_data_o    : std_logic_vector(N - 1 downto 0);
@@ -245,6 +248,7 @@ begin
       o_jal           => s_jal);
 
   mux0: mux4t1_N
+    Generic map (N => 5)
     port map (
       i_w0 => s_Inst(20 downto 16), -- Non-R type write address (Rt)
       i_w1 => s_Inst(15 downto 11), -- R type write address (Rd)
@@ -315,12 +319,24 @@ begin
       i_B => s_ALU_Zero,
       o_F => w_b_n_ALUo);
 
-  mux4: mux2t1_N
+  mux4: mux4t1_N          -- added for lb, lbu, lh, and lhu.
+    generic map (N => 32)
     port map (
-      i_S  => s_MemtoReg,
-      i_D0 => s_DMemAddr,
-      i_D1 => s_DMemOut,
-      o_O  => w_mux_reg_rtn);
+      i_w0 => s_DMemAddr,--[00]
+      i_w1 => w_dmem_lb, --[01]
+      i_w2 => w_dmem_lh, --[10]
+      i_w3 => s_DMemOut, --[11] 
+      i_s0 => s_MemtoReg(0),
+      i_s1 => s_MemtoReg(1),
+      o_Y  => w_mux_reg_rtn
+    );
+
+  -- mux4: mux2t1_N
+  --   port map (
+  --     i_S  => s_MemtoReg,
+  --     i_D0 => s_DMemAddr,
+  --     i_D1 => s_DMemOut,
+  --     o_O  => w_mux_reg_rtn);
 
 end architecture;
 
