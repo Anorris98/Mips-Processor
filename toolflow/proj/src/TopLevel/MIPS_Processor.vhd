@@ -140,6 +140,7 @@ architecture structure of MIPS_Processor is
   component controller is
     port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
           i_instruct5_0   : in  std_logic_vector(5 downto 0);
+          o_beq           : out std_logic;
           o_halt          : out std_logic;
           o_STD_SHIFT     : out std_logic; -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
           o_ALU_Ctl       : out std_logic_vector(5 downto 0);
@@ -177,6 +178,7 @@ architecture structure of MIPS_Processor is
   end component;
 
   -- control signals
+  signal s_beq       :std_logic;
   signal s_STD_SHIFT : std_logic;
   signal s_ALU_Ctl   : std_logic_vector(5 downto 0);
   signal s_MemtoReg  : std_logic_vector(1 downto 0);
@@ -248,6 +250,7 @@ begin
     port map (
       i_instruct31_26 => s_Inst(31 downto 26), -- opcode
       i_instruct5_0   => s_Inst(5 downto 0),   -- funct field
+      o_beq           => s_beq,
       o_halt          => s_Halt,       
       o_STD_SHIFT     => s_STD_SHIFT,
       o_ALU_Ctl       => s_ALU_Ctl,
