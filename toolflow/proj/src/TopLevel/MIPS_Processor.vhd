@@ -84,7 +84,7 @@ architecture structure of MIPS_Processor is
           o_Out       : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component ByteDecoder is
+  component ByteShifter is
     port (
       i_word   : in  std_logic_vector(31 downto 0); -- Instruction bits 31-26
       i_offset : in  std_logic_vector(1 downto 0);  -- two bits is all we need to represent 0 to 3 offsets.
@@ -93,7 +93,7 @@ architecture structure of MIPS_Processor is
     );
   end component;
 
-  component WordDecoder is
+  component WordShifter is
     port (
       i_word   : in  std_logic_vector(31 downto 0); -- Instruction bits 31-26
       i_offset : in  std_logic;                     -- two bits is all we need to represent 0 to 3 offsets.
@@ -327,7 +327,7 @@ begin
       o_branch       => s_Branch,
       o_ALU_I_Result => s_DMemAddr);
 
-  ByteDecoder0: ByteDecoder
+  ByteShifter0: ByteShifter
     port map (
       i_word   => s_DMemOut,
       i_offset => s_DMemAddr(1 downto 0),
@@ -335,7 +335,7 @@ begin
       i_signed => s_ext_ctl
     );
 
-  WordDecoder0: WordDecoder
+  WordShifter0: WordShifter
     port map (
       i_word   => s_DMemOut,
       i_offset => s_DMemAddr(1),

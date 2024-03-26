@@ -84,11 +84,6 @@ architecture mixed of ALU is
           o_Out : out std_logic_vector(N - 1 downto 0));
   end component;
 
-  component invg
-    port (i_A : in  std_logic;
-          o_F : out std_logic);
-  end component;
-
   component Shifter
     generic (N : integer := 32);
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
