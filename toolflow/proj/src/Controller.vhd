@@ -14,6 +14,7 @@ library IEEE;
 entity Controller is
   port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
         i_instruct5_0   : in  std_logic_vector(5 downto 0);
+        o_beq         : out std_logic;
         o_halt        : out std_logic;
         o_STD_SHIFT   : out std_logic;  -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
         o_ALU_Ctl     : out std_logic_vector(5 downto 0);
@@ -38,12 +39,13 @@ architecture structure of Controller is
     port (
       i_instruct31_26 : in  std_logic_vector(5 downto 0);
       i_instruct5_0   : in  std_logic_vector(5 downto 0);
-      o_Output        : out std_logic_vector(19 downto 0)
+      o_Output        : out std_logic_vector(20 downto 0)
     );
   end component;
 
   --Signals
-  signal DecoderOutput : std_logic_vector(19 downto 0);
+  signal DecoderOutput : std_logic_vector(20 downto 0);
+  signal w_beq        : std_logic;
   signal w_halt        : std_logic;
   signal w_STD_SHIFT   : std_logic;
   signal w_Alu_Src     : std_logic;
@@ -92,6 +94,7 @@ begin
   o_jr          <= w_jr;
 
 -- signals hooking up and stripping the correct bit.
+  w_beq         <= DecoderOutput(20);
   w_halt        <= DecoderOutput(19);
   w_STD_SHIFT   <= DecoderOutput(18);
   w_Alu_Src     <= DecoderOutput(17);

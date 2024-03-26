@@ -1,0 +1,68 @@
+[inst #1] lui $4,4097
+Register Write to Reg: 0x04 Val: 0x10010000
+[inst #2] ori $4,$4,0
+Register Write to Reg: 0x04 Val: 0x10010000
+[inst #3] lbu $0,0($4)
+Register Write to Reg: 0x00 Val: 0x00000012
+[inst #4] lbu $1,0($4)
+Register Write to Reg: 0x01 Val: 0x00000012
+[inst #5] lbu $2,0($4)
+Register Write to Reg: 0x02 Val: 0x00000012
+[inst #6] lbu $3,0($4)
+Register Write to Reg: 0x03 Val: 0x00000012
+[inst #7] lbu $5,0($4)
+Register Write to Reg: 0x05 Val: 0x00000012
+[inst #8] lbu $6,0($4)
+Register Write to Reg: 0x06 Val: 0x00000012
+[inst #9] lbu $7,0($4)
+Register Write to Reg: 0x07 Val: 0x00000012
+[inst #10] lbu $8,0($4)
+Register Write to Reg: 0x08 Val: 0x00000012
+[inst #11] lbu $9,0($4)
+Register Write to Reg: 0x09 Val: 0x00000012
+[inst #12] lbu $10,0($4)
+Register Write to Reg: 0x0A Val: 0x00000012
+[inst #13] lbu $11,0($4)
+Register Write to Reg: 0x0B Val: 0x00000012
+[inst #14] lbu $12,0($4)
+Register Write to Reg: 0x0C Val: 0x00000012
+[inst #15] lbu $13,0($4)
+Register Write to Reg: 0x0D Val: 0x00000012
+[inst #16] lbu $14,0($4)
+Register Write to Reg: 0x0E Val: 0x00000012
+[inst #17] lbu $15,0($4)
+Register Write to Reg: 0x0F Val: 0x00000012
+[inst #18] lbu $16,0($4)
+Register Write to Reg: 0x10 Val: 0x00000012
+[inst #19] lbu $17,0($4)
+Register Write to Reg: 0x11 Val: 0x00000012
+[inst #20] lbu $18,0($4)
+Register Write to Reg: 0x12 Val: 0x00000012
+[inst #21] lbu $19,0($4)
+Register Write to Reg: 0x13 Val: 0x00000012
+[inst #22] lbu $20,0($4)
+Register Write to Reg: 0x14 Val: 0x00000012
+[inst #23] lbu $21,0($4)
+Register Write to Reg: 0x15 Val: 0x00000012
+[inst #24] lbu $22,0($4)
+Register Write to Reg: 0x16 Val: 0x00000012
+[inst #25] lbu $23,0($4)
+Register Write to Reg: 0x17 Val: 0x00000012
+[inst #26] lbu $24,0($4)
+Register Write to Reg: 0x18 Val: 0x00000012
+[inst #27] lbu $25,0($4)
+Register Write to Reg: 0x19 Val: 0x00000012
+[inst #28] lbu $26,0($4)
+Register Write to Reg: 0x1A Val: 0x00000012
+[inst #29] lbu $27,0($4)
+Register Write to Reg: 0x1B Val: 0x00000012
+[inst #30] lbu $28,0($4)
+Register Write to Reg: 0x1C Val: 0x00000012
+[inst #31] lbu $29,0($4)
+Register Write to Reg: 0x1D Val: 0x00000012
+[inst #32] lbu $30,0($4)
+Register Write to Reg: 0x1E Val: 0x00000012
+[inst #33] lbu $31,0($4)
+Register Write to Reg: 0x1F Val: 0x00000012
+[inst #34] halt 
+
