@@ -79,6 +79,7 @@ begin
   -- Level 1: All inputs atleast one gate deep
   ---------------------------------------------------------------------------
   --Output map to signals.
+  o_beq         <= w_beq;
   o_halt        <= w_halt;
   o_STD_SHIFT   <= w_STD_SHIFT;
   o_ALU_Ctl     <= w_ALU_Ctl;
