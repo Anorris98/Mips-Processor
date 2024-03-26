@@ -16,16 +16,16 @@ library IEEE;
 entity fetchLogic is
   generic (N : integer := 32);
   port (
-    i_jump_C          : in  std_logic;
-    i_jr_ra_C         : in  std_logic;
-    i_CLK             : in  std_logic;
-    i_RST             : in  std_logic;
-    i_w_branch_n_ALUo : in  std_logic;
-    i_instr_25t0      : in  std_logic_vector(25 downto 0);
-    i_ext_imm         : in  std_logic_vector(N - 1 downto 0);
-    i_jr_ra_pc_next   : in  std_logic_vector(N - 1 downto 0);
-    o_pc_p4           : out std_logic_vector(N - 1 downto 0);
-    o_pc_next         : out std_logic_vector(N - 1 downto 0));
+    i_jump_C        : in  std_logic;
+    i_jr_ra_C       : in  std_logic;
+    i_CLK           : in  std_logic;
+    i_RST           : in  std_logic;
+    i_branch        : in  std_logic;
+    i_instr_25t0    : in  std_logic_vector(25 downto 0);
+    i_ext_imm       : in  std_logic_vector(N - 1 downto 0);
+    i_jr_ra_pc_next : in  std_logic_vector(N - 1 downto 0);
+    o_pc_p4         : out std_logic_vector(N - 1 downto 0);
+    o_pc_next       : out std_logic_vector(N - 1 downto 0));
 end entity;
 
 architecture structural of fetchLogic is
@@ -58,22 +58,44 @@ architecture structural of fetchLogic is
       o_Q   : out std_logic_vector(N - 1 downto 0)); -- Data value output
   end component;
 
-  signal w_add0_mux      : std_logic_vector(N - 1 downto 0); -- Same signal as w_add0_add1
-  signal w_pc_add0       : std_logic_vector(N - 1 downto 0);
-  signal w_shift_add1    : std_logic_vector(N - 1 downto 0);
-  signal w_add1_mux2     : std_logic_vector(N - 1 downto 0);
-  signal w_mux2_mux3     : std_logic_vector(N - 1 downto 0);
-  signal w_mux3_mux5     : std_logic_vector(N - 1 downto 0);
-  signal w_pc_next       : std_logic_vector(N - 1 downto 0);
-  signal w_s120_o        : std_logic_vector(27 downto 0);
-  signal w_pc4_s120_o    : std_logic_vector(N - 1 downto 0);
-  signal s_add0_carry    : std_logic;
-  signal s_add1_carry    : std_logic;
-  signal s_add0_overflow : std_logic;   -- 1 if overflow
-  signal s_add1_overflow : std_logic;   -- 1 if overflow
+  component andg2 is
+    port (i_A : in  std_logic;
+          i_B : in  std_logic;
+          o_F : out std_logic);
+  end component;
+
+  component org2 is
+    port (i_A : in  std_logic;
+          i_B : in  std_logic;
+          o_F : out std_logic);
+  end component;
+
+  component invg is
+    port (i_A : in  std_logic;
+          o_F : out std_logic);
+  end component;
+
+  signal w_add0_mux       : std_logic_vector(N - 1 downto 0); -- Same signal as w_add0_add1
+  signal w_pc_add0        : std_logic_vector(N - 1 downto 0);
+  signal w_shift_add1     : std_logic_vector(N - 1 downto 0);
+  signal w_add1_mux2      : std_logic_vector(N - 1 downto 0);
+  signal w_mux2_mux3      : std_logic_vector(N - 1 downto 0);
+  signal w_mux3_mux5      : std_logic_vector(N - 1 downto 0);
+  signal w_pc_next        : std_logic_vector(N - 1 downto 0);
+  signal w_s120_o         : std_logic_vector(27 downto 0);
+  signal w_pc4_s120_o     : std_logic_vector(N - 1 downto 0);
+  signal s_add0_carry     : std_logic;
+  signal s_add1_carry     : std_logic;
+  signal s_add0_overflow  : std_logic;                        -- 1 if overflow
+  signal s_add1_overflow  : std_logic;                        -- 1 if overflow
 
 begin
 
+  
+
+  -------------------------------------
+  -- Other stuff
+  -------------------------------------
   add0: RippleCarryAdder
     port map (
       A        => w_pc_add0,
@@ -100,7 +122,7 @@ begin
 
   mux2: mux2t1_N
     port map (
-      i_S  => i_w_branch_n_ALUo,
+      i_S  => i_branch, -- 1 if branch, 0 otherwise
       i_D0 => w_add0_mux,
       i_D1 => w_add1_mux2,
       o_O  => w_mux2_mux3);

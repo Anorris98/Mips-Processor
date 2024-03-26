@@ -19,15 +19,15 @@ main:
     bne $t2, 300, not_equal2    # Branch to not_equal2 if $t2 != 300
 
     # Exit program if both conditions satisfied
-    addi $t0 $0 1
+    addi $t0, $0, 1
     halt
 
 not_equal1:
     # Exit program if first condition is met
-    addi $t0 $0 2
+    addi $t0, $0, 2
     halt
 
 not_equal2:
     # Exit program if second condition is met
-    addi $t0 $0 3
+    addi $t0, $0, 3
     halt

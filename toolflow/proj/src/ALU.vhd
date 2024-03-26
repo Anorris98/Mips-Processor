@@ -14,14 +14,15 @@ entity ALU is
   generic (N : integer := 32);
   port (i_ALU_A        : in  std_logic_vector(N - 1 downto 0); -- ALU Input A
         i_ALU_B        : in  std_logic_vector(N - 1 downto 0); -- ALU Input B
-        i_ALU_Ctl      : in  std_logic_vector(5 downto 0);     -- ALU Control Input [5]SLT bit, used only for SLT. [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
+        i_ALU_Ctl      : in  std_logic_vector(7 downto 0);     -- ALU Control Input [5]SLT bit, used only for SLT. [4]Signed or unsidned, [3]shift L or A, [2]selector, [1]selector, [0]selector
         o_ALU_Carry    : out std_logic;                        -- ALU Indicator for a carry out bit.
         o_ALU_Zero     : out std_logic;                        -- ALU Indicator that an operation has resulting in a 0 output.
         o_ALU_Overflow : out std_logic;                        -- ALU Indicator that an overflow has occured.
+        o_branch       : out std_logic;
         o_ALU_I_Result : out std_logic_vector(N - 1 downto 0)); -- ALU add Sub Results.
 end entity;
 
-architecture structure of ALU is
+architecture mixed of ALU is
 
   component AdderSubtractor is
     generic (N : integer := 32);
@@ -36,11 +37,11 @@ architecture structure of ALU is
   end component;
 
   component mux2t1_N
-  generic (N : integer := 32);
-  port(i_S          : in std_logic;
-       i_D0         : in std_logic_vector(N-1 downto 0);
-       i_D1         : in std_logic_vector(N-1 downto 0);
-       o_O          : out std_logic_vector(N-1 downto 0));
+    generic (N : integer := 32);
+    port (i_S  : in  std_logic;
+          i_D0 : in  std_logic_vector(N - 1 downto 0);
+          i_D1 : in  std_logic_vector(N - 1 downto 0);
+          o_O  : out std_logic_vector(N - 1 downto 0));
   end component;
 
   component andg2
@@ -83,6 +84,11 @@ architecture structure of ALU is
           o_Out : out std_logic_vector(N - 1 downto 0));
   end component;
 
+  component invg
+    port (i_A : in  std_logic;
+          o_F : out std_logic);
+  end component;
+
   component Shifter
     generic (N : integer := 32);
     port (i_in        : in  std_logic_vector(N - 1 downto 0);
@@ -104,24 +110,22 @@ architecture structure of ALU is
 
   -- Component Declarations
   -- Signals
-  signal w_AND, w_OR, w_XOR, w_NOR, w_Shift, w_AddSub, w_Lui, w_add_sub_slt : std_logic_vector(N - 1 downto 0); -- 31 downto 0
-  signal w_OVERFLOW, w_SignedOrUnsigned                                     : std_logic;
-  signal w_SLT                                                              : std_logic_vector(N - 1 downto 0); -- 30 downto 0
+  signal w_AND, w_OR, w_XOR, w_NOR, w_Shift, w_AddSub, w_Lui, w_add_sub_slt                             : std_logic_vector(N - 1 downto 0); -- 31 downto 0
+  signal w_OVERFLOW, w_SignedOrUnsigned, w_beq_and_ALU_0, w_beq_or_ALU0, w_bne_and_nALU_0, w_beq, w_bne : std_logic;
+  signal w_SLT                                                                                          : std_logic_vector(N - 1 downto 0); -- 30 downto 0
 
 begin
 
   ---------------------------------------------------------------------------
   -- Level 0: Direct Connections from Inputs
   ---------------------------------------------------------------------------
-  w_Lui              <= i_ALU_B(15 downto 0) & x"0000"; -- LUI
-  w_SignedOrUnsigned <= i_ALU_Ctl(4);                   -- (1)Signed, (0)Unsigned
-      w_SLT  <= "0000000000000000000000000000000" & w_AddSub(31); -- SLT, take 31 bits of zero, and add the msb to the end. 
-                                                                -- if negative, then true(1), if positive, then false(0).
-  
-
+          w_Lui              <= i_ALU_B(15 downto 0) & x"0000";                   -- LUI
+          w_SignedOrUnsigned <= i_ALU_Ctl(4);                                     -- (1)Signed, (0)Unsigned
+          w_SLT              <= "0000000000000000000000000000000" & w_AddSub(31); -- SLT, take 31 bits of zero, and add the msb to the end. 
+  -- if negative, then true(1), if positive, then false(0).
   -- Adder/Subtractor Component
   addsub: AdderSubtractor
-    port map (
+      port map (
       iC                => i_ALU_Ctl(3), --(0)Add, (1)subtract
       iA                => i_ALU_A,
       iB                => i_ALU_B,
@@ -175,6 +179,11 @@ begin
       o_Out => w_NOR
     );
 
+  ---------------------------------------
+  -- Branch logic
+  ---------------------------------------
+  o_branch <= '1' when (i_ALU_Ctl(6) and ((i_ALU_Ctl(7) and o_ALU_Zero) or ((not i_ALU_Ctl(7)) and (not o_ALU_Zero)))) else '0';
+
   ---------------------------------------------------------------------------
   -- Level 1: Intermediate Computation and Shift Operations
   ---------------------------------------------------------------------------
@@ -195,13 +204,13 @@ begin
   mux: mux8t1_N
     port map (
       i_w0 => w_add_sub_slt, -- add/sub
-      i_w1 => w_Shift,  -- Shift Right 
-      i_w2 => w_Shift,  -- Shift left
+      i_w1 => w_Shift,       -- Shift Right 
+      i_w2 => w_Shift,       -- Shift left
       i_w3 => w_AND,
       i_w4 => w_OR,
       i_w5 => w_XOR,
       i_w6 => w_NOR,
-      i_w7 => w_Lui,    -- for Lui
+      i_w7 => w_Lui,         -- for Lui
       i_s0 => i_ALU_Ctl(0),
       i_s1 => i_ALU_Ctl(1),
       i_s2 => i_ALU_Ctl(2),

@@ -14,15 +14,13 @@ library IEEE;
 entity Controller is
   port (i_instruct31_26 : in  std_logic_vector(5 downto 0);
         i_instruct5_0   : in  std_logic_vector(5 downto 0);
-        o_beq         : out std_logic;
         o_halt        : out std_logic;
         o_STD_SHIFT   : out std_logic;  -- Standard shift (1)we are doing a normal shift (0) we are doing a variable shift or does not matter.
-        o_ALU_Ctl     : out std_logic_vector(5 downto 0);
+        o_ALU_Ctl     : out std_logic_vector(7 downto 0);
         o_RegWrite    : out std_logic;
         o_MemtoReg    : out std_logic_vector(1 downto 0);
         o_MemWrite    : out std_logic;
         o_RegDst      : out std_logic_vector(1 downto 0);
-        o_Branch      : out std_logic;
         o_Alu_Src     : out std_logic;
         o_ext_ctl     : out std_logic;
         o_Jump        : out std_logic;
@@ -45,16 +43,14 @@ architecture structure of Controller is
 
   --Signals
   signal DecoderOutput : std_logic_vector(20 downto 0);
-  signal w_beq        : std_logic;
   signal w_halt        : std_logic;
   signal w_STD_SHIFT   : std_logic;
   signal w_Alu_Src     : std_logic;
-  signal w_ALU_Ctl     : std_logic_vector(5 downto 0);
+  signal w_ALU_Ctl     : std_logic_vector(7 downto 0);
   signal w_RegWrite    : std_logic;
   signal w_MemtoReg    : std_logic_vector(1 downto 0);
   signal w_MemWrite    : std_logic;
   signal w_RegDst      : std_logic_vector(1 downto 0);
-  signal w_Branch      : std_logic;
   signal w_ext_ctl     : std_logic;
   signal w_Jump        : std_logic;
   signal w_jr          : std_logic;
@@ -86,7 +82,6 @@ begin
   o_MemtoReg    <= w_MemtoReg;
   o_MemWrite    <= w_MemWrite;
   o_RegDst      <= w_RegDst;
-  o_Branch      <= w_Branch;
   o_Alu_Src     <= w_Alu_Src;
   o_ext_ctl     <= w_ext_ctl;
   o_Jump        <= w_Jump;
@@ -94,17 +89,15 @@ begin
   o_jr          <= w_jr;
 
 -- signals hooking up and stripping the correct bit.
-  w_beq         <= DecoderOutput(20);
-  w_halt        <= DecoderOutput(19);
-  w_STD_SHIFT   <= DecoderOutput(18);
-  w_Alu_Src     <= DecoderOutput(17);
-  w_ALU_Ctl     <= DecoderOutput(16 downto 11);
-  w_MemtoReg    <= DecoderOutput(10 downto 9);    --upodated to 2 bits for the 4 bit mux for lb, lbu, lh, lhu
-  w_MemWrite    <= DecoderOutput(8);
-  w_RegWrite    <= DecoderOutput(7);
-  w_RegDst      <= DecoderOutput(6 downto 5);
-  w_Jump        <= DecoderOutput(4);
-  w_Branch      <= DecoderOutput(3);
+  w_halt        <= DecoderOutput(20);
+  w_STD_SHIFT   <= DecoderOutput(19);
+  w_Alu_Src     <= DecoderOutput(18);
+  w_ALU_Ctl     <= DecoderOutput(17 downto 10); --beq(17), branch(16)
+  w_MemtoReg    <= DecoderOutput(9 downto 8);    --upodated to 2 bits for the 4 bit mux for lb, lbu, lh, lhu
+  w_MemWrite    <= DecoderOutput(7);
+  w_RegWrite    <= DecoderOutput(6);
+  w_RegDst      <= DecoderOutput(5 downto 4);
+  w_Jump        <= DecoderOutput(3);
   w_ext_ctl     <= DecoderOutput(2);
   w_jal         <= DecoderOutput(1);
   w_jr          <= DecoderOutput(0);
