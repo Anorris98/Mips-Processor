@@ -314,7 +314,7 @@ begin
       i_D1 => s_mux7_iD1, -- makes bits 5-0 the shamt field
       o_O  => w_mux7_alu_rtn);
 
-  oALUOut <= w_mux_reg_rtn; --signal for the alu out, is only read by the top level, so need no for extra name.
+  oALUOut <= s_DMemAddr; --signal for the alu out, is only read by the top level, so need no for extra name.
 
   ALU0: ALU
     port map (
