@@ -191,7 +191,6 @@ architecture structure of MIPS_Processor is
   signal w_mux_reg_rtn  : std_logic_vector(N - 1 downto 0);
   signal w_mux1_alu_rtn : std_logic_vector(N - 1 downto 0);
   signal w_mux7_alu_rtn : std_logic_vector(N - 1 downto 0);
-  signal w_ra_pc_next   : std_logic_vector(N - 1 downto 0);
   signal w_dmem_lh      : std_logic_vector(N - 1 downto 0);
   signal w_dmem_lb      : std_logic_vector(N - 1 downto 0);
   -- outputs of main resources
@@ -201,7 +200,6 @@ architecture structure of MIPS_Processor is
   signal s_ext_o     : std_logic_vector(N - 1 downto 0);
   signal s_ALU_Carry : std_logic;
   signal s_ALU_Zero  : std_logic;
-  signal s_oALU      : std_logic_vector(N - 1 downto 0);
   -- Misc
   signal s_mux7_iD1 : std_logic_vector(N - 1 downto 0);
 
