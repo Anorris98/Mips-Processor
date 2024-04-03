@@ -1,13 +1,13 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity and_N_tb is
+entity andg_N_tb is
 -- Testbench has no ports!
-end and_N_tb;
+end andg_N_tb;
 
-architecture behavior of and_N_tb is
+architecture behavior of andg_N_tb is
     -- Component Declaration for the Unit Under Test (UUT)
-    component and_N
+    component andg_N
         generic(N : integer := 32);
         port(
             i_A  : in  std_logic_vector(N-1 downto 0);
@@ -28,7 +28,7 @@ architecture behavior of and_N_tb is
 
 begin
     -- Instantiate the Unit Under Test (UUT)
-    uut: and_N
+    uut: andg_N
         generic map (N => N)
         port map (
             i_A  => i_A,
