@@ -1,16 +1,16 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity xor_N_tb is
+entity xorg_N_tb is
 -- Testbench has no ports!
-end xor_N_tb;
+end xorg_N_tb;
 
-architecture behavior of xor_N_tb is
+architecture behavior of xorg_N_tb is
     -- Constants for the testbench
     constant N : integer := 32;
     
     -- Component Declaration for the Unit Under Test (UUT)
-    component xor_N
+    component xorg_N
         generic(N : integer := 32);
         port(
             i_A   : in  std_logic_vector(N-1 downto 0);
@@ -28,7 +28,7 @@ architecture behavior of xor_N_tb is
 
 begin
     -- Instantiate the Unit Under Test (UUT)
-    uut: xor_N
+    uut: xorg_N
         generic map (N => N)
         port map (
             i_A   => i_A,
