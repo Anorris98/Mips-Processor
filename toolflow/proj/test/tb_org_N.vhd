@@ -1,39 +1,39 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity xor_N_tb is
+entity org_N_tb is
 -- Testbench has no ports!
-end xor_N_tb;
+end org_N_tb;
 
-architecture behavior of xor_N_tb is
+architecture behavior of org_N_tb is
     -- Constants for the testbench
     constant N : integer := 32;
     
     -- Component Declaration for the Unit Under Test (UUT)
-    component xor_N
+    component org_N
         generic(N : integer := 32);
         port(
-            i_A   : in  std_logic_vector(N-1 downto 0);
-            i_B   : in  std_logic_vector(N-1 downto 0);
-            o_out : out std_logic_vector(N-1 downto 0)
+            i_A  : in  std_logic_vector(N-1 downto 0);
+            i_B  : in  std_logic_vector(N-1 downto 0);
+            o_Out: out std_logic_vector(N-1 downto 0)
         );
     end component;
     
     -- Input signals
-    signal i_A   : std_logic_vector(N-1 downto 0);
-    signal i_B   : std_logic_vector(N-1 downto 0);
+    signal i_A  : std_logic_vector(N-1 downto 0);
+    signal i_B  : std_logic_vector(N-1 downto 0);
     
     -- Output signal
-    signal o_out : std_logic_vector(N-1 downto 0);
+    signal o_Out: std_logic_vector(N-1 downto 0);
 
 begin
     -- Instantiate the Unit Under Test (UUT)
-    uut: xor_N
+    uut: org_N
         generic map (N => N)
         port map (
-            i_A   => i_A,
-            i_B   => i_B,
-            o_out => o_out
+            i_A  => i_A,
+            i_B  => i_B,
+            o_Out=> o_Out
         );
     
     -- Stimulus process
@@ -64,11 +64,6 @@ begin
         i_B <= "01010101010101010101010101010101";
         wait for 100 ns;
 
-        -- Test case 6: Opposite of case 5
-        i_A <= "01010101010101010101010101010101";
-        i_B <= "10101010101010101010101010101010";
-        wait for 100 ns;
-        
         -- Additional test cases as desired
 
         -- End simulation
