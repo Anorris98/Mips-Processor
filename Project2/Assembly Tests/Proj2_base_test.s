@@ -25,11 +25,7 @@ swTest:
 sw $t0, 0($s0)
 loadTests1:
 lui $t0, 0x1010
-lw $t1, 0($s0)
-nop
-nop
-nop		#consumer and producer back to back
-nop
+lasw $t1, 0($s0)	#psuedo instruction, inserts 3 additional nops.
 orTests:
 nor $t2, $t0, $t1
 xor $t3, $t0, $t1
