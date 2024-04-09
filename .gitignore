@@ -6,6 +6,14 @@ Project1/*/*/modelsim.ini
 Project1/*/*/work
 Project1/*/*/transcript
 Project1/*/*/vsim.wlf
+Project2/*/modelsim.ini
+Project2/*/work
+Project2/*/transcript
+Project2/*/vsim.wlf
+Project2/*/*/modelsim.ini
+Project2/*/*/work
+Project2/*/*/transcript
+Project2/*/*/vsim.wlf
 toolflow/output
 toolflow/internal/ModelSimContainer
 toolflow/proj/src/TopLevel/work
