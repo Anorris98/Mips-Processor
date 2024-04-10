@@ -41,36 +41,20 @@ begin
     o_ID_PC_P4 <= s_ID_PC_P4;
     o_ID_instr31t0 <= s_ID_instr31t0;
 
-    -- with i_WE select
-    --     s_IF_PC_P4 <= i_IF_PC_P4 when '1',
-    --     s_ID_PC_P4 when others;
-    -- with i_WE select
-    --     s_IF_instr31t0 <= i_IF_instr31t0 when '1',
-    --     s_ID_instr31t0 when others;
-    -- process (i_WE)
-    -- begin
-    --     if (i_WE = '1') then
-    --         s_IF_PC_P4 <= i_IF_PC_P4;
-    --         s_IF_instr31t0 <= i_IF_instr31t0;
-    --     else
-    --         s_IF_PC_P4 <= s_ID_PC_P4;
-    --         s_IF_instr31t0 <= s_ID_instr31t0;
-    --     end if;
-    -- end process;
-
     -- This process handles the asyncrhonous reset and
     -- synchronous write. We want to be able to reset 
     -- our processor's registers so that we minimize
     -- glitchy behavior on startup.
+    -- if (rising_edge(i_CLK) and i_WE = '0') then
     process (i_CLK, i_RST, i_WE)
     begin
         if (i_RST = '1') then
-            s_ID_PC_P4 <= x"00400004"; -- Use "(others => '0')" for N-bit values
+            s_ID_PC_P4 <= x"00400000"; -- Use "(others => '0')" for N-bit values
             s_ID_instr31t0 <= x"00000000";
         elsif (rising_edge(i_CLK) and i_WE = '1') then
             s_ID_PC_P4 <= i_IF_PC_P4;
             s_ID_instr31t0 <= i_IF_instr31t0;
-        elsif (rising_edge(i_CLK) and i_WE = '0') then
+        else
             s_ID_PC_P4 <= s_ID_PC_P4;
             s_ID_instr31t0 <= s_ID_instr31t0;
         end if;
