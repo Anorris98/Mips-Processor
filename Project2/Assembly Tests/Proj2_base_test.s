@@ -13,7 +13,7 @@ nop
 addu $t3, $t0, $t1
 add $t2, $t0, $zero	#$t2 = $t0
 
-Loadtestcopy: # moved above and tets, loads values to be used by or tests early.
+#or test setup moved above and tets, loads values to be used by or tests early.
 lw $t8, 0($s0)	
 lui $t9, 0x1010 #psuedo instruction, inserts 3 additional nops.
 
@@ -23,7 +23,7 @@ and $t1, $t3, $t0	#okay becasuse origionlly we wanted to use the old value of $t
 
 loadTests1: #load and store tests were swapped. first before messing with after sw.
 lw $t1, 0($s0)	
-lasw $t0, 0x1010 #psuedo instruction, inserts 3 additional nops.
+lui $t0, 0x1010
 
 addi $t0, $zero, 0x00000001 #moved up here, is used for the shifts to allow sll to shift it, sw uses the old $t0 data, so before its written, which is done by design.
 addi $t7, $zero, -3456		#used in shift tests 2
@@ -35,6 +35,9 @@ or $t5, $t9, $t8
 ori $t6, $t9, 0x4444
 xor $t3, $t9, $t8
 
+#load regs for sub tests
+addi $t8, $zero, 10					#addi and sub require 4, if we insert 1 before addi t1, we can still keep things rolling. then we only have to have 2 below it.
+addi $t9, $zero, 8 
 
 shiftTests1:
 sll $t0, $t0, 4
@@ -48,34 +51,28 @@ shiftTests2:		#multiple 3 nops here because of multiple consumer and producers u
 srl $t0, $t0, 4
 sra $t7, $t7, 4
 
-subTests:		#t0 and t1 are reset here.##########
-addi $t0, $zero, 10			
-nop			#addi and sub require 4, if we insert 1 before addi t1, we can still keep things rolling. then we only have to have 2 below it.
-addi $t1, $zero, 8 
-nop
-nop
-sub $t2, $t0, $t1
-sub $t3, $t1, $t0
-subu $t4, $t1, $t0
-loadTests2:
-lb $t0, 0($s0)
-lh $t1, 4($s0)
-lbu $t2, 8($s0)
-lhu $t3, 12($s0)
-shiftVariableTests:
+subTests:		#t0 and t1 are reset here.##########					#addi and sub require 4, if we insert 1 before addi t1, we can still keep things rolling. then we only have to have 2 below it.
+sub $t2, $t8, $t9
+sub $t3, $t9, $t8
+subu $t4, $t9, $t8
+
+#shift variable setup
 addi $t0, $zero, 0x00000001
 addi $t7, $zero, 4
-nop	#Required 3 becasue of consumer and producer t7 being so close. this fix also fixes t0 issue.
-nop
-nop
-sllv $t1, $t0, $t7
-srlv $t2, $t0, $t7
+
+loadTests2:
+lb $t8, 0($s0)
+lh $t9, 4($s0)
+lbu $t2, 8($s0)
+
 addi $t0, $zero, -3456
-nop
-nop	#same issue as above.
-nop
-srav $t3, $t0, $t7
-nop	#for halt
-nop
-nop
+
+lhu $t3, 12($s0)
+
+shiftVariableTests:
+
+sllv $t1, $t0, $t7 #we want the old value of $t0 in these, so I moved the addi to above it to allow less nops
+srlv $t2, $t0, $t7
+srav $t3, $t0, $t7 #we want the new value of $t0 here
+
 halt
