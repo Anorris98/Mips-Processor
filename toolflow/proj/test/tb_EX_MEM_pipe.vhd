@@ -21,14 +21,14 @@ architecture behavior of tb_EX_MEM_pipe is
             i_CLK           : in std_logic;                     -- Clock input
             i_RST           : in std_logic;                     -- Reset input
             i_WE            : in std_logic;                     -- Write enable
-            i_EX_halt_c     : in std_logic;                     -- Halt control signal
-            i_EX_MemToReg_c : in std_logic_vector(1 downto 0);  -- MemToReg control signal
-            i_EX_MemWrite_c : in std_logic;                     -- Memory write control signal
-            i_EX_RegWrite_c : in std_logic;                     -- Register write control signal
-            i_EX_Jump_c     : in std_logic;                     -- Jump control signal
+            i_EX_halt       : in std_logic;                     -- Halt control signal
+            i_EX_MemToReg   : in std_logic_vector(1 downto 0);  -- MemToReg control signal
+            i_EX_MemWrite   : in std_logic;                     -- Memory write control signal
+            i_EX_RegWrite   : in std_logic;                     -- Register write control signal
+            i_EX_Jump       : in std_logic;                     -- Jump control signal
             i_EX_ext_ctl    : in std_logic;                     -- Sign extension control signal
-            i_EX_jal_C      : in std_logic;                     -- Jump and link write back control signal
-            i_EX_jr_c       : in std_logic;                     -- Jump return control signal
+            i_EX_jal        : in std_logic;                     -- Jump and link write back control signal
+            i_EX_jr         : in std_logic;                     -- Jump return control signal
             i_EX_branch     : in std_logic;                     -- Branch output from ALU
             i_EX_PCP4       : in std_logic_vector(31 downto 0); -- PC+4 value
             i_EX_rs_data_o  : in std_logic_vector(31 downto 0); -- Output from Rs address
@@ -40,14 +40,14 @@ architecture behavior of tb_EX_MEM_pipe is
             ------------------------------------------------------------------------------------
             -- outputs
             ------------------------------------------------------------------------------------
-            o_MEM_halt_c     : out std_logic;                     -- Halt control signal
-            o_MEM_MemToReg_c : out std_logic_vector(1 downto 0);  -- MemToReg control signal
-            o_MEM_MemWrite_c : out std_logic;                     -- Memory write control signal
-            o_MEM_RegWrite_c : out std_logic;                     -- Register write control signal
-            o_MEM_Jump_c     : out std_logic;                     -- Jump control signal
+            o_MEM_halt       : out std_logic;                     -- Halt control signal
+            o_MEM_MemToReg   : out std_logic_vector(1 downto 0);  -- MemToReg control signal
+            o_MEM_MemWrite   : out std_logic;                     -- Memory write control signal
+            o_MEM_RegWrite   : out std_logic;                     -- Register write control signal
+            o_MEM_Jump       : out std_logic;                     -- Jump control signal
             o_MEM_ext_ctl    : out std_logic;                     -- Sign extension control signal
-            o_MEM_jal_C      : out std_logic;                     -- Jump and link write back control signal
-            o_MEM_jr_c       : out std_logic;                     -- Jump return control signal
+            o_MEM_jal        : out std_logic;                     -- Jump and link write back control signal
+            o_MEM_jr         : out std_logic;                     -- Jump return control signal
             o_MEM_branch     : out std_logic;                     -- Branch output from ALU
             o_MEM_PCP4       : out std_logic_vector(31 downto 0); -- PC+4 value
             o_MEM_rs_data_o  : out std_logic_vector(31 downto 0); -- Output from Rs address
@@ -63,14 +63,14 @@ architecture behavior of tb_EX_MEM_pipe is
     signal s_CLK           : std_logic;                     -- Clock input
     signal s_RST           : std_logic;                     -- Reset input
     signal s_WE            : std_logic;                     -- Write enable
-    signal s_EX_halt_c     : std_logic;                     -- Halt control signal
-    signal s_EX_MemToReg_c : std_logic_vector(1 downto 0);  -- MemToReg control signal
-    signal s_EX_MemWrite_c : std_logic;                     -- Memory write control signal
-    signal s_EX_RegWrite_c : std_logic;                     -- Register write control signal
-    signal s_EX_Jump_c     : std_logic;                     -- Jump control signal
+    signal s_EX_halt       : std_logic;                     -- Halt control signal
+    signal s_EX_MemToReg   : std_logic_vector(1 downto 0);  -- MemToReg control signal
+    signal s_EX_MemWrite   : std_logic;                     -- Memory write control signal
+    signal s_EX_RegWrite   : std_logic;                     -- Register write control signal
+    signal s_EX_Jump       : std_logic;                     -- Jump control signal
     signal s_EX_ext_ctl    : std_logic;                     -- Sign extension control signal
-    signal s_EX_jal_C      : std_logic;                     -- Jump and link write back control signal
-    signal s_EX_jr_c       : std_logic;                     -- Jump return control signal
+    signal s_EX_jal        : std_logic;                     -- Jump and link write back control signal
+    signal s_EX_jr         : std_logic;                     -- Jump return control signal
     signal s_EX_branch     : std_logic;                     -- Branch output from ALU
     signal s_EX_PCP4       : std_logic_vector(31 downto 0); -- PC+4 value
     signal s_EX_rs_data_o  : std_logic_vector(31 downto 0); -- Output from Rs address
@@ -81,14 +81,14 @@ architecture behavior of tb_EX_MEM_pipe is
     signal s_EX_add1_mux2  : std_logic_vector(31 downto 0); -- Output from Adder 1
 
     --Outputs
-    signal s_MEM_halt_c     : std_logic;                     -- Halt control signal
-    signal s_MEM_MemToReg_c : std_logic_vector(1 downto 0);  -- MemToReg control signal
-    signal s_MEM_MemWrite_c : std_logic;                     -- Memory write control signal
-    signal s_MEM_RegWrite_c : std_logic;                     -- Register write control signal
-    signal s_MEM_Jump_c     : std_logic;                     -- Jump control signal
+    signal s_MEM_halt       : std_logic;                     -- Halt control signal
+    signal s_MEM_MemToReg   : std_logic_vector(1 downto 0);  -- MemToReg control signal
+    signal s_MEM_MemWrite   : std_logic;                     -- Memory write control signal
+    signal s_MEM_RegWrite   : std_logic;                     -- Register write control signal
+    signal s_MEM_Jump       : std_logic;                     -- Jump control signal
     signal s_MEM_ext_ctl    : std_logic;                     -- Sign extension control signal
-    signal s_MEM_jal_C      : std_logic;                     -- Jump and link write back control signal
-    signal s_MEM_jr_c       : std_logic;                     -- Jump return control signal
+    signal s_MEM_jal        : std_logic;                     -- Jump and link write back control signal
+    signal s_MEM_jr         : std_logic;                     -- Jump return control signal
     signal s_MEM_branch     : std_logic;                     -- Branch output from ALU
     signal s_MEM_PCP4       : std_logic_vector(31 downto 0); -- PC+4 value
     signal s_MEM_rs_data_o  : std_logic_vector(31 downto 0); -- Output from Rs address
@@ -107,14 +107,14 @@ begin
         i_CLK           => s_CLK,           -- Clock input
         i_RST           => s_RST,           -- Reset input
         i_WE            => s_WE,            -- Write enable
-        i_EX_halt_c     => s_EX_halt_c,     -- Halt control signal
-        i_EX_MemToReg_c => s_EX_MemToReg_c, -- MemToReg control signal
-        i_EX_MemWrite_c => s_EX_MemWrite_c, -- Memory write control signal
-        i_EX_RegWrite_c => s_EX_RegWrite_c, -- Register write control signal
-        i_EX_Jump_c     => s_EX_Jump_c,     -- Jump control signal
+        i_EX_halt       => s_EX_halt,       -- Halt control signal
+        i_EX_MemToReg   => s_EX_MemToReg,   -- MemToReg control signal
+        i_EX_MemWrite   => s_EX_MemWrite,   -- Memory write control signal
+        i_EX_RegWrite   => s_EX_RegWrite,   -- Register write control signal
+        i_EX_Jump       => s_EX_Jump,       -- Jump control signal
         i_EX_ext_ctl    => s_EX_ext_ctl,    -- Sign extension control signal
-        i_EX_jal_C      => s_EX_jal_C,      -- Jump and link write back control signal
-        i_EX_jr_c       => s_EX_jr_c,       -- Jump return control signal
+        i_EX_jal        => s_EX_jal,        -- Jump and link write back control signal
+        i_EX_jr         => s_EX_jr,         -- Jump return control signal
         i_EX_branch     => s_EX_branch,     -- Branch output from ALU
         i_EX_PCP4       => s_EX_PCP4,       -- PC+4 value
         i_EX_rs_data_o  => s_EX_rs_data_o,  -- Output from Rs address
@@ -126,14 +126,14 @@ begin
         ------------------------------------------------------------------------------------
         -- outputs
         ------------------------------------------------------------------------------------
-        o_MEM_halt_c     => s_MEM_halt_c,     -- Halt control signal
-        o_MEM_MemToReg_c => s_MEM_MemToReg_c, -- MemToReg control signal
-        o_MEM_MemWrite_c => s_MEM_MemWrite_c, -- Memory write control signal
-        o_MEM_RegWrite_c => s_MEM_RegWrite_c, -- Register write control signal
-        o_MEM_Jump_c     => s_MEM_Jump_c,     -- Jump control signal
+        o_MEM_halt       => s_MEM_halt,       -- Halt control signal
+        o_MEM_MemToReg   => s_MEM_MemToReg,   -- MemToReg control signal
+        o_MEM_MemWrite   => s_MEM_MemWrite,   -- Memory write control signal
+        o_MEM_RegWrite   => s_MEM_RegWrite,   -- Register write control signal
+        o_MEM_Jump       => s_MEM_Jump,       -- Jump control signal
         o_MEM_ext_ctl    => s_MEM_ext_ctl,    -- Sign extension control signal
-        o_MEM_jal_C      => s_MEM_jal_C,      -- Jump and link write back control signal
-        o_MEM_jr_c       => s_MEM_jr_c,       -- Jump return control signal
+        o_MEM_jal        => s_MEM_jal,        -- Jump and link write back control signal
+        o_MEM_jr         => s_MEM_jr,         -- Jump return control signal
         o_MEM_branch     => s_MEM_branch,     -- Branch output from ALU
         o_MEM_PCP4       => s_MEM_PCP4,       -- PC+4 value
         o_MEM_rs_data_o  => s_MEM_rs_data_o,  -- Output from Rs address
@@ -172,14 +172,14 @@ begin
     P_TB : process
     begin
         s_WE            <= '1';
-        s_EX_halt_c     <= '1';
-        s_EX_MemToReg_c <= b"11";
-        s_EX_MemWrite_c <= '1';
-        s_EX_RegWrite_c <= '1';
-        s_EX_Jump_c     <= '1';
+        s_EX_halt       <= '1';
+        s_EX_MemToReg   <= b"11";
+        s_EX_MemWrite   <= '1';
+        s_EX_RegWrite   <= '1';
+        s_EX_Jump       <= '1';
         s_EX_ext_ctl    <= '1';
-        s_EX_jal_C      <= '1';
-        s_EX_jr_c       <= '1';
+        s_EX_jal        <= '1';
+        s_EX_jr         <= '1';
         s_EX_branch     <= '1';
         s_EX_PCP4       <= x"00400008";
         s_EX_rs_data_o  <= x"FFFFFFFF";
@@ -191,14 +191,14 @@ begin
         wait for cCLK_PER;
 
         s_WE            <= '1';
-        s_EX_halt_c     <= '0';
-        s_EX_MemToReg_c <= b"00";
-        s_EX_MemWrite_c <= '0';
-        s_EX_RegWrite_c <= '0';
-        s_EX_Jump_c     <= '0';
+        s_EX_halt       <= '0';
+        s_EX_MemToReg   <= b"00";
+        s_EX_MemWrite   <= '0';
+        s_EX_RegWrite   <= '0';
+        s_EX_Jump       <= '0';
         s_EX_ext_ctl    <= '0';
-        s_EX_jal_C      <= '0';
-        s_EX_jr_c       <= '0';
+        s_EX_jal        <= '0';
+        s_EX_jr         <= '0';
         s_EX_branch     <= '0';
         s_EX_PCP4       <= x"00400008";
         s_EX_rs_data_o  <= x"00000000";
@@ -210,14 +210,14 @@ begin
         wait for cCLK_PER;
 
         s_WE            <= '0';
-        s_EX_halt_c     <= '1';
-        s_EX_MemToReg_c <= b"11";
-        s_EX_MemWrite_c <= '1';
-        s_EX_RegWrite_c <= '1';
-        s_EX_Jump_c     <= '1';
+        s_EX_halt       <= '1';
+        s_EX_MemToReg   <= b"11";
+        s_EX_MemWrite   <= '1';
+        s_EX_RegWrite   <= '1';
+        s_EX_Jump       <= '1';
         s_EX_ext_ctl    <= '1';
-        s_EX_jal_C      <= '1';
-        s_EX_jr_c       <= '1';
+        s_EX_jal        <= '1';
+        s_EX_jr         <= '1';
         s_EX_branch     <= '1';
         s_EX_PCP4       <= x"00400008";
         s_EX_rs_data_o  <= x"FFFFFFFF";
@@ -229,14 +229,14 @@ begin
         wait for cCLK_PER;
 
         s_WE            <= '0';
-        s_EX_halt_c     <= '0';
-        s_EX_MemToReg_c <= b"00";
-        s_EX_MemWrite_c <= '0';
-        s_EX_RegWrite_c <= '0';
-        s_EX_Jump_c     <= '0';
+        s_EX_halt       <= '0';
+        s_EX_MemToReg   <= b"00";
+        s_EX_MemWrite   <= '0';
+        s_EX_RegWrite   <= '0';
+        s_EX_Jump       <= '0';
         s_EX_ext_ctl    <= '0';
-        s_EX_jal_C      <= '0';
-        s_EX_jr_c       <= '0';
+        s_EX_jal        <= '0';
+        s_EX_jr         <= '0';
         s_EX_branch     <= '0';
         s_EX_PCP4       <= x"00400008";
         s_EX_rs_data_o  <= x"00000000";
@@ -248,14 +248,14 @@ begin
         wait for cCLK_PER;
 
         s_WE            <= '1';
-        s_EX_halt_c     <= '1';
-        s_EX_MemToReg_c <= b"11";
-        s_EX_MemWrite_c <= '1';
-        s_EX_RegWrite_c <= '1';
-        s_EX_Jump_c     <= '1';
+        s_EX_halt       <= '1';
+        s_EX_MemToReg   <= b"11";
+        s_EX_MemWrite   <= '1';
+        s_EX_RegWrite   <= '1';
+        s_EX_Jump       <= '1';
         s_EX_ext_ctl    <= '1';
-        s_EX_jal_C      <= '1';
-        s_EX_jr_c       <= '1';
+        s_EX_jal        <= '1';
+        s_EX_jr         <= '1';
         s_EX_branch     <= '1';
         s_EX_PCP4       <= x"00400008";
         s_EX_rs_data_o  <= x"FFFFFFFF";

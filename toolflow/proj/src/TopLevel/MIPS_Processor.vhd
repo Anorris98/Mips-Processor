@@ -130,6 +130,13 @@ architecture structure of MIPS_Processor is
       o_F : out std_logic);
   end component;
 
+  component org2 is
+    port (
+      i_A : in std_logic;
+      i_B : in std_logic;
+      o_F : out std_logic);
+  end component;
+
   -- component fetchLogic is
   --   port (
   --     i_jump_C        : in std_logic;
@@ -223,50 +230,50 @@ architecture structure of MIPS_Processor is
 
   component ID_EX_pipe is
     port (
-      i_CLK              : in std_logic;                     -- Clock input
-      i_RST              : in std_logic;                     -- Reset input
-      i_WE               : in std_logic;                     -- Write enable
-      i_ID_halt_c        : in std_logic;                     -- Halt control signal
-      i_ID_STD_Shift_c   : in std_logic;                     -- STD Shift control signal
-      i_ID_ALU_Src_c     : in std_logic;                     -- ALU Source control signal
-      i_ID_ALU_Control_c : in std_logic_vector(7 downto 0);  -- ALU Control signals
-      i_ID_MemToReg_c    : in std_logic_vector(1 downto 0);  -- MemToReg control signal
-      i_ID_MemWrite_c    : in std_logic;                     -- Memory write control signal
-      i_ID_RegWrite_c    : in std_logic;                     -- Register write control signal
-      i_ID_RegDst_c      : in std_logic_vector(1 downto 0);  -- Register destination control signal
-      i_ID_Jump_c        : in std_logic;                     -- Jump control signal
-      i_ID_ext_ctl       : in std_logic;                     -- Sign extension control signal
-      i_ID_jal_C         : in std_logic;                     -- Jump and link write back control signal
-      i_ID_jr_c          : in std_logic;                     -- Jump return control signal
-      i_ID_PCP4          : in std_logic_vector(31 downto 0); -- PC+4 value
-      i_ID_instr20t16    : in std_logic_vector(4 downto 0);  -- Register Rt address signal
-      i_ID_instr15t11    : in std_logic_vector(4 downto 0);  -- Register Rd address signal
-      i_ID_rs_data_o     : in std_logic_vector(31 downto 0); -- Output from Rs address
-      i_ID_rt_data_o     : in std_logic_vector(31 downto 0); -- Output from Rt address
-      i_ID_ext_o         : in std_logic_vector(31 downto 0); -- Extension control output
-      i_ID_s120_o        : in std_logic_vector(27 downto 0); -- Instruction [25:0] shifted left 2
+      i_CLK            : in std_logic;                     -- Clock input
+      i_RST            : in std_logic;                     -- Reset input
+      i_WE             : in std_logic;                     -- Write enable
+      i_ID_halt        : in std_logic;                     -- Halt control signal
+      i_ID_STD_Shift   : in std_logic;                     -- STD Shift control signal
+      i_ID_ALU_Src     : in std_logic;                     -- ALU Source control signal
+      i_ID_ALU_Control : in std_logic_vector(7 downto 0);  -- ALU Control signals
+      i_ID_MemToReg    : in std_logic_vector(1 downto 0);  -- MemToReg control signal
+      i_ID_MemWrite    : in std_logic;                     -- Memory write control signal
+      i_ID_RegWrite    : in std_logic;                     -- Register write control signal
+      i_ID_RegDst      : in std_logic_vector(1 downto 0);  -- Register destination control signal
+      i_ID_Jump        : in std_logic;                     -- Jump control signal
+      i_ID_ext_ctl     : in std_logic;                     -- Sign extension control signal
+      i_ID_jal         : in std_logic;                     -- Jump and link write back control signal
+      i_ID_jr          : in std_logic;                     -- Jump return control signal
+      i_ID_PCP4        : in std_logic_vector(31 downto 0); -- PC+4 value
+      i_ID_instr20t16  : in std_logic_vector(4 downto 0);  -- Register Rt address signal
+      i_ID_instr15t11  : in std_logic_vector(4 downto 0);  -- Register Rd address signal
+      i_ID_rs_data_o   : in std_logic_vector(31 downto 0); -- Output from Rs address
+      i_ID_rt_data_o   : in std_logic_vector(31 downto 0); -- Output from Rt address
+      i_ID_ext_o       : in std_logic_vector(31 downto 0); -- Extension control output
+      i_ID_s120_o      : in std_logic_vector(27 downto 0); -- Instruction [25:0] shifted left 2
       ------------------------------------------------------------------------------------
       -- outputs
       ------------------------------------------------------------------------------------
-      o_EX_halt_c        : out std_logic;                     -- Halt control signal
-      o_EX_STD_Shift_c   : out std_logic;                     -- STD Shift control signal
-      o_EX_ALU_Src_c     : out std_logic;                     -- ALU Source control signal
-      o_EX_ALU_Control_c : out std_logic_vector(7 downto 0);  -- ALU Control signals
-      o_EX_MemToReg_c    : out std_logic_vector(1 downto 0);  -- MemToReg control signal
-      o_EX_MemWrite_c    : out std_logic;                     -- Memory write control signal
-      o_EX_RegWrite_c    : out std_logic;                     -- Register write control signal
-      o_EX_RegDst_c      : out std_logic_vector(1 downto 0);  -- Register destination control signal
-      o_EX_Jump_c        : out std_logic;                     -- Jump control signal
-      o_EX_ext_ctl       : out std_logic;                     -- Sign extension control signal
-      o_EX_jal_C         : out std_logic;                     -- Jump and link write back control signal
-      o_EX_jr_c          : out std_logic;                     -- Jump return control signal
-      o_EX_PCP4          : out std_logic_vector(31 downto 0); -- PC+4 value
-      o_EX_instr20t16    : out std_logic_vector(4 downto 0);  -- Register Rt address signal
-      o_EX_instr15t11    : out std_logic_vector(4 downto 0);  -- Register Rd address signal
-      o_EX_rs_data_o     : out std_logic_vector(31 downto 0); -- Output from Rs address
-      o_EX_rt_data_o     : out std_logic_vector(31 downto 0); -- Output from Rt address
-      o_EX_ext_o         : out std_logic_vector(31 downto 0); -- Extension control output
-      o_EX_s120_o        : out std_logic_vector(27 downto 0)  -- Instruction [25:0] shifted left 2
+      o_EX_halt        : out std_logic;                     -- Halt control signal
+      o_EX_STD_Shift   : out std_logic;                     -- STD Shift control signal
+      o_EX_ALU_Src     : out std_logic;                     -- ALU Source control signal
+      o_EX_ALU_Control : out std_logic_vector(7 downto 0);  -- ALU Control signals
+      o_EX_MemToReg    : out std_logic_vector(1 downto 0);  -- MemToReg control signal
+      o_EX_MemWrite    : out std_logic;                     -- Memory write control signal
+      o_EX_RegWrite    : out std_logic;                     -- Register write control signal
+      o_EX_RegDst      : out std_logic_vector(1 downto 0);  -- Register destination control signal
+      o_EX_Jump        : out std_logic;                     -- Jump control signal
+      o_EX_ext_ctl     : out std_logic;                     -- Sign extension control signal
+      o_EX_jal         : out std_logic;                     -- Jump and link write back control signal
+      o_EX_jr          : out std_logic;                     -- Jump return control signal
+      o_EX_PCP4        : out std_logic_vector(31 downto 0); -- PC+4 value
+      o_EX_instr20t16  : out std_logic_vector(4 downto 0);  -- Register Rt address signal
+      o_EX_instr15t11  : out std_logic_vector(4 downto 0);  -- Register Rd address signal
+      o_EX_rs_data_o   : out std_logic_vector(31 downto 0); -- Output from Rs address
+      o_EX_rt_data_o   : out std_logic_vector(31 downto 0); -- Output from Rt address
+      o_EX_ext_o       : out std_logic_vector(31 downto 0); -- Extension control output
+      o_EX_s120_o      : out std_logic_vector(27 downto 0)  -- Instruction [25:0] shifted left 2
     );
   end component;
 
@@ -275,14 +282,14 @@ architecture structure of MIPS_Processor is
       i_CLK           : in std_logic;                     -- Clock input
       i_RST           : in std_logic;                     -- Reset input
       i_WE            : in std_logic;                     -- Write enable
-      i_EX_halt_c     : in std_logic;                     -- Halt control signal
-      i_EX_MemToReg_c : in std_logic_vector(1 downto 0);  -- MemToReg control signal
-      i_EX_MemWrite_c : in std_logic;                     -- Memory write control signal
-      i_EX_RegWrite_c : in std_logic;                     -- Register write control signal
-      i_EX_Jump_c     : in std_logic;                     -- Jump control signal
+      i_EX_halt       : in std_logic;                     -- Halt control signal
+      i_EX_MemToReg   : in std_logic_vector(1 downto 0);  -- MemToReg control signal
+      i_EX_MemWrite   : in std_logic;                     -- Memory write control signal
+      i_EX_RegWrite   : in std_logic;                     -- Register write control signal
+      i_EX_Jump       : in std_logic;                     -- Jump control signal
       i_EX_ext_ctl    : in std_logic;                     -- Sign extension control signal
-      i_EX_jal_C      : in std_logic;                     -- Jump and link write back control signal
-      i_EX_jr_c       : in std_logic;                     -- Jump return control signal
+      i_EX_jal        : in std_logic;                     -- Jump and link write back control signal
+      i_EX_jr         : in std_logic;                     -- Jump return control signal
       i_EX_branch     : in std_logic;                     -- Branch output from ALU
       i_EX_PCP4       : in std_logic_vector(31 downto 0); -- PC+4 value
       i_EX_rs_data_o  : in std_logic_vector(31 downto 0); -- Output from Rs address
@@ -294,14 +301,14 @@ architecture structure of MIPS_Processor is
       ------------------------------------------------------------------------------------
       -- outputs
       ------------------------------------------------------------------------------------
-      o_MEM_halt_c     : out std_logic;                     -- Halt control signal
-      o_MEM_MemToReg_c : out std_logic_vector(1 downto 0);  -- MemToReg control signal
-      o_MEM_MemWrite_c : out std_logic;                     -- Memory write control signal
-      o_MEM_RegWrite_c : out std_logic;                     -- Register write control signal
-      o_MEM_Jump_c     : out std_logic;                     -- Jump control signal
+      o_MEM_halt       : out std_logic;                     -- Halt control signal
+      o_MEM_MemToReg   : out std_logic_vector(1 downto 0);  -- MemToReg control signal
+      o_MEM_MemWrite   : out std_logic;                     -- Memory write control signal
+      o_MEM_RegWrite   : out std_logic;                     -- Register write control signal
+      o_MEM_Jump       : out std_logic;                     -- Jump control signal
       o_MEM_ext_ctl    : out std_logic;                     -- Sign extension control signal
-      o_MEM_jal_C      : out std_logic;                     -- Jump and link write back control signal
-      o_MEM_jr_c       : out std_logic;                     -- Jump return control signal
+      o_MEM_jal        : out std_logic;                     -- Jump and link write back control signal
+      o_MEM_jr         : out std_logic;                     -- Jump return control signal
       o_MEM_branch     : out std_logic;                     -- Branch output from ALU
       o_MEM_PCP4       : out std_logic_vector(31 downto 0); -- PC+4 value
       o_MEM_rs_data_o  : out std_logic_vector(31 downto 0); -- Output from Rs address
@@ -315,26 +322,26 @@ architecture structure of MIPS_Processor is
 
   component MEM_WB_pipe is
     port (
-      i_CLK            : in std_logic;                     -- Clock input
-      i_RST            : in std_logic;                     -- Reset input
-      i_WE             : in std_logic;                     -- Write enable
-      i_MEM_halt_c     : in std_logic;                     -- Halt control signal
-      i_MEM_MemToReg_c : in std_logic_vector(1 downto 0);  -- MemToReg control signal
-      i_MEM_RegWrite_c : in std_logic;                     -- Register write control signal
-      i_MEM_jal_C      : in std_logic;                     -- Jump and link write back control signal
-      i_MEM_PCP4       : in std_logic_vector(31 downto 0); -- PC+4 value
-      i_MEM_RegWrAddr  : in std_logic_vector(4 downto 0);  -- Write address
-      i_MEM_Dmem_Addr  : in std_logic_vector(31 downto 0); -- Output from the ALU
+      i_CLK           : in std_logic;                     -- Clock input
+      i_RST           : in std_logic;                     -- Reset input
+      i_WE            : in std_logic;                     -- Write enable
+      i_MEM_halt      : in std_logic;                     -- Halt control signal
+      i_MEM_MemToReg  : in std_logic_vector(1 downto 0);  -- MemToReg control signal
+      i_MEM_RegWrite  : in std_logic;                     -- Register write control signal
+      i_MEM_jal       : in std_logic;                     -- Jump and link write back control signal
+      i_MEM_PCP4      : in std_logic_vector(31 downto 0); -- PC+4 value
+      i_MEM_RegWrAddr : in std_logic_vector(4 downto 0);  -- Write address
+      i_MEM_Dmem_Addr : in std_logic_vector(31 downto 0); -- Output from the ALU
       ------------------------------------------------------------------------------------
       -- outputs
       ------------------------------------------------------------------------------------
-      o_WB_halt_c     : out std_logic;                     -- Halt control signal
-      o_WB_MemToReg_c : out std_logic_vector(1 downto 0);  -- MemToReg control signal
-      o_WB_RegWrite_c : out std_logic;                     -- Register write control signal
-      o_WB_jal_C      : out std_logic;                     -- Jump and link write back control signal
-      o_WB_PCP4       : out std_logic_vector(31 downto 0); -- PC+4 value
-      o_WB_RegWrAddr  : out std_logic_vector(4 downto 0);  -- Write address
-      o_WB_Dmem_Addr  : out std_logic_vector(31 downto 0)  -- Output from the ALU
+      o_WB_halt      : out std_logic;                     -- Halt control signal
+      o_WB_MemToReg  : out std_logic_vector(1 downto 0);  -- MemToReg control signal
+      o_WB_RegWrite  : out std_logic;                     -- Register write control signal
+      o_WB_jal       : out std_logic;                     -- Jump and link write back control signal
+      o_WB_PCP4      : out std_logic_vector(31 downto 0); -- PC+4 value
+      o_WB_RegWrAddr : out std_logic_vector(4 downto 0);  -- Write address
+      o_WB_Dmem_Addr : out std_logic_vector(31 downto 0)  -- Output from the ALU
     );
   end component;
 
@@ -385,29 +392,32 @@ architecture structure of MIPS_Processor is
   signal s_ID_rs_data_o : std_logic_vector(N - 1 downto 0);
   signal s_ID_rt_data_o : std_logic_vector(N - 1 downto 0);
   -- EX signals and wires
-  signal s_EX_halt_c        : std_logic;                     -- Halt control signal
-  signal s_EX_STD_Shift_c   : std_logic;                     -- STD Shift control signal
-  signal s_EX_ALU_Src_c     : std_logic;                     -- ALU Source control signal
-  signal s_EX_ALU_Control_c : std_logic_vector(7 downto 0);  -- ALU Control signals
-  signal s_EX_MemToReg_c    : std_logic_vector(1 downto 0);  -- MemToReg control signal
-  signal s_EX_MemWrite_c    : std_logic;                     -- Memory write control signal
-  signal s_EX_RegWr         : std_logic;                     -- Register write control signal
-  signal s_EX_RegDst_c      : std_logic_vector(1 downto 0);  -- Register destination control signal
-  signal s_EX_Jump_c        : std_logic;                     -- Jump control signal
-  signal s_EX_ext_ctl       : std_logic;                     -- Sign extension control signal
-  signal s_EX_jal_C         : std_logic;                     -- Jump and link write back control signal
-  signal s_EX_jr_c          : std_logic;                     -- Jump return control signal
-  signal s_EX_PCP4          : std_logic_vector(31 downto 0); -- PC+4 value
-  signal s_EX_instr20t16    : std_logic_vector(4 downto 0);  -- Register Rt address signal
-  signal s_EX_instr15t11    : std_logic_vector(4 downto 0);  -- Register Rd address signal
-  signal s_EX_rs_data_o     : std_logic_vector(31 downto 0); -- Output from Rs address
-  signal s_EX_rt_data_o     : std_logic_vector(31 downto 0); -- Output from Rt address
-  signal s_EX_ext_o         : std_logic_vector(31 downto 0); -- Extension control output
-  signal s_EX_s120_o        : std_logic_vector(27 downto 0); -- Instruction [25:0] shifted left 2
+  signal s_EX_halt        : std_logic;                     -- Halt control signal
+  signal s_EX_STD_Shift   : std_logic;                     -- STD Shift control signal
+  signal s_EX_ALU_Src     : std_logic;                     -- ALU Source control signal
+  signal s_EX_ALU_Control : std_logic_vector(7 downto 0);  -- ALU Control signals
+  signal s_EX_MemToReg    : std_logic_vector(1 downto 0);  -- MemToReg control signal
+  signal s_EX_MemWrite    : std_logic;                     -- Memory write control signal
+  signal s_EX_RegWr       : std_logic;                     -- Register write control signal
+  signal s_EX_RegDst      : std_logic_vector(1 downto 0);  -- Register destination control signal
+  signal s_EX_Jump        : std_logic;                     -- Jump control signal
+  signal s_EX_ext_ctl     : std_logic;                     -- Sign extension control signal
+  signal s_EX_jal         : std_logic;                     -- Jump and link write back control signal
+  signal s_EX_jr          : std_logic;                     -- Jump return control signal
+  signal s_EX_PCP4        : std_logic_vector(31 downto 0); -- PC+4 value
+  signal s_EX_instr20t16  : std_logic_vector(4 downto 0);  -- Register Rt address signal
+  signal s_EX_instr15t11  : std_logic_vector(4 downto 0);  -- Register Rd address signal
+  signal s_EX_rs_data_o   : std_logic_vector(31 downto 0); -- Output from Rs address
+  signal s_EX_rt_data_o   : std_logic_vector(31 downto 0); -- Output from Rt address
+  signal s_EX_ext_o       : std_logic_vector(31 downto 0); -- Extension control output
+  signal s_EX_s120_o      : std_logic_vector(27 downto 0); -- Instruction [25:0] shifted left 2
 
   -- MEM signals and wires
-  signal s_MEM_RegWr : std_logic;
-
+  signal s_MEM_RegWr     : std_logic;
+  signal s_MEM_diff_addr : std_logic;
+  signal s_MEM_PC_next   : std_logic_vector(31 downto 0);
+  signal s_MEM_branch    : std_logic;
+  signal w_MEM_or1_or2   : std_logic;
   -- WB signals and wires
 
 begin
@@ -438,6 +448,28 @@ begin
     data => s_DMemData,
     we   => s_DMemWr,
     q    => s_DMemOut);
+
+  or1 : org2
+  port map(
+    i_A => s_MEM_Jump,
+    i_B => s_MEM_jr,
+    o_F => w_MEM_or1_or2
+  );
+
+  or2 : org2
+  port map(
+    i_A => s_MEM_branch,
+    i_B => w_MEM_or1_or2,
+    o_F => s_MEM_diff_addr
+  );
+
+  mux8 : mux2t1_N
+  port map(
+    i_s  => s_MEM_diff_addr,
+    i_D0 => s_IF_pc_p4,
+    i_D1 => s_MEM_PC_next,
+    o_O  => w_IF_pc_next
+  );
 
   add0 : RippleCarryAdder
   port map(
@@ -505,50 +537,50 @@ begin
 
   id_ex_pipe : ID_EX_pipe
   port map(
-    i_CLK              => iCLK,            -- Clock input
-    i_RST              => iRST,            -- Reset input
-    i_WE               => '1',             -- Write enable
-    i_ID_halt_c        => s_ID_Halt,       -- Halt control signal
-    i_ID_STD_Shift_c   => s_ID_STD_SHIFT,  -- STD Shift control signal
-    i_ID_ALU_Src_c     => s_ID_Alu_Src,    -- ALU Source control signal
-    i_ID_ALU_Control_c => s_ID_ALU_Ctl,    -- ALU Control signals
-    i_ID_MemToReg_c    => s_ID_MemtoReg,   -- MemToReg control signal
-    i_ID_MemWrite_c    => s_ID_DMemWr,     -- Memory write control signal
-    i_ID_RegWrite_c    => s_ID_RegWr,      -- Register write control signal
-    i_ID_RegDst_c      => s_ID_RegDst,     -- Register destination control signal
-    i_ID_Jump_c        => s_ID_Jump,       -- Jump control signal
-    i_ID_ext_ctl       => s_ID_ext_ctl,    -- Sign extension control signal
-    i_ID_jal_C         => s_ID_jal,        -- Jump and link write back control signal
-    i_ID_jr_c          => s_ID_jr,         -- Jump return control signal
-    i_ID_PCP4          => s_ID_pc_p4,      -- PC+4 value
-    i_ID_instr20t16    => s_ID_Inst(20 downto 16), -- Register Rt address signal
-    i_ID_instr15t11    => s_ID_inst(15 downto 11), -- Register Rd address signal
-    i_ID_rs_data_o     => s_ID_rs_data_o,  -- Output from Rs address
-    i_ID_rt_data_o     => s_ID_rt_data_o,  -- Output from Rt address
-    i_ID_ext_o         => w_ID_ext_o,      -- Extension control output
-    i_ID_s120_o        => w_ID_s120_o,     -- Instruction [25:0] shifted left 2
+    i_CLK            => iCLK,                    -- Clock input
+    i_RST            => iRST,                    -- Reset input
+    i_WE             => '1',                     -- Write enable
+    i_ID_halt        => s_ID_Halt,               -- Halt control signal
+    i_ID_STD_Shift   => s_ID_STD_SHIFT,          -- STD Shift control signal
+    i_ID_ALU_Src     => s_ID_Alu_Src,            -- ALU Source control signal
+    i_ID_ALU_Control => s_ID_ALU_Ctl,            -- ALU Control signals
+    i_ID_MemToReg    => s_ID_MemtoReg,           -- MemToReg control signal
+    i_ID_MemWrite    => s_ID_DMemWr,             -- Memory write control signal
+    i_ID_RegWrite    => s_ID_RegWr,              -- Register write control signal
+    i_ID_RegDst      => s_ID_RegDst,             -- Register destination control signal
+    i_ID_Jump        => s_ID_Jump,               -- Jump control signal
+    i_ID_ext_ctl     => s_ID_ext_ctl,            -- Sign extension control signal
+    i_ID_jal         => s_ID_jal,                -- Jump and link write back control signal
+    i_ID_jr          => s_ID_jr,                 -- Jump return control signal
+    i_ID_PCP4        => s_ID_pc_p4,              -- PC+4 value
+    i_ID_instr20t16  => s_ID_Inst(20 downto 16), -- Register Rt address signal
+    i_ID_instr15t11  => s_ID_inst(15 downto 11), -- Register Rd address signal
+    i_ID_rs_data_o   => s_ID_rs_data_o,          -- Output from Rs address
+    i_ID_rt_data_o   => s_ID_rt_data_o,          -- Output from Rt address
+    i_ID_ext_o       => w_ID_ext_o,              -- Extension control output
+    i_ID_s120_o      => w_ID_s120_o,             -- Instruction [25:0] shifted left 2
     ------------------------------------------------------------------------------------
     -- outputs
     ------------------------------------------------------------------------------------
-    o_EX_halt_c        => s_EX_halt_c,        -- Halt control signal
-    o_EX_STD_Shift_c   => s_EX_STD_Shift_c,   -- STD Shift control signal
-    o_EX_ALU_Src_c     => s_EX_ALU_Src_c,     -- ALU Source control signal
-    o_EX_ALU_Control_c => s_EX_ALU_Control_c, -- ALU Control signals
-    o_EX_MemToReg_c    => s_EX_MemToReg_c,    -- MemToReg control signal
-    o_EX_MemWrite_c    => s_EX_MemWrite_c,    -- Memory write control signal
-    o_EX_RegWrite_c    => s_EX_RegWrite_c,    -- Register write control signal
-    o_EX_RegDst_c      => s_EX_RegDst_c,      -- Register destination control signal
-    o_EX_Jump_c        => s_EX_Jump_c,        -- Jump control signal
-    o_EX_ext_ctl       => s_EX_ext_ctl,       -- Sign extension control signal
-    o_EX_jal_C         => s_EX_jal_C,         -- Jump and link write back control signal
-    o_EX_jr_c          => s_EX_jr_c,          -- Jump return control signal
-    o_EX_PCP4          => s_EX_PCP4,          -- PC+4 value
-    o_EX_instr20t16    => s_EX_instr20t16,    -- Register Rt address signal
-    o_EX_instr15t11    => s_EX_instr15t11,    -- Register Rd address signal
-    o_EX_rs_data_o     => s_EX_rs_data_o,     -- Output from Rs address
-    o_EX_rt_data_o     => s_EX_rt_data_o,     -- Output from Rt address
-    o_EX_ext_o         => s_EX_ext_o,         -- Extension control output
-    o_EX_s120_o        => s_EX_s120_o         -- Instruction [25:0] shifted left 2
+    o_EX_halt        => s_EX_halt,        -- Halt control signal
+    o_EX_STD_Shift   => s_EX_STD_Shift,   -- STD Shift control signal
+    o_EX_ALU_Src     => s_EX_ALU_Src,     -- ALU Source control signal
+    o_EX_ALU_Control => s_EX_ALU_Control, -- ALU Control signals
+    o_EX_MemToReg    => s_EX_MemToReg,    -- MemToReg control signal
+    o_EX_MemWrite    => s_EX_MemWrite,    -- Memory write control signal
+    o_EX_RegWrite    => s_EX_RegWrite,    -- Register write control signal
+    o_EX_RegDst      => s_EX_RegDst,      -- Register destination control signal
+    o_EX_Jump        => s_EX_Jump,        -- Jump control signal
+    o_EX_ext_ctl     => s_EX_ext_ctl,     -- Sign extension control signal
+    o_EX_jal         => s_EX_jal,         -- Jump and link write back control signal
+    o_EX_jr          => s_EX_jr,          -- Jump return control signal
+    o_EX_PCP4        => s_EX_PCP4,        -- PC+4 value
+    o_EX_instr20t16  => s_EX_instr20t16,  -- Register Rt address signal
+    o_EX_instr15t11  => s_EX_instr15t11,  -- Register Rd address signal
+    o_EX_rs_data_o   => s_EX_rs_data_o,   -- Output from Rs address
+    o_EX_rt_data_o   => s_EX_rt_data_o,   -- Output from Rt address
+    o_EX_ext_o       => s_EX_ext_o,       -- Extension control output
+    o_EX_s120_o      => s_EX_s120_o       -- Instruction [25:0] shifted left 2
   );
 
   mux0 : mux4t1_N
