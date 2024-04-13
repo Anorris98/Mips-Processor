@@ -26,7 +26,7 @@ numbers: .word 3, 0, 0, 3, 54, -1, 2, 256, -3, 0		# Array of N=10
 main:
 	
 	addiu $s0, $zero, 1    	#SwappedSomething = true	#initialize swapped something to true.
-	li $s2, 9 	#(n-2)				#initzalize for loop counter to stop at N-2, becasue of i and i++
+	addiu $s2, $zero, 9 	#(n-2)				#initzalize for loop counter to stop at N-2, becasue of i and i++
 	
 	j whileloop	#start looping
 
