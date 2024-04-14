@@ -146,14 +146,6 @@ architecture structure of MIPS_Processor is
       Overflow : out std_logic);
   end component;
 
-  component mux2t1_N is
-    port (
-      i_S  : in std_logic;
-      i_D0 : in std_logic_vector(N - 1 downto 0);
-      i_D1 : in std_logic_vector(N - 1 downto 0);
-      o_O  : out std_logic_vector(N - 1 downto 0));
-  end component;
-
   component pc_dffg is
     port (
       i_CLK : in std_logic;                          -- Clock input
@@ -345,6 +337,8 @@ architecture structure of MIPS_Processor is
   -- ID signals and wires
   signal s_ID_pc_p4     : std_logic_vector(N - 1 downto 0);
   signal s_ID_Inst      : std_logic_vector(N - 1 downto 0);
+  signal s_ID_Halt      : std_logic;
+  signal s_ID_DMemWr    : std_logic;
   signal s_ID_STD_SHIFT : std_logic;
   signal s_ID_ALU_Ctl   : std_logic_vector(7 downto 0);
   signal s_ID_RegWr     : std_logic;
@@ -380,6 +374,7 @@ architecture structure of MIPS_Processor is
   signal s_EX_rt_data_o    : std_logic_vector(N - 1 downto 0); -- Output from Rt address
   signal s_EX_ext_o        : std_logic_vector(N - 1 downto 0); -- Extension control output
   signal s_EX_s120_o       : std_logic_vector(27 downto 0);    -- Instruction [25:0] shifted left 2
+  signal s_EX_pc4_s120_o   : std_logic_vector(N - 1 downto 0); -- Full jump address
   signal w_EX_mux1_alu_rtn : std_logic_vector(N - 1 downto 0);
   signal w_EX_mux7_iD1     : std_logic_vector(N - 1 downto 0);
   signal w_EX_mux7_alu_rtn : std_logic_vector(N - 1 downto 0);
@@ -387,24 +382,35 @@ architecture structure of MIPS_Processor is
   signal s_EX_ALU_Zero     : std_logic;
   signal s_EX_branch       : std_logic;
   signal w_EX_shift_add1   : std_logic_vector(N - 1 downto 0);
+  signal s_EX_add1_mux2    : std_logic_vector(N - 1 downto 0);
   signal s_add1_carry      : std_logic;
   signal s_add1_overflow   : std_logic; -- 1 if overflow
   -- MEM signals and wires
-  signal s_MEM_RegWr     : std_logic;
-  signal s_MEM_diff_addr : std_logic;
-  signal s_MEM_PC_next   : std_logic_vector(N - 1 downto 0);
-  signal s_MEM_branch    : std_logic;
-  signal w_MEM_or1_or2   : std_logic;
-  signal w_MEM_mux2_mux3 : std_logic_vector(N - 1 downto 0);
-  signal w_MEM_mux3_mux5 : std_logic_vector(N - 1 downto 0);
-  signal s_MEM_halt      : std_logic;                        -- Halt control signal
-  signal s_MEM_MemToReg  : std_logic_vector(1 downto 0);     -- MemToReg control signal
-  signal s_MEM_jal       : std_logic;                        -- Jump and link write back control signal
-  signal s_MEM_PCP4      : std_logic_vector(N - 1 downto 0); -- PC+4 value
-  signal s_MEM_RegWrAddr : std_logic_vector(4 downto 0);     -- Write address
-  signal s_MEM_Dmem_Addr : std_logic_vector(N - 1 downto 0); -- Output from the ALU
-  signal s_MEM_Dmem_Lb   : std_logic_vector(N - 1 downto 0); -- Output from byte decoder
-  signal s_MEM_Dmem_Lh   : std_logic_vector(N - 1 downto 0); -- Output from word decoder
+  signal s_MEM_MemWrite   : std_logic; -- Memory write control signal
+  signal s_MEM_RegWr      : std_logic;
+  signal s_MEM_diff_addr  : std_logic;
+  signal s_MEM_PC_next    : std_logic_vector(N - 1 downto 0);
+  signal s_MEM_branch     : std_logic;
+  signal s_MEM_jr         : std_logic; -- Jump return control signal
+  signal s_MEM_Jump       : std_logic; -- Jump control signal
+  signal s_MEM_ext_ctl    : std_logic; -- Sign extension control signal
+  signal w_MEM_or1_or2    : std_logic;
+  signal w_MEM_mux2_mux3  : std_logic_vector(N - 1 downto 0);
+  signal w_MEM_mux3_mux5  : std_logic_vector(N - 1 downto 0);
+  signal s_MEM_halt       : std_logic;                        -- Halt control signal
+  signal s_MEM_MemToReg   : std_logic_vector(1 downto 0);     -- MemToReg control signal
+  signal s_MEM_jal        : std_logic;                        -- Jump and link write back control signal
+  signal s_MEM_PCP4       : std_logic_vector(N - 1 downto 0); -- PC+4 value
+  signal s_MEM_RegWrAddr  : std_logic_vector(4 downto 0);     -- Write address
+  signal s_MEM_Dmem_Addr  : std_logic_vector(N - 1 downto 0); -- Output from the ALU
+  signal s_MEM_Dmem_Lb    : std_logic_vector(N - 1 downto 0); -- Output from byte decoder
+  signal s_MEM_Dmem_Lh    : std_logic_vector(N - 1 downto 0); -- Output from word decoder
+  signal s_MEM_rs_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rs address
+  signal s_MEM_rt_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rt address
+  signal s_MEM_pc4_s120_o : std_logic_vector(N - 1 downto 0); -- Jump address
+  signal s_MEM_add1_mux2  : std_logic_vector(N - 1 downto 0);
+  signal s_EX_RegWrAddr   : std_logic_vector(4 downto 0); -- Final register write address
+  signal s_EX_Dmem_Addr   : std_logic_vector(N - 1 downto 0);
 
   -- WB signals and wires
   signal s_WB_halt        : std_logic;                        -- Halt control signal
@@ -445,8 +451,7 @@ begin
     i_s  => s_MEM_diff_addr,
     i_D0 => s_IF_pc_p4,
     i_D1 => s_MEM_PC_next,
-    o_O  => w_IF_pc_next
-  );
+    o_O  => w_IF_pc_next);
 
   add0 : RippleCarryAdder
   port map(
@@ -461,23 +466,22 @@ begin
     i_CLK => iCLK,            -- Clock input
     i_RST => iRST,            -- Reset input
     i_WE  => '1',             -- Write enable input
-    i_D   => w_IF_pc_next;    -- Data value input
+    i_D   => w_IF_pc_next,    -- Data value input
     o_Q   => s_NextInstAddr); -- Data value output
 
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
 
-  if_id_pipe : IF_ID_pipe
+  IFID_pipe : IF_ID_pipe
   port map(
     i_CLK          => iCLK,       -- Clock input
     i_RST          => iRST,       -- Reset input
-    i_WE           => '1';        -- Write enable
+    i_WE           => '1',        -- Write enable
     i_IF_PC_P4     => s_IF_pc_p4, -- PC + 4
     i_IF_instr31t0 => s_Inst,     -- Entire instruction
     o_ID_PC_P4     => s_ID_pc_p4, -- PC + 4
-    o_ID_instr31t0 => s_ID_Inst   -- Entire instruction
-  );
+    o_ID_instr31t0 => s_ID_Inst); -- Entire instruction
 
   ----------------------------------------------------------------------------------------------------------
   -- Decode stage
@@ -526,7 +530,7 @@ begin
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
 
-  id_ex_pipe : ID_EX_pipe
+  IDEX_pipe : ID_EX_pipe
   port map(
     i_CLK            => iCLK,                    -- Clock input
     i_RST            => iRST,                    -- Reset input
@@ -559,7 +563,7 @@ begin
     o_EX_ALU_Control => s_EX_ALU_Control, -- ALU Control signals
     o_EX_MemToReg    => s_EX_MemToReg,    -- MemToReg control signal
     o_EX_MemWrite    => s_EX_MemWrite,    -- Memory write control signal
-    o_EX_RegWrite    => s_EX_RegWrite,    -- Register write control signal
+    o_EX_RegWrite    => s_EX_RegWr,       -- Register write control signal
     o_EX_RegDst      => s_EX_RegDst,      -- Register destination control signal
     o_EX_Jump        => s_EX_Jump,        -- Jump control signal
     o_EX_ext_ctl     => s_EX_ext_ctl,     -- Sign extension control signal
@@ -571,8 +575,7 @@ begin
     o_EX_rs_data_o   => s_EX_rs_data_o,   -- Output from Rs address
     o_EX_rt_data_o   => s_EX_rt_data_o,   -- Output from Rt address
     o_EX_ext_o       => s_EX_ext_o,       -- Extension control output
-    o_EX_s120_o      => s_EX_s120_o       -- Instruction [25:0] shifted left 2
-  );
+    o_EX_s120_o      => s_EX_s120_o);     -- Instruction [25:0] shifted left 2
 
   ----------------------------------------------------------------------------------------------------------
   -- Execution stage
@@ -632,7 +635,7 @@ begin
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
-  ex_mem_pipe : EX_MEM_pipe
+  EXMEM_pipe : EX_MEM_pipe
   port map(
     i_CLK           => iCLK,            -- Clock input
     i_RST           => iRST,            -- Reset input
@@ -640,7 +643,7 @@ begin
     i_EX_halt       => s_EX_halt,       -- Halt control signal
     i_EX_MemToReg   => s_EX_MemToReg,   -- MemToReg control signal
     i_EX_MemWrite   => s_EX_MemWrite,   -- Memory write control signal
-    i_EX_RegWrite   => s_EX_RegWrite,   -- Register write control signal
+    i_EX_RegWrite   => s_EX_RegWr,      -- Register write control signal
     i_EX_Jump       => s_EX_Jump,       -- Jump control signal
     i_EX_ext_ctl    => s_EX_ext_ctl,    -- Sign extension control signal
     i_EX_jal        => s_EX_jal,        -- Jump and link write back control signal
@@ -659,7 +662,7 @@ begin
     o_MEM_halt       => s_MEM_halt,       -- Halt control signal
     o_MEM_MemToReg   => s_MEM_MemToReg,   -- MemToReg control signal
     o_MEM_MemWrite   => s_MEM_MemWrite,   -- Memory write control signal
-    o_MEM_RegWrite   => s_MEM_RegWrite,   -- Register write control signal
+    o_MEM_RegWrite   => s_MEM_RegWr,      -- Register write control signal
     o_MEM_Jump       => s_MEM_Jump,       -- Jump control signal
     o_MEM_ext_ctl    => s_MEM_ext_ctl,    -- Sign extension control signal
     o_MEM_jal        => s_MEM_jal,        -- Jump and link write back control signal
@@ -671,8 +674,7 @@ begin
     o_MEM_pc4_s120_o => s_MEM_pc4_s120_o, -- Jump address
     o_MEM_RegWrAddr  => s_MEM_RegWrAddr,  -- Write address
     o_MEM_Dmem_Addr  => s_MEM_Dmem_Addr,  -- Output from the ALU
-    o_MEM_add1_mux2  => s_MEM_add1_mux2   -- Output from Adder 1
-  );
+    o_MEM_add1_mux2  => s_MEM_add1_mux2); -- Output from Adder 1
   ----------------------------------------------------------------------------------------------------------
   -- Memory stage
   ----------------------------------------------------------------------------------------------------------
@@ -744,14 +746,14 @@ begin
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
-  mem_wb_pipe : MEM_WB_pipe
+  MEMWB_pipe : MEM_WB_pipe
   port map(
     i_CLK           => iCLK,
     i_RST           => iRST,
-    i_WE            => '1'',
+    i_WE            => '1',
     i_MEM_halt      => s_MEM_halt,      -- Halt control signal
     i_MEM_MemToReg  => s_MEM_MemToReg,  -- MemToReg control signal
-    i_MEM_RegWrite  => s_MEM_RegWrite,  -- Register write control signal
+    i_MEM_RegWrite  => s_MEM_RegWr,     -- Register write control signal
     i_MEM_jal       => s_MEM_jal,       -- Jump and link write back control signal
     i_MEM_PCP4      => s_MEM_PCP4,      -- PC+4 value
     i_MEM_RegWrAddr => s_MEM_RegWrAddr, -- Write address
@@ -771,8 +773,7 @@ begin
     o_WB_Dmem_Addr => s_WB_Dmem_Addr, -- Output from the ALU
     o_WB_Dmem_out  => s_WB_Dmem_out,  -- Output from DMEM
     o_WB_Dmem_Lb   => s_WB_Dmem_Lb,   -- Output from byte decoder
-    o_WB_Dmem_Lh   => s_WB_Dmem_Lh    -- Output from word decoder
-  );
+    o_WB_Dmem_Lh   => s_WB_Dmem_Lh);  -- Output from word decoder
   ----------------------------------------------------------------------------------------------------------
   -- Write Back stage
   ----------------------------------------------------------------------------------------------------------
