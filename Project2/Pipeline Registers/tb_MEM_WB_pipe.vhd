@@ -18,26 +18,32 @@ architecture behavior of tb_MEM_WB_pipe is
     component MEM_WB_pipe
         generic (N : integer := 32);
         port (
-            i_CLK           : in std_logic;                     -- Clock input
-            i_RST           : in std_logic;                     -- Reset input
-            i_WE            : in std_logic;                     -- Write enable
-            i_MEM_halt      : in std_logic;                     -- Halt control signal
-            i_MEM_MemToReg  : in std_logic_vector(1 downto 0);  -- MemToReg control signal
-            i_MEM_RegWrite  : in std_logic;                     -- Register write control signal
-            i_MEM_jal       : in std_logic;                     -- Jump and link write back control signal
-            i_MEM_PCP4      : in std_logic_vector(31 downto 0); -- PC+4 value
-            i_MEM_RegWrAddr : in std_logic_vector(4 downto 0);  -- Write address
-            i_MEM_Dmem_Addr : in std_logic_vector(31 downto 0); -- Output from the ALU
+            i_CLK           : in std_logic;                        -- Clock input
+            i_RST           : in std_logic;                        -- Reset input
+            i_WE            : in std_logic;                        -- Write enable
+            i_MEM_halt      : in std_logic;                        -- Halt control signal
+            i_MEM_MemToReg  : in std_logic_vector(1 downto 0);     -- MemToReg control signal
+            i_MEM_RegWrite  : in std_logic;                        -- Register write control signal
+            i_MEM_jal       : in std_logic;                        -- Jump and link write back control signal
+            i_MEM_PCP4      : in std_logic_vector(N - 1 downto 0); -- PC+4 value
+            i_MEM_RegWrAddr : in std_logic_vector(4 downto 0);     -- Write address
+            i_MEM_Dmem_Addr : in std_logic_vector(N - 1 downto 0); -- Output from the ALU
+            i_MEM_Dmem_out  : in std_logic_vector(N - 1 downto 0); -- Output from DMEM
+            i_MEM_Dmem_Lb   : in std_logic_vector(N - 1 downto 0); -- Output from byte decoder
+            i_MEM_Dmem_Lh   : in std_logic_vector(N - 1 downto 0); -- Output from word decoder
             ------------------------------------------------------------------------------------
             -- outputs
             ------------------------------------------------------------------------------------
-            o_WB_halt      : out std_logic;                     -- Halt control signal
-            o_WB_MemToReg  : out std_logic_vector(1 downto 0);  -- MemToReg control signal
-            o_WB_RegWrite  : out std_logic;                     -- Register write control signal
-            o_WB_jal       : out std_logic;                     -- Jump and link write back control signal
-            o_WB_PCP4      : out std_logic_vector(31 downto 0); -- PC+4 value
-            o_WB_RegWrAddr : out std_logic_vector(4 downto 0);  -- Write address
-            o_WB_Dmem_Addr : out std_logic_vector(31 downto 0)  -- Output from the ALU
+            o_WB_halt      : out std_logic;                        -- Halt control signal
+            o_WB_MemToReg  : out std_logic_vector(1 downto 0);     -- MemToReg control signal
+            o_WB_RegWrite  : out std_logic;                        -- Register write control signal
+            o_WB_jal       : out std_logic;                        -- Jump and link write back control signal
+            o_WB_PCP4      : out std_logic_vector(N - 1 downto 0); -- PC+4 value
+            o_WB_RegWrAddr : out std_logic_vector(4 downto 0);     -- Write address
+            o_WB_Dmem_Addr : out std_logic_vector(N - 1 downto 0); -- Output from the ALU
+            o_WB_Dmem_out  : out std_logic_vector(N - 1 downto 0); -- Output from DMEM
+            o_WB_Dmem_Lb   : out std_logic_vector(N - 1 downto 0); -- Output from byte decoder
+            o_WB_Dmem_Lh   : out std_logic_vector(N - 1 downto 0)  -- Output from word decoder
         );
     end component;
 
@@ -45,22 +51,28 @@ architecture behavior of tb_MEM_WB_pipe is
     signal s_CLK           : std_logic;
     signal s_RST           : std_logic;
     signal s_WE            : std_logic;
-    signal s_MEM_halt      : std_logic;                     -- Halt control signal
-    signal s_MEM_MemToReg  : std_logic_vector(1 downto 0);  -- MemToReg control signal
-    signal s_MEM_RegWrite  : std_logic;                     -- Register write control signal
-    signal s_MEM_jal       : std_logic;                     -- Jump and link write back control signal
-    signal s_MEM_PCP4      : std_logic_vector(31 downto 0); -- PC+4 value
-    signal s_MEM_RegWrAddr : std_logic_vector(4 downto 0);  -- Write address
-    signal s_MEM_Dmem_Addr : std_logic_vector(31 downto 0); -- Output from the ALU
+    signal s_MEM_halt      : std_logic;                        -- Halt control signal
+    signal s_MEM_MemToReg  : std_logic_vector(1 downto 0);     -- MemToReg control signal
+    signal s_MEM_RegWrite  : std_logic;                        -- Register write control signal
+    signal s_MEM_jal       : std_logic;                        -- Jump and link write back control signal
+    signal s_MEM_PCP4      : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_MEM_RegWrAddr : std_logic_vector(4 downto 0);     -- Write address
+    signal s_MEM_Dmem_Addr : std_logic_vector(N - 1 downto 0); -- Output from the ALU
+    signal s_MEM_Dmem_out  : std_logic_vector(N - 1 downto 0); -- Output from DMEM
+    signal s_MEM_Dmem_Lb   : std_logic_vector(N - 1 downto 0); -- Output from byte decoder
+    signal s_MEM_Dmem_Lh   : std_logic_vector(N - 1 downto 0); -- Output from word decoder
 
     --Outputs
-    signal s_WB_halt      : std_logic;                     -- Halt control signal
-    signal s_WB_MemToReg  : std_logic_vector(1 downto 0);  -- MemToReg control signal
-    signal s_WB_RegWrite  : std_logic;                     -- Register write control signal
-    signal s_WB_jal       : std_logic;                     -- Jump and link write back control signal
-    signal s_WB_PCP4      : std_logic_vector(31 downto 0); -- PC+4 value
-    signal s_WB_RegWrAddr : std_logic_vector(4 downto 0);  -- Write address
-    signal s_WB_Dmem_Addr : std_logic_vector(31 downto 0); -- Output from the ALU
+    signal s_WB_halt      : std_logic;                        -- Halt control signal
+    signal s_WB_MemToReg  : std_logic_vector(1 downto 0);     -- MemToReg control signal
+    signal s_WB_RegWrite  : std_logic;                        -- Register write control signal
+    signal s_WB_jal       : std_logic;                        -- Jump and link write back control signal
+    signal s_WB_PCP4      : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_WB_RegWrAddr : std_logic_vector(4 downto 0);     -- Write address
+    signal s_WB_Dmem_Addr : std_logic_vector(N - 1 downto 0); -- Output from the ALU
+    signal s_WB_Dmem_out  : std_logic_vector(N - 1 downto 0); -- Output from DMEM
+    signal s_WB_Dmem_Lb   : std_logic_vector(N - 1 downto 0); -- Output from byte decoder
+    signal s_WB_Dmem_Lh   : std_logic_vector(N - 1 downto 0); -- Output from word decoder
 
 begin
 
@@ -78,6 +90,9 @@ begin
         i_MEM_PCP4      => s_MEM_PCP4,      -- PC+4 value
         i_MEM_RegWrAddr => s_MEM_RegWrAddr, -- Write address
         i_MEM_Dmem_Addr => s_MEM_Dmem_Addr, -- Output from the ALU
+        i_MEM_Dmem_out  => s_MEM_Dmem_out,  -- Output from DMEM
+        i_MEM_Dmem_Lb   => s_MEM_Dmem_Lb,   -- Output from byte decoder
+        i_MEM_Dmem_Lh   => s_MEM_Dmem_Lh,    -- Output from word decoder
         ------------------------------------------------------------------------------------
         -- outputs
         ------------------------------------------------------------------------------------
@@ -87,7 +102,10 @@ begin
         o_WB_jal       => s_WB_jal,       -- Jump and link write back control signal
         o_WB_PCP4      => s_WB_PCP4,      -- PC+4 value
         o_WB_RegWrAddr => s_WB_RegWrAddr, -- Write address
-        o_WB_Dmem_Addr => s_WB_Dmem_Addr  -- Output from the ALU
+        o_WB_Dmem_Addr => s_WB_Dmem_Addr, -- Output from the ALU
+        o_WB_Dmem_out  => s_WB_Dmem_out,  -- Output from DMEM
+        o_WB_Dmem_Lb   => s_WB_Dmem_Lb,   -- Output from byte decoder
+        o_WB_Dmem_Lh   => s_WB_Dmem_Lh    -- Output from word decoder
     );
 
     -- This process sets the clock value (low for gCLK_HPER, then high
@@ -125,6 +143,9 @@ begin
         s_MEM_PCP4      <= x"FFFFFFFF";
         s_MEM_RegWrAddr <= b"11111";
         s_MEM_Dmem_Addr <= x"FFFFFFFF";
+        s_MEM_Dmem_out  <= x"FFFFFFFF";
+        s_MEM_Dmem_Lb   <= x"FFFFFFFF";
+        s_MEM_Dmem_Lh   <= x"FFFFFFFF";
         wait for cCLK_PER;
 
         s_WE            <= '1';
@@ -135,6 +156,9 @@ begin
         s_MEM_PCP4      <= x"00000000";
         s_MEM_RegWrAddr <= b"00000";
         s_MEM_Dmem_Addr <= x"00000000";
+        s_MEM_Dmem_out  <= x"00000000";
+        s_MEM_Dmem_Lb   <= x"00000000";
+        s_MEM_Dmem_Lh   <= x"00000000";
         wait for cCLK_PER;
 
         s_WE            <= '0';
@@ -145,6 +169,9 @@ begin
         s_MEM_PCP4      <= x"FFFFFFFF";
         s_MEM_RegWrAddr <= b"11111";
         s_MEM_Dmem_Addr <= x"FFFFFFFF";
+        s_MEM_Dmem_out  <= x"FFFFFFFF";
+        s_MEM_Dmem_Lb   <= x"FFFFFFFF";
+        s_MEM_Dmem_Lh   <= x"FFFFFFFF";
         wait for cCLK_PER;
 
         s_WE            <= '0';
@@ -155,6 +182,9 @@ begin
         s_MEM_PCP4      <= x"00000000";
         s_MEM_RegWrAddr <= b"00000";
         s_MEM_Dmem_Addr <= x"00000000";
+        s_MEM_Dmem_out  <= x"00000000";
+        s_MEM_Dmem_Lb   <= x"00000000";
+        s_MEM_Dmem_Lh   <= x"00000000";
         wait for cCLK_PER;
 
         s_WE            <= '1';
@@ -165,6 +195,9 @@ begin
         s_MEM_PCP4      <= x"FFFFFFFF";
         s_MEM_RegWrAddr <= b"11111";
         s_MEM_Dmem_Addr <= x"FFFFFFFF";
+        s_MEM_Dmem_out  <= x"FFFFFFFF";
+        s_MEM_Dmem_Lb   <= x"FFFFFFFF";
+        s_MEM_Dmem_Lh   <= x"FFFFFFFF";
         wait for cCLK_PER;
 
         wait;
