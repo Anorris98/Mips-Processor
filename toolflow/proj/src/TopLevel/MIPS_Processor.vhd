@@ -506,7 +506,9 @@ begin
     o_jr            => s_ID_jr,
     o_jal           => s_ID_jal);
 
-  s_RegWr <= s_WB_RegWr;
+    s_RegWr <= s_WB_RegWr;
+    s_RegWrAddr <= s_WB_RegWrAddr;
+    s_RegWrData <= w_WB_mux_reg_rtn;
 
   regist : reg
   port map(
@@ -746,6 +748,8 @@ begin
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
+ s_Halt <= s_WB_halt;
+
   MEMWB_pipe : MEM_WB_pipe
   port map(
     i_CLK           => iCLK,

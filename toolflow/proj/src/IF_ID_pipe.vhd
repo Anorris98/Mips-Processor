@@ -46,7 +46,7 @@ begin
     -- our processor's registers so that we minimize
     -- glitchy behavior on startup.
     -- if (rising_edge(i_CLK) and i_WE = '0') then
-    process (i_CLK, i_RST, i_WE)
+    process (i_CLK, i_RST, i_WE, i_IF_PC_P4)
     begin
         if (i_RST = '1') then
             s_ID_PC_P4     <= x"00000000"; -- Use "(others => '0')" for N-bit values
