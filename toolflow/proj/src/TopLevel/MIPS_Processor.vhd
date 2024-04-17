@@ -508,7 +508,7 @@ begin
 
     s_RegWr <= s_WB_RegWr;
     s_RegWrAddr <= s_WB_RegWrAddr;
-    s_RegWrData <= w_WB_mux_reg_rtn;
+    -- s_RegWrData <= w_WB_mux_reg_rtn;
 
   regist : reg
   port map(
