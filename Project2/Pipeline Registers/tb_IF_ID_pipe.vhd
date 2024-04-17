@@ -18,25 +18,25 @@ architecture behavior of tb_IF_ID_pipe is
     component IF_ID_pipe
         generic (N : integer := 32);
         port (
-            i_CLK : in std_logic; -- Clock input
-            i_RST : in std_logic; -- Reset input
-            i_WE : in std_logic; -- Write enable
-            i_IF_PC_P4 : in std_logic_vector(N - 1 downto 0); -- PC + 4
-            i_IF_instr31t0 : in std_logic_vector(N - 1 downto 0); -- Entire instruction
-            o_ID_PC_P4 : out std_logic_vector(N - 1 downto 0); -- PC + 4
-            o_ID_instr31t0 : out std_logic_vector(N - 1 downto 0) -- Entire instruction
+            i_CLK          : in std_logic;                         -- Clock input
+            i_RST          : in std_logic;                         -- Reset input
+            i_WE           : in std_logic;                         -- Write enable
+            i_IF_PC_P4     : in std_logic_vector(N - 1 downto 0);  -- PC + 4
+            i_IF_instr31t0 : in std_logic_vector(N - 1 downto 0);  -- Entire instruction
+            o_ID_PC_P4     : out std_logic_vector(N - 1 downto 0); -- PC + 4
+            o_ID_instr31t0 : out std_logic_vector(N - 1 downto 0)  -- Entire instruction
         );
     end component;
 
     --Inputs
-    signal s_CLK : std_logic;
-    signal s_RST : std_logic;
-    signal s_WE : std_logic;
-    signal s_IF_PC_P4 : std_logic_vector(N - 1 downto 0);
+    signal s_CLK          : std_logic;
+    signal s_RST          : std_logic;
+    signal s_WE           : std_logic;
+    signal s_IF_PC_P4     : std_logic_vector(N - 1 downto 0);
     signal s_IF_instr31t0 : std_logic_vector(N - 1 downto 0);
 
     --Outputs
-    signal s_ID_PC_P4 : std_logic_vector(N - 1 downto 0);
+    signal s_ID_PC_P4     : std_logic_vector(N - 1 downto 0);
     signal s_ID_instr31t0 : std_logic_vector(N - 1 downto 0);
 
 begin
@@ -45,12 +45,12 @@ begin
     uut : IF_ID_pipe
     generic map(N => N)
     port map(
-        i_CLK => s_CLK,
-        i_RST => s_RST,
-        i_WE => s_WE,
-        i_IF_PC_P4 => s_IF_PC_P4,
+        i_CLK          => s_CLK,
+        i_RST          => s_RST,
+        i_WE           => s_WE,
+        i_IF_PC_P4     => s_IF_PC_P4,
         i_IF_instr31t0 => s_IF_instr31t0,
-        o_ID_PC_P4 => s_ID_PC_P4,
+        o_ID_PC_P4     => s_ID_PC_P4,
         o_ID_instr31t0 => s_ID_instr31t0
     );
 
@@ -81,43 +81,43 @@ begin
     ----------------------------------
     P_TB : process
     begin
-        s_WE <= '1';
-        s_IF_PC_P4 <= x"00400004";
+        s_WE           <= '1';
+        s_IF_PC_P4     <= x"00400004";
         s_IF_instr31t0 <= x"11111111";
         wait for cCLK_PER;
 
-        s_WE <= '1';
-        s_IF_PC_P4 <= x"00400008";
+        s_WE           <= '1';
+        s_IF_PC_P4     <= x"00400008";
         s_IF_instr31t0 <= x"22222222";
         wait for cCLK_PER;
 
-        s_WE <= '0';
-        s_IF_PC_P4 <= x"00400004";
+        s_WE           <= '0';
+        s_IF_PC_P4     <= x"00400004";
         s_IF_instr31t0 <= x"11111111";
         wait for cCLK_PER;
 
-        s_WE <= '0';
-        s_IF_PC_P4 <= x"00400008";
+        s_WE           <= '0';
+        s_IF_PC_P4     <= x"00400008";
         s_IF_instr31t0 <= x"22222222";
         wait for cCLK_PER;
 
-        s_WE <= '1';
-        s_IF_PC_P4 <= x"0040000C";
+        s_WE           <= '1';
+        s_IF_PC_P4     <= x"0040000C";
         s_IF_instr31t0 <= x"33333333";
         wait for cCLK_PER;
 
-        s_WE <= '1';
-        s_IF_PC_P4 <= x"00400010";
+        s_WE           <= '1';
+        s_IF_PC_P4     <= x"00400010";
         s_IF_instr31t0 <= x"44444444";
         wait for cCLK_PER;
 
-        s_WE <= '0';
-        s_IF_PC_P4 <= x"00400020";
+        s_WE           <= '0';
+        s_IF_PC_P4     <= x"00400020";
         s_IF_instr31t0 <= x"99999999";
         wait for cCLK_PER;
 
-        s_WE <= '1';
-        s_IF_PC_P4 <= x"00400014";
+        s_WE           <= '1';
+        s_IF_PC_P4     <= x"00400014";
         s_IF_instr31t0 <= x"55555555";
         wait for cCLK_PER;
 

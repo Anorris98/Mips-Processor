@@ -132,7 +132,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstAddr[6]",
+					"name" : "iCLK",
+					"strict" : false
+				},
+				{
+					"name" : "iRST",
 					"strict" : false
 				},
 				{
@@ -140,23 +144,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstAddr[7]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstAddr[9]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstAddr[8]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstAddr[5]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstAddr[4]",
+					"name" : "iInstExt[15]",
 					"strict" : false
 				},
 				{
@@ -168,6 +156,30 @@
 					"strict" : false
 				},
 				{
+					"name" : "iInstAddr[4]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstAddr[5]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstAddr[6]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstAddr[7]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstAddr[8]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstAddr[9]",
+					"strict" : false
+				},
+				{
 					"name" : "iInstAddr[10]",
 					"strict" : false
 				},
@@ -176,31 +188,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[15]",
-					"strict" : false
-				},
-				{
-					"name" : "iCLK",
-					"strict" : false
-				},
-				{
-					"name" : "iRST",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[26]",
-					"strict" : false
-				},
-				{
 					"name" : "iInstExt[30]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[28]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[27]",
 					"strict" : false
 				},
 				{
@@ -212,19 +200,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[16]",
+					"name" : "iInstExt[26]",
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[17]",
+					"name" : "iInstExt[27]",
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[19]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[20]",
+					"name" : "iInstExt[28]",
 					"strict" : false
 				},
 				{
@@ -232,19 +216,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[0]",
+					"name" : "iInstExt[17]",
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[1]",
+					"name" : "iInstExt[16]",
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[2]",
+					"name" : "iInstExt[20]",
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[5]",
+					"name" : "iInstExt[19]",
 					"strict" : false
 				},
 				{
@@ -252,7 +236,43 @@
 					"strict" : false
 				},
 				{
+					"name" : "iInstExt[1]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[0]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[5]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[2]",
+					"strict" : false
+				},
+				{
 					"name" : "iInstExt[3]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[14]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[13]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[10]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[11]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[12]",
 					"strict" : false
 				},
 				{
@@ -260,7 +280,15 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[24]",
+					"name" : "iInstExt[8]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[9]",
+					"strict" : false
+				},
+				{
+					"name" : "iInstExt[7]",
 					"strict" : false
 				},
 				{
@@ -280,35 +308,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "iInstExt[7]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[8]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[9]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[10]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[11]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[12]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[13]",
-					"strict" : false
-				},
-				{
-					"name" : "iInstExt[14]",
+					"name" : "iInstExt[24]",
 					"strict" : false
 				}
 			]
