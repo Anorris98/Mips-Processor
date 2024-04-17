@@ -23,8 +23,13 @@ visited:
 res_idx:
         .word   3
 .text
-	addiu $sp, $zero, 0x10011000
-	addiu $fp, $zero, 0
+	lui $sp, 0x00001001## for la
+	lui $s7, 0x0000FFFF #Uused as -1 for a beq, instead of it having to use a psuedo.
+	nop
+	nop
+	ori $sp, $sp, 0x00001000 ## for la
+	ori $s7, $s7, 0x0000FFFF
+	add $fp, $0, $0
 	lasw $ra pump
 	j main # jump to the starting location
 	
@@ -42,15 +47,19 @@ main:
         nop################################################################
         nop
         
-        sw      $31,36($sp)
+        sw      $ra,36($sp)
         sw      $fp,32($sp)
         nop
-        add    	$fp,$sp,$zero
+        add    	$fp,$sp,$0
+        nop
+        nop
+        nop
         sw      $0,24($fp)
         j       main_loop_control
 
 	nop
 	nop	#for jump
+	nop
 	nop
 
 main_loop_body:
@@ -65,6 +74,9 @@ main_loop_body:
         trucks:
 
         xori    $2,$2,0x1
+        nop
+        nop
+        nop
 #        andi    $2,$2,0x00ff
         beq     $2,$0,kick
         
@@ -85,7 +97,13 @@ main_loop_body:
 
 kick:
         lw      $2,24($fp)
+        nop
+        nop
+        nop
         addiu   $2,$2,1
+        nop
+        nop
+        nop
         sw      $2,24($fp)
 main_loop_control:
         lw      $2,24($fp)
@@ -97,7 +115,7 @@ main_loop_control:
         nop
         nop################################################################
         nop
-        beq	$2, $zero, hew # beq, j to simulate bne 
+        beq	$2, $0, hew # beq, j to simulate bne 
         
         nop
 	nop	#for Branch
@@ -151,7 +169,7 @@ welcome:
         nop
         nop################################################################
         nop
-        lw      $31,36($sp)
+        lw      $ra,36($sp)
         lw      $fp,32($sp)
         nop
         nop################################################################
@@ -211,7 +229,7 @@ turkey:
         nop
         nop################################################################
         nop
-        beq	$3,-1,telling # beq, j to simulate bne
+        beq	$3,$s7,telling # beq, j to simulate bne
         
         nop
 	nop	#for Branch
@@ -223,8 +241,14 @@ turkey:
 	nop
 	
         telling:
-	lasw 	$v0, res_idx
-	lw	$v0, 0($v0)
+	lasw 	$2, res_idx
+	nop
+	nop
+	nop
+	lw	$2, 0($2)
+	nop
+	nop
+	nop
         addiu   $4,$2,-1
         lasw 	$3, res_idx
         nop
@@ -248,6 +272,9 @@ turkey:
         nop################################################################
         nop
         andi	$at, $2, 0xffff # -1 will sign extend (according to assembler), but 0xffff won't
+        nop
+        nop
+        nop
         addu 	$2, $4, $at
         nop
         nop################################################################
@@ -259,8 +286,10 @@ turkey:
         nop
         sw      $3,0($2)
         move    $sp,$fp
-        lw      $31,44($fp)
+        nop
+        lw      $ra,44($fp)
         lw      $fp,40($fp)
+        nop
         addiu   $sp,$sp,48
         jr      $ra
         
@@ -273,7 +302,7 @@ topsort:
         nop
         nop################################################################
         nop
-        sw      $31,44($sp)
+        sw      $ra,44($sp)
         sw      $fp,40($sp)
         move    $fp,$sp
         nop
@@ -350,6 +379,9 @@ iterate_edges:
         lw      $2,24($fp)
         move    $sp,$fp
         lw      $fp,20($fp)
+        nop
+        nop
+        nop
         addiu   $sp,$fp,24
         jr      $ra
         
@@ -362,9 +394,9 @@ next_edge:
         nop
         nop################################################################
         nop
-        sw      $31,28($sp)
+        sw      $ra,28($sp)
         sw      $fp,24($sp)
-        add	$fp,$zero,$sp
+        add	$fp,$0,$sp
         sw      $4,32($sp)
         j       waggish
         
@@ -455,7 +487,7 @@ waggish:
         nop
         nop################################################################
         nop
-        beq	$2,$zero,mark # beq, j to simulate bne 
+        beq	$2,$0,mark # beq, j to simulate bne 
         
         nop
 	nop	#for branch
@@ -468,14 +500,15 @@ waggish:
 	nop
         
         mark:
-        addiu   $2, $zero, -1
+        addiu   $2, $0, -1
 
 cynical:
         move    $sp,$fp
         nop################################################################
-        lw      $31,28($fp)
+        lw      $ra,28($fp)
         lw      $fp,24($fp)
         addiu   $sp,$sp,32
+        nop #for lw $ra
         jr      $ra
         
        	nop
@@ -512,7 +545,7 @@ has_edge:
         nop################################################################
         nop
         sw      $2,16($fp)
-        addiu   $2, $zero, 1
+        addiu   $2, $0, 1
         nop
         nop################################################################
         nop
@@ -606,7 +639,7 @@ mark_visited:
         nop################################################################
         nop
         sw      $4,32($fp)
-        addiu   $2, $zero, 1
+        addiu   $2, $0, 1
         nop
         nop################################################################
         nop
@@ -633,6 +666,9 @@ example:
         nop################################################################
         nop
         addiu   $2,$2,1
+        nop
+        nop
+        nop
         sw      $2,12($fp)
         
         nop
@@ -652,7 +688,7 @@ recast:
         nop################################################################
         nop
         
-        beq	$2,$zero,pat # beq, j to simulate bne
+        beq	$2,$0,pat # beq, j to simulate bne
         
         nop
 	nop	#for Branch
@@ -708,7 +744,7 @@ is_visited:
         nop################################################################
         nop
         sw      $4,32($fp)
-        ori     $2,$zero,1
+        ori     $2,$0,1
         nop
         nop################################################################
         nop

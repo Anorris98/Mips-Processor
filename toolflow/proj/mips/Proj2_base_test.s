@@ -1,7 +1,14 @@
 .data
 arr: .word 0 : 10
 .text
-la $s0, arr
+lui $1, 0x0001001 #replaces la as psuedocode breaks the instruction.
+nop
+nop
+nop
+ori $16, $1, 0x00000000 
+nop
+nop ######la####
+
 addTests:
 addi $t0, $zero, 100	#$t0 = 100
 addiu $t1, $zero, -1	#$t1 = 4,294,967,295
@@ -19,6 +26,9 @@ lui $t9, 0x1010 #psuedo instruction, inserts 3 additional nops.
 
 andTests:
 andi $t0, $t0, 66
+nop
+nop
+nop
 and $t1, $t3, $t0	#okay becasuse origionlly we wanted to use the old value of $t0 anyway. 20/21 were swapped.
 
 loadTests1: #load and store tests were swapped. first before messing with after sw.
@@ -29,8 +39,18 @@ addi $t0, $zero, 0x00000001 #moved up here, is used for the shifts to allow sll 
 addi $t7, $zero, -3456		#used in shift tests 2
 		
 orTests:
-nor $t2, $9, $t8   #t8=t1,t9=t0
-xori $t4, $t9, 0x11001100
+nor $t2, $t9, $t8   #t8=t1,t9=t0
+
+lui $1, 0x00001100##Mips assembles XORI into 3 psuedo instructions, so I was unable to test that here. becasue our system can do it in one single instruction.
+nop
+nop
+nop
+ori $1,$1, 0x00001100
+nop
+nop
+nop
+xor $12, $25, $1 ##xori###############################
+
 or $t5, $t9, $t8
 ori $t6, $t9, 0x4444
 xor $t3, $t9, $t8
@@ -43,6 +63,7 @@ shiftTests1:
 sll $t0, $t0, 4
 slt $t1, $t4, $t5
 slti $t2, $t2, 55
+nop
 
 swTest:		#sw tests swapped with or test 2
 sw $t0, 0($s0)
@@ -67,7 +88,11 @@ lbu $t2, 8($s0)
 
 addi $t0, $zero, -3456
 
+nop
+
 lhu $t3, 12($s0)
+
+nop
 
 shiftVariableTests:
 

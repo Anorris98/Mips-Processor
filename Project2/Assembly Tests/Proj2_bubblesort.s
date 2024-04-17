@@ -53,8 +53,7 @@ forloop:
 
 	
 	bgt $t0, $t1, swap	#if numbers in i > numbers in i+1, need to sort.
-	
-	addiu $s1, $s1, 1		#increment counter/i++ moved from lower because no matter what we need to inc
+	addiu $s1, $s1, 1		#increment counter/i++ moved from lower because no matter what we need to inc, requires delayed branching.
 	nop			#4 nops to allow us to not load bad data if we didnt branch.
 	nop
 	
