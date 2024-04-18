@@ -17,7 +17,7 @@ entity MEM_WB_pipe is
     port (
         i_CLK           : in std_logic;                        -- Clock input
         i_RST           : in std_logic;                        -- Reset input
-        i_WE            : in std_logic;                        -- Write enable
+        i_WE            : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
         i_MEM_halt      : in std_logic;                        -- Halt control signal
         i_MEM_MemToReg  : in std_logic_vector(1 downto 0);     -- MemToReg control signal
         i_MEM_RegWrite  : in std_logic;                        -- Register write control signal
