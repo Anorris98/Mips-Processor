@@ -17,7 +17,8 @@ entity ID_EX_pipe is
     port (
         i_CLK            : in std_logic;                        -- Clock input
         i_RST            : in std_logic;                        -- Reset input
-        i_WE             : in std_logic;                        -- Write enable
+        i_WE             : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
+        i_FLUSH          : in std_logic;                        -- FLUSH
         i_ID_halt        : in std_logic;                        -- Halt control signal
         i_ID_STD_Shift   : in std_logic;                        -- STD Shift control signal
         i_ID_ALU_Src     : in std_logic;                        -- ALU Source control signal
@@ -135,7 +136,7 @@ begin
     -- glitchy behavior on startup.
     process (i_CLK, i_RST, i_WE)
     begin
-        if (i_RST = '1') then
+        if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
             s_EX_halt        <= '0';         -- Halt control signal
             s_EX_STD_Shift   <= '0';         -- STD Shift control signal
             s_EX_ALU_Src     <= '0';         -- ALU Source control signal

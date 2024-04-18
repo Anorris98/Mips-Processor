@@ -17,7 +17,8 @@ entity EX_MEM_pipe is
     port (
         i_CLK           : in std_logic;                        -- Clock input
         i_RST           : in std_logic;                        -- Reset input
-        i_WE            : in std_logic;                        -- Write enable
+        i_WE            : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
+        i_FLUSH         : in std_logic;                        -- FLUSH control
         i_EX_halt       : in std_logic;                        -- Halt control signal
         i_EX_MemToReg   : in std_logic_vector(1 downto 0);     -- MemToReg control signal
         i_EX_MemWrite   : in std_logic;                        -- Memory write control signal
@@ -120,7 +121,7 @@ begin
     -- glitchy behavior on startup.
     process (i_CLK, i_RST, i_WE)
     begin
-        if (i_RST = '1') then
+        if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
             s_MEM_halt       <= '0';         -- Halt control signal
             s_MEM_MemToReg   <= b"00";       -- MemToReg control signal
             s_MEM_MemWrite   <= '0';         -- Memory write control signal

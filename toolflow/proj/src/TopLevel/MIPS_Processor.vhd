@@ -198,7 +198,8 @@ architecture structure of MIPS_Processor is
     port (
       i_CLK          : in std_logic;                         -- Clock input
       i_RST          : in std_logic;                         -- Reset input
-      i_WE           : in std_logic;                         -- Write enable
+      i_WE           : in std_logic;                         -- Write enable (1 when writing, 0 when stalling)
+      i_FLUSH        : in std_logic;                         -- FLUSH
       i_IF_PC_P4     : in std_logic_vector(N - 1 downto 0);  -- PC + 4
       i_IF_instr31t0 : in std_logic_vector(N - 1 downto 0);  -- Entire instruction
       o_ID_PC_P4     : out std_logic_vector(N - 1 downto 0); -- PC + 4
@@ -210,7 +211,8 @@ architecture structure of MIPS_Processor is
     port (
       i_CLK            : in std_logic;                        -- Clock input
       i_RST            : in std_logic;                        -- Reset input
-      i_WE             : in std_logic;                        -- Write enable
+      i_WE             : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
+      i_FLUSH          : in std_logic;                        -- FLUSH
       i_ID_halt        : in std_logic;                        -- Halt control signal
       i_ID_STD_Shift   : in std_logic;                        -- STD Shift control signal
       i_ID_ALU_Src     : in std_logic;                        -- ALU Source control signal
@@ -259,7 +261,8 @@ architecture structure of MIPS_Processor is
     port (
       i_CLK           : in std_logic;                        -- Clock input
       i_RST           : in std_logic;                        -- Reset input
-      i_WE            : in std_logic;                        -- Write enable
+      i_WE            : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
+      i_FLUSH         : in std_logic;                        -- FLUSH control
       i_EX_halt       : in std_logic;                        -- Halt control signal
       i_EX_MemToReg   : in std_logic_vector(1 downto 0);     -- MemToReg control signal
       i_EX_MemWrite   : in std_logic;                        -- Memory write control signal
@@ -302,7 +305,7 @@ architecture structure of MIPS_Processor is
     port (
       i_CLK           : in std_logic;                        -- Clock input
       i_RST           : in std_logic;                        -- Reset input
-      i_WE            : in std_logic;                        -- Write enable
+      i_WE            : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
       i_MEM_halt      : in std_logic;                        -- Halt control signal
       i_MEM_MemToReg  : in std_logic_vector(1 downto 0);     -- MemToReg control signal
       i_MEM_RegWrite  : in std_logic;                        -- Register write control signal
@@ -475,13 +478,14 @@ begin
 
   IFID_pipe : IF_ID_pipe
   port map(
-    i_CLK          => iCLK,       -- Clock input
-    i_RST          => iRST,       -- Reset input
-    i_WE           => '1',        -- Write enable
-    i_IF_PC_P4     => s_IF_pc_p4, -- PC + 4
-    i_IF_instr31t0 => s_Inst,     -- Entire instruction
-    o_ID_PC_P4     => s_ID_pc_p4, -- PC + 4
-    o_ID_instr31t0 => s_ID_Inst); -- Entire instruction
+    i_CLK          => iCLK,            -- Clock input
+    i_RST          => iRST,            -- Reset input
+    i_WE           => '1',             -- Write enable
+    i_FLUSH        => s_MEM_diff_addr, -- FLUSH
+    i_IF_PC_P4     => s_IF_pc_p4,      -- PC + 4
+    i_IF_instr31t0 => s_Inst,          -- Entire instruction
+    o_ID_PC_P4     => s_ID_pc_p4,      -- PC + 4
+    o_ID_instr31t0 => s_ID_Inst);      -- Entire instruction
 
   ----------------------------------------------------------------------------------------------------------
   -- Decode stage
@@ -506,9 +510,9 @@ begin
     o_jr            => s_ID_jr,
     o_jal           => s_ID_jal);
 
-    s_RegWr <= s_WB_RegWr;
-    s_RegWrAddr <= s_WB_RegWrAddr;
-    -- s_RegWrData <= w_WB_mux_reg_rtn;
+  s_RegWr     <= s_WB_RegWr;
+  s_RegWrAddr <= s_WB_RegWrAddr;
+  -- s_RegWrData <= w_WB_mux_reg_rtn;
 
   regist : reg
   port map(
@@ -537,6 +541,7 @@ begin
     i_CLK            => iCLK,                    -- Clock input
     i_RST            => iRST,                    -- Reset input
     i_WE             => '1',                     -- Write enable
+    i_FLUSH          => s_MEM_diff_addr,         -- FLUSH
     i_ID_halt        => s_ID_Halt,               -- Halt control signal
     i_ID_STD_Shift   => s_ID_STD_SHIFT,          -- STD Shift control signal
     i_ID_ALU_Src     => s_ID_Alu_Src,            -- ALU Source control signal
@@ -642,6 +647,7 @@ begin
     i_CLK           => iCLK,            -- Clock input
     i_RST           => iRST,            -- Reset input
     i_WE            => '1',             -- Write enable
+    i_FLUSH         => s_MEM_diff_addr, -- FLUSH
     i_EX_halt       => s_EX_halt,       -- Halt control signal
     i_EX_MemToReg   => s_EX_MemToReg,   -- MemToReg control signal
     i_EX_MemWrite   => s_EX_MemWrite,   -- Memory write control signal
@@ -748,7 +754,7 @@ begin
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
- s_Halt <= s_WB_halt;
+  s_Halt <= s_WB_halt;
 
   MEMWB_pipe : MEM_WB_pipe
   port map(
