@@ -9,7 +9,29 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
 !s11e vcom 2023.2_2 2023.06, Jun  9 2023
+R0
+R1
+R0
+R1
+R0
+R1
+!s12c _opt1
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 13
 !s112 1.1
 !i10d 8192
@@ -17,6 +39,18 @@ R1
 !i10f 100
 cModel Technology
 Z2 d/home/anorris/CPRE381/ProjectGit/cpre_381
+T_opt
+!s110 1713567550
+VcXQUc>g>hgMQn`2m1oN942
+04 24 8 work tb_pipelineflushandstall behavior 1
+=1-0050569b998c-6622f73e-1fab4-59cb
+R1
+!s12b OEM100
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2023.2_2;77
 Eex_mem_pipe
 Z3 w1713464281
 Z4 DPx3 std 6 textio 0 22 LS[?81n5ZHWBI9JkBZTV<2
@@ -27,29 +61,29 @@ Z6 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM
 Z7 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd
 l0
 Z8 L15 1
-VbVNHhS8XCG7`FKZJCz`^P0
+V_H;ON0X:YGRhINMbgBf952
 !s100 TWWh=YK;X8g5?M0JDN[1B0
 Z9 OL;C;2023.2_2;77
-32
-Z10 !s110 1713474945
+33
+Z10 !s110 1713565703
 !i10b 1
-Z11 !s108 1713474945.000000
+Z11 !s108 1713565703.000000
 Z12 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd|
 Z13 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd|
 !i113 0
 Z14 o-work work
-Z15 tExplicit 1 CvgOpt 0
+Z15 tExplicit 1 NoCoverage 1 CvgOpt 0
 Amixed
 R4
 R5
-DEx4 work 11 ex_mem_pipe 0 22 bVNHhS8XCG7`FKZJCz`^P0
+DEx4 work 11 ex_mem_pipe 0 22 _H;ON0X:YGRhINMbgBf952
 !i122 0
 l97
 L61 119
-Vgig8BA<z;X`^]_LM=FGU>3
+VidjdY1_nX=NF>A1nLN`TG1
 !s100 jGVOGA>ZE<k;UM94zD5Za2
 R9
-32
+33
 R10
 !i10b 1
 R11
@@ -68,10 +102,10 @@ Z16 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX
 Z17 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd
 l0
 R8
-VIiEeN@f3W_bE2M?OACCXe1
+VbnZ6N<3MSP?M[]MG?_SKj1
 !s100 :;]oXBdCcMVSzhzNm^_S12
 R9
-32
+33
 R10
 !i10b 1
 R11
@@ -83,14 +117,14 @@ R15
 Amixed
 R4
 R5
-DEx4 work 10 id_ex_pipe 0 22 IiEeN@f3W_bE2M?OACCXe1
+DEx4 work 10 id_ex_pipe 0 22 bnZ6N<3MSP?M[]MG?_SKj1
 !i122 1
 l109
 L67 137
-VF8NM;VUP8Lg7ID_QF>7@43
+Vz9DR`YV55S03A2TD00KG`0
 !s100 C45A?a`lA<FmC;hbnXBBa2
 R9
-32
+33
 R10
 !i10b 1
 R11
@@ -109,34 +143,34 @@ Z20 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID
 Z21 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd
 l0
 R8
-VIFDKQA2FaVDJBUJE2Wk[^2
+VO<__zoTTInd3`2723]^DZ0
 !s100 6EDTZ=OS<dMbNnC4?<X6^3
 R9
-32
-R10
+33
+Z22 !s110 1713565704
 !i10b 1
 R11
-Z22 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd|
-Z23 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd|
+Z23 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd|
+Z24 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd|
 !i113 0
 R14
 R15
 Amixed
 R4
 R5
-DEx4 work 10 if_id_pipe 0 22 IFDKQA2FaVDJBUJE2Wk[^2
+DEx4 work 10 if_id_pipe 0 22 O<__zoTTInd3`2723]^DZ0
 !i122 2
 l38
 L30 36
-V[F2oSiLb6UA_==oW_cG7S1
+VSKV[05SA:kHWl4SGHjli11
 !s100 LTALj2?lKbc<no0XcBh2;2
 R9
-32
-R10
+33
+R22
 !i10b 1
 R11
-R22
 R23
+R24
 !i113 0
 R14
 R15
@@ -146,61 +180,81 @@ R4
 R5
 !i122 3
 R2
-Z24 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd
-Z25 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd
+Z25 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd
+Z26 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd
 l0
 R8
-Vn?ObVGcelO5@USd[gV]Th3
+VoSCNaR5?WkF1ejD3KI@6I0
 !s100 7M2ZXgK_F7NOk:oZ4oC>T0
 R9
-32
-R10
+33
+R22
 !i10b 1
-R11
-Z26 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd|
-Z27 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd|
+Z27 !s108 1713565704.000000
+Z28 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd|
+Z29 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd|
 !i113 0
 R14
 R15
 Amixed
 R4
 R5
-DEx4 work 11 mem_wb_pipe 0 22 n?ObVGcelO5@USd[gV]Th3
+DEx4 work 11 mem_wb_pipe 0 22 oSCNaR5?WkF1ejD3KI@6I0
 !i122 3
 l72
 L48 83
-VD_l51=GZXfXi^FV;=;za40
+V;dej@Ilc?9VD8fh2l1kgk2
 !s100 ebaFWFH=f4I1JL<j<58Dc1
 R9
-32
-R10
+33
+R22
 !i10b 1
-R11
-R26
 R27
+R28
+R29
 !i113 0
 R14
 R15
 Etb_pipelineflushandstall
-w1713476665
-DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
+Z30 w1713567532
+Z31 DPx4 ieee 11 numeric_std 0 22 F8@]:i<mFK7<TjIzKcTGi0
 R4
 R5
-!i122 7
+!i122 14
 R2
-8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd
-F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd
+Z32 8/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd
+Z33 F/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd
 l0
 L9 1
-V@l8?]KHlkAVBROHcd8mk`1
+V@JCAM9Li86Oz^7NjTfY102
 !s100 iH[eD8DOFN1=ma;d@j2^W0
 R9
-32
-!s110 1713476679
+33
+Z34 !s110 1713567548
 !i10b 1
-!s108 1713476679.000000
-!s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd|
-!s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd|
+Z35 !s108 1713567548.000000
+Z36 !s90 -reportprogress|300|-work|work|/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd|
+Z37 !s107 /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd|
+!i113 0
+R14
+R15
+Abehavior
+R31
+R4
+R5
+DEx4 work 24 tb_pipelineflushandstall 0 22 @JCAM9Li86Oz^7NjTfY102
+!i122 14
+l196
+L13 502
+VO22mEAQLni>NI5Qm6KO^H3
+!s100 d5>1B3BLPbmPF]P8i4ZgH0
+R9
+33
+R34
+!i10b 1
+R35
+R36
+R37
 !i113 0
 R14
 R15

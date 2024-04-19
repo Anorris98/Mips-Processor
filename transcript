@@ -12,65 +12,66 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd}
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 16:53:29 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
+#         Searched libraries:
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 16:53:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:15:45 on Apr 18,2024
+# Start time: 16:53:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity EX_MEM_pipe
 # -- Compiling architecture mixed of EX_MEM_pipe
-# End time: 16:15:45 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 16:53:44 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd}
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:15:45 on Apr 18,2024
+# Start time: 16:53:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity ID_EX_pipe
 # -- Compiling architecture mixed of ID_EX_pipe
-# End time: 16:15:45 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 16:53:44 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd}
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:15:45 on Apr 18,2024
+# Start time: 16:53:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity IF_ID_pipe
 # -- Compiling architecture mixed of IF_ID_pipe
-# End time: 16:15:45 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 16:53:44 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd}
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:15:45 on Apr 18,2024
+# Start time: 16:53:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity MEM_WB_pipe
 # -- Compiling architecture mixed of MEM_WB_pipe
-# End time: 16:15:45 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
-# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:15:52 on Apr 18,2024
-# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity tb_PipelineFlushandStall
-# -- Compiling architecture behavior of tb_PipelineFlushandStall
-# End time: 16:15:52 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 16:53:44 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:16:04 on Apr 18,2024
+# Start time: 16:53:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -78,11 +79,509 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# End time: 16:16:04 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:53:44 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:16:06 on Apr 18,2024
+# Start time: 16:53:55 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
+#         Searched libraries:
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 16:53:55 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 16:53:59 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
+#         Searched libraries:
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 16:53:59 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity EX_MEM_pipe
+# -- Compiling architecture mixed of EX_MEM_pipe
+# End time: 16:55:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity ID_EX_pipe
+# -- Compiling architecture mixed of ID_EX_pipe
+# End time: 16:55:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IF_ID_pipe
+# -- Compiling architecture mixed of IF_ID_pipe
+# End time: 16:55:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MEM_WB_pipe
+# -- Compiling architecture mixed of MEM_WB_pipe
+# End time: 16:55:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:25 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:25 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:27 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:28 on Apr 19,2024, Elapsed time: 0:00:01
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:28 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:28 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:28 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:28 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:28 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:28 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:29 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:29 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:30 on Apr 19,2024, Elapsed time: 0:00:01
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:30 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:30 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:30 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:30 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:30 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:30 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:31 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:31 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:31 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:31 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:31 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:31 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:31 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:31 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:55:31 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
+# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
+# End time: 16:55:31 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 16:55:37 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
+#         Searched libraries:
+#             work
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 16:55:38 on Apr 19,2024, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 1
+# Modified modelsim.ini
+# Modified modelsim.ini
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:34 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 16:56:34 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:41 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity EX_MEM_pipe
+# -- Compiling architecture mixed of EX_MEM_pipe
+# End time: 16:56:41 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:41 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity ID_EX_pipe
+# -- Compiling architecture mixed of ID_EX_pipe
+# End time: 16:56:41 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:41 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IF_ID_pipe
+# -- Compiling architecture mixed of IF_ID_pipe
+# End time: 16:56:41 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:41 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MEM_WB_pipe
+# -- Compiling architecture mixed of MEM_WB_pipe
+# End time: 16:56:41 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 16:56:41 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 16:56:41 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs=+acc work.ex_mem_pipe work.id_ex_pipe work.if_id_pipe work.mem_wb_pipe work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.ex_mem_pipe work.id_ex_pipe work.if_id_pipe work.mem_wb_pipe work.tb_pipelineflushandstall 
+# Start time: 16:56:42 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.ex_mem_pipe(mixed)#2
+# Loading work.id_ex_pipe(mixed)#2
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+quit -sim
+# End time: 16:57:09 on Apr 19,2024, Elapsed time: 0:00:27
+# Errors: 0, Warnings: 1
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 16:57:11 on Apr 19,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
@@ -94,56 +593,12 @@ vsim -voptargs=+acc work.tb_pipelineflushandstall
 # Loading work.if_id_pipe(mixed)#1
 # Loading work.id_ex_pipe(mixed)#1
 # Loading work.ex_mem_pipe(mixed)#1
-# Load canceled
-run 1000
-reset -f
-# /usr/bin/reset: invalid option -- 'f'
-# Usage: tset [options] [terminal]
-# 
-# Options:
-#   -c          set control characters
-#   -e ch       erase character
-#   -I          no initialization strings
-#   -i ch       interrupt character
-#   -k ch       kill character
-#   -m mapping  map identifier to type
-#   -Q          do not output control key settings
-#   -q          display term only, do no changes
-#   -r          display term on stderr
-#   -s          output TERM set command
-#   -V          print curses-version
-#   -w          set window-size
-# 
-# If neither -c/-w are given, both are assumed.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
-add wave -position insertpoint  \
-sim:/tb_pipelineflushandstall/uut0/i_CLK \
-sim:/tb_pipelineflushandstall/uut0/i_FLUSH \
-sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0 \
-sim:/tb_pipelineflushandstall/uut0/i_IF_PC_P4 \
-sim:/tb_pipelineflushandstall/uut0/i_RST \
-sim:/tb_pipelineflushandstall/uut0/i_WE \
-sim:/tb_pipelineflushandstall/uut0/N \
-sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0 \
-sim:/tb_pipelineflushandstall/uut0/o_ID_PC_P4 \
-sim:/tb_pipelineflushandstall/uut0/s_ID_instr31t0 \
-sim:/tb_pipelineflushandstall/uut0/s_ID_PC_P4 \
-sim:/tb_pipelineflushandstall/uut0/s_IF_instr31t0 \
-sim:/tb_pipelineflushandstall/uut0/s_IF_PC_P4
-add wave -position insertpoint sim:/tb_pipelineflushandstall/uut1/*
-add wave -position insertpoint sim:/tb_pipelineflushandstall/uut2/*
-run 1000
-# Can't move the Now cursor.
-run 1000
 quit -sim
-# End time: 16:25:27 on Apr 18,2024, Elapsed time: 0:09:21
+# End time: 17:11:31 on Apr 19,2024, Elapsed time: 0:14:20
 # Errors: 0, Warnings: 1
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:25:30 on Apr 18,2024
+# Start time: 17:11:36 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -151,12 +606,26 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# End time: 16:25:30 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 17:11:36 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:11:42 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:11:42 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:25:31 on Apr 18,2024
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Start time: 17:11:52 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -165,22 +634,17 @@ vsim -voptargs=+acc work.tb_pipelineflushandstall
 # Loading work.if_id_pipe(mixed)#1
 # Loading work.id_ex_pipe(mixed)#1
 # Loading work.ex_mem_pipe(mixed)#1
-add wave -position insertpoint sim:/tb_pipelineflushandstall/uut0/*
-add wave -position insertpoint sim:/tb_pipelineflushandstall/uut1/*
-add wave -position insertpoint sim:/tb_pipelineflushandstall/uut2/*
+# Loading work.mem_wb_pipe(mixed)#1
 add wave -position insertpoint  \
-sim:/tb_pipelineflushandstall/s_IF_ID_Stall
+sim:/tb_pipelineflushandstall/uut0/i_WE
 add wave -position insertpoint  \
-sim:/tb_pipelineflushandstall/s_ID_EX_Stall
-add wave -position 1  sim:/tb_pipelineflushandstall/s_FLUSH
-add wave -position 1  sim:/tb_pipelineflushandstall/s_EX_MEM_Stall
-run 2000
+sim:/tb_pipelineflushandstall/s_CLK
 quit -sim
-# End time: 16:28:52 on Apr 18,2024, Elapsed time: 0:03:21
-# Errors: 0, Warnings: 0
+# End time: 17:22:41 on Apr 19,2024, Elapsed time: 0:10:49
+# Errors: 0, Warnings: 1
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:28:58 on Apr 18,2024
+# Start time: 17:22:44 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -188,11 +652,23 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# End time: 16:28:59 on Apr 18,2024, Elapsed time: 0:00:01
+# End time: 17:22:44 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:22:50 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:22:50 on Apr 19,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:29:00 on Apr 18,2024
+# Start time: 17:22:51 on Apr 19,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Error: (vopt-7) Failed to open  file "/home/anorris/CPRE381/ProjectGit/cpre_381/work/@_opt/_deps" in read mode.
@@ -203,11 +679,23 @@ vsim -voptargs=+acc work.tb_pipelineflushandstall
 # Vopt Compiler exiting
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=2, Warnings=2.
 # Error loading design
-# End time: 16:29:00 on Apr 18,2024, Elapsed time: 0:00:00
+# End time: 17:22:52 on Apr 19,2024, Elapsed time: 0:00:01
 # Errors: 2, Warnings: 2
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:23:09 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:23:09 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:29:05 on Apr 18,2024
+# Start time: 17:23:11 on Apr 19,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
@@ -219,18 +707,76 @@ vsim -voptargs=+acc work.tb_pipelineflushandstall
 # Loading work.if_id_pipe(mixed)#1
 # Loading work.id_ex_pipe(mixed)#1
 # Loading work.ex_mem_pipe(mixed)#1
-add wave -position end  sim:/tb_pipelineflushandstall/s_EX_MEM_Stall
-add wave -position end  sim:/tb_pipelineflushandstall/s_ID_EX_Stall
-add wave -position end  sim:/tb_pipelineflushandstall/s_IF_ID_Stall
-add wave -position 0  sim:/tb_pipelineflushandstall/s_CLK
-add wave -position 0  sim:/tb_pipelineflushandstall/s_FLUSH
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
 run 2000
 quit -sim
-# End time: 16:32:06 on Apr 18,2024, Elapsed time: 0:03:01
+# End time: 17:28:11 on Apr 19,2024, Elapsed time: 0:05:00
 # Errors: 0, Warnings: 1
-vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:32:09 on Apr 18,2024
+# Start time: 17:28:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/EX_MEM_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity EX_MEM_pipe
+# -- Compiling architecture mixed of EX_MEM_pipe
+# End time: 17:28:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:28:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/ID_EX_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity ID_EX_pipe
+# -- Compiling architecture mixed of ID_EX_pipe
+# End time: 17:28:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:28:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/IF_ID_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity IF_ID_pipe
+# -- Compiling architecture mixed of IF_ID_pipe
+# End time: 17:28:24 on Apr 19,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:28:24 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/MEM_WB_pipe.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MEM_WB_pipe
+# -- Compiling architecture mixed of MEM_WB_pipe
+# End time: 17:28:24 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:28:25 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -238,33 +784,11 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(167): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(180): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(227): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(430): VHDL Compiler exiting
-# End time: 16:32:09 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
-# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
-vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
-# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:32:14 on Apr 18,2024
-# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity tb_PipelineFlushandStall
-# -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(167): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(180): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(227): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(430): VHDL Compiler exiting
-# End time: 16:32:14 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
-# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
+# End time: 17:28:25 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:32:15 on Apr 18,2024
+# Start time: 17:28:28 on Apr 19,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
@@ -276,50 +800,129 @@ vsim -voptargs=+acc work.tb_pipelineflushandstall
 # Loading work.if_id_pipe(mixed)#1
 # Loading work.id_ex_pipe(mixed)#1
 # Loading work.ex_mem_pipe(mixed)#1
-add wave -position end  sim:/tb_pipelineflushandstall/s_EX_MEM_Stall
-add wave -position end  sim:/tb_pipelineflushandstall/s_FLUSH
-add wave -position end  sim:/tb_pipelineflushandstall/s_ID_EX_Stall
-add wave -position end  sim:/tb_pipelineflushandstall/s_IF_ID_Stall
-add wave -position 0  sim:/tb_pipelineflushandstall/s_CLK
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+run 2000
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_Dmem_Addr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run 2000
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+run 2000
+add list \
+sim:/tb_pipelineflushandstall/s_CLK \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0 \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0 \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11 \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11 \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr 
+quit -sim
+# End time: 17:40:37 on Apr 19,2024, Elapsed time: 0:12:09
+# Errors: 0, Warnings: 1
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:40:39 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:40:39 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:40:44 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:40:44 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:40:57 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:40:57 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 17:40:58 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_Dmem_Addr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
 run 2000
 quit -sim
-# End time: 16:33:30 on Apr 18,2024, Elapsed time: 0:01:15
+# End time: 17:44:10 on Apr 19,2024, Elapsed time: 0:03:12
 # Errors: 0, Warnings: 1
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
-# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:33:40 on Apr 18,2024
-# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity tb_PipelineFlushandStall
-# -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(167): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(180): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(227): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(430): VHDL Compiler exiting
-# End time: 16:33:41 on Apr 18,2024, Elapsed time: 0:00:01
-# Errors: 3, Warnings: 0
-vcom -reportprogress 300 -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
-# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:42:09 on Apr 18,2024
-# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity tb_PipelineFlushandStall
-# -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
-# End time: 16:42:09 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:44:21 on Apr 18,2024
+# Start time: 17:44:18 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -327,16 +930,11 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
-# End time: 16:44:22 on Apr 18,2024, Elapsed time: 0:00:01
-# Errors: 3, Warnings: 0
-# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
+# End time: 17:44:18 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:44:27 on Apr 18,2024
+# Start time: 17:44:24 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -344,42 +942,60 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
-# End time: 16:44:27 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
-# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
+# End time: 17:44:24 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 vsim -voptargs=+acc work.tb_pipelineflushandstall
 # vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:44:28 on Apr 18,2024
+# Start time: 17:44:26 on Apr 19,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
-# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
-#         Searched libraries:
-#             work
-# Optimization failed
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
-# Error loading design
-# End time: 16:44:28 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 1
-vsim -voptargs=+acc work.tb_pipelineflushandstall
-# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
-# Start time: 16:44:37 on Apr 18,2024
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
-# ** Error: (vopt-13130) Failed to find design unit 'tb_pipelineflushandstall'.
-#         Searched libraries:
-#             work
-# Optimization failed
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
-# Error loading design
-# End time: 16:44:38 on Apr 18,2024, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 1
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_Dmem_Addr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+run 2000
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_ID_EX_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_IF_ID_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_MEM_WB_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_EX_MEM_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_FLUSH
+quit -sim
+# End time: 17:49:28 on Apr 19,2024, Elapsed time: 0:05:02
+# Errors: 0, Warnings: 1
 vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
 # QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
-# Start time: 16:44:39 on Apr 18,2024
+# Start time: 17:49:30 on Apr 19,2024
 # vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -387,11 +1003,198 @@ vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Reg
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_PipelineFlushandStall
 # -- Compiling architecture behavior of tb_PipelineFlushandStall
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(174): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(187): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Error: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(234): (vcom-1436) Actual expression (prefix expression) of formal "i_WE" is not globally static.
-# ** Note: /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd(437): VHDL Compiler exiting
-# End time: 16:44:39 on Apr 18,2024, Elapsed time: 0:00:00
-# Errors: 3, Warnings: 0
-# /usr/local/mentor/questasim/linux_x86_64/vcom failed.
-# Break key hit
+# End time: 17:49:30 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.tb_pipelineflushandstall
+# vsim work.tb_pipelineflushandstall 
+# Start time: 17:49:35 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_ID_EX_Stall
+# ** UI-Msg (Warning): (vish-4014) No objects found matching '/tb_pipelineflushandstall/d_ID_EX_Stall'.
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_IF_ID_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_MEM_WB_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_EX_MEM_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_FLUSH
+run 2000
+quit -sim
+# End time: 17:56:20 on Apr 19,2024, Elapsed time: 0:06:45
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:56:23 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:56:23 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:56:28 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:56:28 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 17:56:29 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_ID_EX_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_IF_ID_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_MEM_WB_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_EX_MEM_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_FLUSH
+run 2000
+quit -sim
+# End time: 17:59:00 on Apr 19,2024, Elapsed time: 0:02:31
+# Errors: 0, Warnings: 1
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:59:03 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:59:03 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -work work {/home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd}
+# QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+# Start time: 17:59:08 on Apr 19,2024
+# vcom -reportprogress 300 -work work /home/anorris/CPRE381/ProjectGit/cpre_381/Project2/Pipeline Registers/tb_PipelineFlushandStall.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_PipelineFlushandStall
+# -- Compiling architecture behavior of tb_PipelineFlushandStall
+# End time: 17:59:08 on Apr 19,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs=+acc work.tb_pipelineflushandstall
+# vsim -voptargs="+acc" work.tb_pipelineflushandstall 
+# Start time: 17:59:09 on Apr 19,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_pipelineflushandstall(behavior)#1
+# Loading work.if_id_pipe(mixed)#1
+# Loading work.id_ex_pipe(mixed)#1
+# Loading work.ex_mem_pipe(mixed)#1
+# Loading work.mem_wb_pipe(mixed)#1
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_CLK
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/i_IF_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut0/o_ID_instr31t0
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/i_ID_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut1/o_EX_instr15t11
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/o_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/i_MEM_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut3/o_WB_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/uut2/i_EX_RegWrAddr
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_ID_EX_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_IF_ID_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_MEM_WB_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/d_EX_MEM_Stall
+add wave -position insertpoint  \
+sim:/tb_pipelineflushandstall/s_FLUSH
+run 2000
+# End time: 18:02:21 on Apr 19,2024, Elapsed time: 0:03:12
+# Errors: 0, Warnings: 1
