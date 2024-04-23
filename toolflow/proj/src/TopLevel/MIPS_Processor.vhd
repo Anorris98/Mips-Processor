@@ -226,6 +226,7 @@ architecture structure of MIPS_Processor is
       i_ID_jal         : in std_logic;                        -- Jump and link write back control signal
       i_ID_jr          : in std_logic;                        -- Jump return control signal
       i_ID_PCP4        : in std_logic_vector(N - 1 downto 0); -- PC+4 value
+      i_ID_instr25t21  : in std_logic_vector(4 downto 0);    -- Register Rs address signal
       i_ID_instr20t16  : in std_logic_vector(4 downto 0);     -- Register Rt address signal
       i_ID_instr15t11  : in std_logic_vector(4 downto 0);     -- Register Rd address signal
       i_ID_rs_data_o   : in std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -248,6 +249,7 @@ architecture structure of MIPS_Processor is
       o_EX_jal         : out std_logic;                        -- Jump and link write back control signal
       o_EX_jr          : out std_logic;                        -- Jump return control signal
       o_EX_PCP4        : out std_logic_vector(N - 1 downto 0); -- PC+4 value
+      o_EX_instr25t21  : out std_logic_vector(4 downto 0);     -- Register Rs address signal
       o_EX_instr20t16  : out std_logic_vector(4 downto 0);     -- Register Rt address signal
       o_EX_instr15t11  : out std_logic_vector(4 downto 0);     -- Register Rd address signal
       o_EX_rs_data_o   : out std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -559,6 +561,7 @@ begin
     i_ID_jal         => s_ID_jal,                -- Jump and link write back control signal
     i_ID_jr          => s_ID_jr,                 -- Jump return control signal
     i_ID_PCP4        => s_ID_pc_p4,              -- PC+4 value
+    i_ID_instr25t21  => s_ID_Inst(25 downto 21),  -- Register Rt address signal
     i_ID_instr20t16  => s_ID_Inst(20 downto 16), -- Register Rt address signal
     i_ID_instr15t11  => s_ID_inst(15 downto 11), -- Register Rd address signal
     i_ID_rs_data_o   => s_ID_rs_data_o,          -- Output from Rs address
@@ -581,6 +584,7 @@ begin
     o_EX_jal         => s_EX_jal,         -- Jump and link write back control signal
     o_EX_jr          => s_EX_jr,          -- Jump return control signal
     o_EX_PCP4        => s_EX_PCP4,        -- PC+4 value
+    o_EX_instr25t21  => open,             -- Register Rs address signal
     o_EX_instr20t16  => s_EX_instr20t16,  -- Register Rt address signal
     o_EX_instr15t11  => s_EX_instr15t11,  -- Register Rd address signal
     o_EX_rs_data_o   => s_EX_rs_data_o,   -- Output from Rs address
