@@ -473,11 +473,11 @@ begin
 
   pc_dff : pc_dffg
   port map(
-    i_CLK => iCLK,            -- Clock input
-    i_RST => iRST,            -- Reset input
-    i_WE  => '1',             -- Write enable input
-    i_D   => w_IF_pc_next,    -- Data value input
-    o_Q   => s_NextInstAddr); -- Data value output
+    i_CLK => iCLK,              -- Clock input
+    i_RST => iRST,              -- Reset input
+    i_WE  => not w_IF_ID_Stall, -- Write enable input
+    i_D   => w_IF_pc_next,      -- Data value input
+    o_Q   => s_NextInstAddr);   -- Data value output
 
   ----------------------------------------------------------------------------------------------------------
   -- PIPE

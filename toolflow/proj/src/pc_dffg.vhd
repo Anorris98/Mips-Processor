@@ -46,8 +46,10 @@ begin
   begin
     if (i_RST = '1') then
       s_Q <= x"00400000"; -- Use "(others => '0')" for N-bit values
-    elsif (rising_edge(i_CLK)) then
+    elsif (rising_edge(i_CLK) and i_WE = '1') then
       s_Q <= s_D;
+    else
+      s_Q <= s_Q;
     end if;
 
   end process;
