@@ -226,7 +226,7 @@ architecture structure of MIPS_Processor is
       i_ID_jal         : in std_logic;                        -- Jump and link write back control signal
       i_ID_jr          : in std_logic;                        -- Jump return control signal
       i_ID_PCP4        : in std_logic_vector(N - 1 downto 0); -- PC+4 value
-      i_ID_instr25t21  : in std_logic_vector(4 downto 0);    -- Register Rs address signal
+      i_ID_instr25t21  : in std_logic_vector(4 downto 0);     -- Register Rs address signal
       i_ID_instr20t16  : in std_logic_vector(4 downto 0);     -- Register Rt address signal
       i_ID_instr15t11  : in std_logic_vector(4 downto 0);     -- Register Rd address signal
       i_ID_rs_data_o   : in std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -376,6 +376,7 @@ architecture structure of MIPS_Processor is
   signal s_EX_jal          : std_logic;                        -- Jump and link write back control signal
   signal s_EX_jr           : std_logic;                        -- Jump return control signal
   signal s_EX_PCP4         : std_logic_vector(N - 1 downto 0); -- PC+4 value
+  signal s_EX_instr25t11   : std_logic_vector(4 downto 0);     -- Register Rt address signal
   signal s_EX_instr20t16   : std_logic_vector(4 downto 0);     -- Register Rt address signal
   signal s_EX_instr15t11   : std_logic_vector(4 downto 0);     -- Register Rd address signal
   signal s_EX_rs_data_o    : std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -484,14 +485,14 @@ begin
 
   IFID_pipe : IF_ID_pipe
   port map(
-    i_CLK          => iCLK,               -- Clock input
-    i_RST          => iRST,               -- Reset input
-    i_WE           => not w_IF_ID_Stall,  -- Write enable (used for stall as well, turns off writing off, and signals stgay the same)
-    i_FLUSH        => s_MEM_diff_addr,    -- FLUSH
-    i_IF_PC_P4     => s_IF_pc_p4,         -- PC + 4
-    i_IF_instr31t0 => s_Inst,             -- Entire instruction
-    o_ID_PC_P4     => s_ID_pc_p4,         -- PC + 4
-    o_ID_instr31t0 => s_ID_Inst);         -- Entire instruction
+    i_CLK          => iCLK,              -- Clock input
+    i_RST          => iRST,              -- Reset input
+    i_WE           => not w_IF_ID_Stall, -- Write enable (used for stall as well, turns off writing off, and signals stgay the same)
+    i_FLUSH        => s_MEM_diff_addr,   -- FLUSH
+    i_IF_PC_P4     => s_IF_pc_p4,        -- PC + 4
+    i_IF_instr31t0 => s_Inst,            -- Entire instruction
+    o_ID_PC_P4     => s_ID_pc_p4,        -- PC + 4
+    o_ID_instr31t0 => s_ID_Inst);        -- Entire instruction
 
   ----------------------------------------------------------------------------------------------------------
   -- Decode stage
@@ -561,7 +562,7 @@ begin
     i_ID_jal         => s_ID_jal,                -- Jump and link write back control signal
     i_ID_jr          => s_ID_jr,                 -- Jump return control signal
     i_ID_PCP4        => s_ID_pc_p4,              -- PC+4 value
-    i_ID_instr25t21  => s_ID_Inst(25 downto 21),  -- Register Rt address signal
+    i_ID_instr25t21  => s_ID_Inst(25 downto 21), -- Register Rs address signal
     i_ID_instr20t16  => s_ID_Inst(20 downto 16), -- Register Rt address signal
     i_ID_instr15t11  => s_ID_inst(15 downto 11), -- Register Rd address signal
     i_ID_rs_data_o   => s_ID_rs_data_o,          -- Output from Rs address
@@ -584,7 +585,7 @@ begin
     o_EX_jal         => s_EX_jal,         -- Jump and link write back control signal
     o_EX_jr          => s_EX_jr,          -- Jump return control signal
     o_EX_PCP4        => s_EX_PCP4,        -- PC+4 value
-    o_EX_instr25t21  => open,             -- Register Rs address signal
+    o_EX_instr25t21  => s_EX_instr25t11,  -- Register Rs address signal
     o_EX_instr20t16  => s_EX_instr20t16,  -- Register Rt address signal
     o_EX_instr15t11  => s_EX_instr15t11,  -- Register Rd address signal
     o_EX_rs_data_o   => s_EX_rs_data_o,   -- Output from Rs address
@@ -652,26 +653,26 @@ begin
   ----------------------------------------------------------------------------------------------------------
   EXMEM_pipe : EX_MEM_pipe
   port map(
-    i_CLK           => iCLK,                -- Clock input
-    i_RST           => iRST,                -- Reset input
-    i_WE            => not w_EX_MEM_Stall,  -- Write Enable (used for stall as well, turns off writing off, and signals stgay the same)
-    i_FLUSH         => s_MEM_diff_addr,     -- FLUSH
-    i_EX_halt       => s_EX_halt,           -- Halt control signal
-    i_EX_MemToReg   => s_EX_MemToReg,       -- MemToReg control signal
-    i_EX_MemWrite   => s_EX_MemWrite,       -- Memory write control signal
-    i_EX_RegWrite   => s_EX_RegWr,          -- Register write control signal
-    i_EX_Jump       => s_EX_Jump,           -- Jump control signal
-    i_EX_ext_ctl    => s_EX_ext_ctl,        -- Sign extension control signal
-    i_EX_jal        => s_EX_jal,            -- Jump and link write back control signal
-    i_EX_jr         => s_EX_jr,             -- Jump return control signal
-    i_EX_branch     => s_EX_branch,         -- Branch output from ALU
-    i_EX_PCP4       => s_EX_PCP4,           -- PC+4 value
-    i_EX_rs_data_o  => s_EX_rs_data_o,      -- Output from Rs address
-    i_EX_rt_data_o  => s_EX_rt_data_o,      -- Output from Rt address
-    i_EX_pc4_s120_o => s_EX_pc4_s120_o,     -- Jump address
-    i_EX_RegWrAddr  => s_EX_RegWrAddr,      -- Write address
-    i_EX_Dmem_Addr  => s_EX_Dmem_Addr,      -- Output from the ALU
-    i_EX_add1_mux2  => s_EX_add1_mux2,      -- Output from Adder 1
+    i_CLK           => iCLK,               -- Clock input
+    i_RST           => iRST,               -- Reset input
+    i_WE            => not w_EX_MEM_Stall, -- Write Enable (used for stall as well, turns off writing off, and signals stgay the same)
+    i_FLUSH         => s_MEM_diff_addr,    -- FLUSH
+    i_EX_halt       => s_EX_halt,          -- Halt control signal
+    i_EX_MemToReg   => s_EX_MemToReg,      -- MemToReg control signal
+    i_EX_MemWrite   => s_EX_MemWrite,      -- Memory write control signal
+    i_EX_RegWrite   => s_EX_RegWr,         -- Register write control signal
+    i_EX_Jump       => s_EX_Jump,          -- Jump control signal
+    i_EX_ext_ctl    => s_EX_ext_ctl,       -- Sign extension control signal
+    i_EX_jal        => s_EX_jal,           -- Jump and link write back control signal
+    i_EX_jr         => s_EX_jr,            -- Jump return control signal
+    i_EX_branch     => s_EX_branch,        -- Branch output from ALU
+    i_EX_PCP4       => s_EX_PCP4,          -- PC+4 value
+    i_EX_rs_data_o  => s_EX_rs_data_o,     -- Output from Rs address
+    i_EX_rt_data_o  => s_EX_rt_data_o,     -- Output from Rt address
+    i_EX_pc4_s120_o => s_EX_pc4_s120_o,    -- Jump address
+    i_EX_RegWrAddr  => s_EX_RegWrAddr,     -- Write address
+    i_EX_Dmem_Addr  => s_EX_Dmem_Addr,     -- Output from the ALU
+    i_EX_add1_mux2  => s_EX_add1_mux2,     -- Output from Adder 1
     ------------------------------------------------------------------------------------
     -- outputs
     ------------------------------------------------------------------------------------
@@ -766,18 +767,18 @@ begin
 
   MEMWB_pipe : MEM_WB_pipe
   port map(
-    i_CLK           => iCLK,                -- Clock input
-    i_RST           => iRST,                -- Reset input
-    i_WE            => not w_MEM_WB_Stall,  -- Write Enable (used for stall as well, turns off writing off, and signals stgay the same)
-    i_MEM_halt      => s_MEM_halt,          -- Halt control signal
-    i_MEM_MemToReg  => s_MEM_MemToReg,      -- MemToReg control signal
-    i_MEM_RegWrite  => s_MEM_RegWr,         -- Register write control signal
-    i_MEM_jal       => s_MEM_jal,           -- Jump and link write back control signal
-    i_MEM_PCP4      => s_MEM_PCP4,          -- PC+4 value
-    i_MEM_RegWrAddr => s_MEM_RegWrAddr,     -- Write address
-    i_MEM_Dmem_Addr => s_MEM_Dmem_Addr,     -- Output from the ALU
-    i_MEM_Dmem_out  => s_DMemOut,           -- Output from DMEM
-    i_MEM_Dmem_Lb   => s_MEM_Dmem_Lb,       -- Output from byte decoder
+    i_CLK           => iCLK,               -- Clock input
+    i_RST           => iRST,               -- Reset input
+    i_WE            => not w_MEM_WB_Stall, -- Write Enable (used for stall as well, turns off writing off, and signals stgay the same)
+    i_MEM_halt      => s_MEM_halt,         -- Halt control signal
+    i_MEM_MemToReg  => s_MEM_MemToReg,     -- MemToReg control signal
+    i_MEM_RegWrite  => s_MEM_RegWr,        -- Register write control signal
+    i_MEM_jal       => s_MEM_jal,          -- Jump and link write back control signal
+    i_MEM_PCP4      => s_MEM_PCP4,         -- PC+4 value
+    i_MEM_RegWrAddr => s_MEM_RegWrAddr,    -- Write address
+    i_MEM_Dmem_Addr => s_MEM_Dmem_Addr,    -- Output from the ALU
+    i_MEM_Dmem_out  => s_DMemOut,          -- Output from DMEM
+    i_MEM_Dmem_Lb   => s_MEM_Dmem_Lb,      -- Output from byte decoder
     i_MEM_Dmem_Lh   => s_MEM_Dmem_Lh,
     ------------------------------------------------------------------------------------
     -- outputs
