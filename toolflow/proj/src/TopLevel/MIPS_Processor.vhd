@@ -344,9 +344,11 @@ architecture structure of MIPS_Processor is
     port (
         i_EX_Reg_Rt    : in  std_logic_vector(4 downto 0);  -- Register Rt in EX stage
         i_EX_Reg_Rs    : in  std_logic_vector(4 downto 0);  -- Register Rs in EX stage
+        i_EX_opcode    : in  std_logic_vector(5 downto 0);  -- Opcode in EX stage
         i_MEM_Reg_Dst  : in  std_logic_vector(4 downto 0);  -- Register destination in MEM stage
         i_WB_Reg_Dst   : in  std_logic_vector(4 downto 0);  -- Register destination in WB stage
         i_PC_Addr      : in  std_logic_vector(31 downto 0); -- PC address, used for sensativity list.
+        i_EX_ALU_Src   : in  std_logic;                  -- ALU source in EX stage
         i_MEM_opcode   : in  std_logic_vector(5 downto 0);  -- Opcode in MEM stage
         i_ID_Rt        : in  std_logic_vector(4 downto 0);  -- Register Rt in ID stage
         i_ID_Rs        : in  std_logic_vector(4 downto 0);  -- Register Rs in ID stage
@@ -586,9 +588,11 @@ ext: extender16t32
   port map (
       i_EX_Reg_Rt     =>  s_EX_instr20t16,
       i_EX_Reg_Rs     =>  s_EX_instr25t11,
+      i_EX_opcode     =>  s_EX_instr31t26,
       i_MEM_Reg_Dst   =>  s_MEM_RegWrAddr,
       i_WB_Reg_Dst    =>  s_WB_RegWrAddr,
       i_PC_Addr       =>  s_NextInstAddr,
+      i_EX_ALU_Src    =>  s_EX_ALU_Src,
       i_MEM_opcode    =>  s_MEM_instr31t26,
       i_ID_Rt         =>  s_ID_Inst(20 downto 16),
       i_ID_Rs         =>  s_ID_Inst(25 downto 21),

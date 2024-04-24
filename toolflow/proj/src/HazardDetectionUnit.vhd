@@ -7,9 +7,11 @@ library IEEE;
 entity HazardDetectionUnit is
   port (i_EX_Reg_Rt    : in  std_logic_vector(4 downto 0);  -- Register Rt in EX stage
         i_EX_Reg_Rs    : in  std_logic_vector(4 downto 0);  -- Register Rs in EX stage
+        i_EX_opcode    : in  std_logic_vector(5 downto 0);  -- Opcode in EX stage
         i_MEM_Reg_Dst  : in  std_logic_vector(4 downto 0);  -- Register destination in MEM stage
         i_WB_Reg_Dst   : in  std_logic_vector(4 downto 0);  -- Register destination in WB stage
         i_PC_Addr      : in  std_logic_vector(31 downto 0); -- PC address, used for sensativity list.
+        i_EX_ALU_Src   : in  std_logic;                     -- ALU source in ID stage
         i_MEM_opcode   : in  std_logic_vector(5 downto 0);  -- Opcode in MEM stage
         i_ID_Rt        : in  std_logic_vector(4 downto 0);  -- Register Rt in ID stage
         i_ID_Rs        : in  std_logic_vector(4 downto 0);  -- Register Rs in ID stage
@@ -45,11 +47,18 @@ begin
     -- checking for matchs for Rs and Rt in the WB Stage, 
 
     -- checks for rs and rt match in the mem stage, and sets a flag for which one they matched, to not attempt matching a later wb match.
+
     if ((i_EX_Reg_Rs = i_MEM_Reg_Dst) or (i_EX_Reg_Rt = i_MEM_Reg_Dst)) then --remember to check for lw and sw.
 
       if (i_EX_Reg_Rt = i_MEM_Reg_Dst) then -- Arithmatic & logic MEM #2
         o_Fwd_Mux1_Sel <= "101"; -- E
-        rtForwarded <= '1';
+         rtForwarded <= '1';
+         if((i_MEM_opcode = "001111")) then --lui for mem, uses zero register so messes up.
+          o_Fwd_Mux0_Sel <= "101"; -- E
+          o_Fwd_Mux1_Sel <= "000"; -- None
+          rsForwarded <= '1';
+          rtForwarded <= '1';
+         end if;
       end if;
 
       if(i_EX_Reg_Rs = i_MEM_Reg_Dst) then
@@ -83,10 +92,20 @@ begin
         end if;
     end if;
 
-    if((i_WB_We = '1') and ((i_ID_Rt = i_MEM_Reg_Dst) or  i_ID_rs = i_WB_Reg_Dst)) then -- we need to stall if we are using data in WB stage in the ID stage.
-      o_Stall_IFID <= '1';
-      o_Stall_IDEX <= '1';
+    if((i_WB_We = '1') and ((i_ID_Rt = i_MEM_Reg_Dst) or   (i_ID_rs = i_WB_Reg_Dst)) and ((i_ID_Rt /= "00000") and (i_ID_rs /= "00000") and (i_WB_Reg_Dst /= "00000"))) then -- we need to stall if we are using data in WB stage in the ID stage.
+    o_Stall_IFID <= '1';
+    o_Stall_IDEX <= '1';
 
+    end if;
+
+    if ((i_EX_Reg_Rt = "00000") or (i_EX_Reg_Rs = "00000") or i_WB_We = '0') then --we are using zero register, we do not want to forward.
+      o_Fwd_Mux0_Sel <= "000";
+      o_Fwd_Mux1_Sel <= "000";
+    end if;
+
+    if(((i_EX_opcode = "100011") and (i_MEM_opcode = "101011"))) then -- if we have a sw then a lw immediatly behind it, we need to not fwd, even if their data is the same.
+      o_Fwd_Mux0_Sel <= "000";
+      o_Fwd_Mux1_Sel <= "000";
     end if;
 
     end process;
