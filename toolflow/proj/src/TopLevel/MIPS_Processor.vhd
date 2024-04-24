@@ -572,7 +572,7 @@ begin
       i_rs_addrs => s_ID_Inst(25 downto 21), -- Rs address
       i_rt_addrs => s_ID_Inst(20 downto 16), -- Rt address
       i_rd_addrs => s_RegWrAddr,
-      i_rd_data  => s_RegWrData,
+      i_rd_data  => w_WB_mux_reg_rtn,
       o_rs_data  => s_ID_rs_data_o,
       o_rt_data  => s_ID_rt_data_o);
 
@@ -582,7 +582,7 @@ ext: extender16t32
       i_ctl   => s_ID_ext_ctl,
       o_Imm32 => w_ID_ext_o);
 
-HazardDetectionUnit0: HazardDetectionUnit 
+  HazardDetectionUnit0: HazardDetectionUnit 
   port map (
       i_EX_Reg_Rt     =>  s_EX_instr20t16,
       i_EX_Reg_Rs     =>  s_EX_instr25t11,
