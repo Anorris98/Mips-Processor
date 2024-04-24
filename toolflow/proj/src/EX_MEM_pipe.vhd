@@ -29,6 +29,7 @@ entity EX_MEM_pipe is
         i_EX_jr         : in std_logic;                        -- Jump return control signal
         i_EX_branch     : in std_logic;                        -- Branch output from ALU
         i_EX_PCP4       : in std_logic_vector(N - 1 downto 0); -- PC+4 value
+        i_EX_instr31t26 : in std_logic_vector(5 downto 0);     -- Itype OpCode signal
         i_EX_rs_data_o  : in std_logic_vector(N - 1 downto 0); -- Output from Rs address
         i_EX_rt_data_o  : in std_logic_vector(N - 1 downto 0); -- Output from Rt address
         i_EX_pc4_s120_o : in std_logic_vector(N - 1 downto 0); -- Jump address
@@ -48,6 +49,7 @@ entity EX_MEM_pipe is
         o_MEM_jr         : out std_logic;                        -- Jump return control signal
         o_MEM_branch     : out std_logic;                        -- Branch output from ALU
         o_MEM_PCP4       : out std_logic_vector(N - 1 downto 0); -- PC+4 value
+        o_MEM_instr31t26 : out std_logic_vector(5 downto 0);     -- Itype OpCode signal
         o_MEM_rs_data_o  : out std_logic_vector(N - 1 downto 0); -- Output from Rs address
         o_MEM_rt_data_o  : out std_logic_vector(N - 1 downto 0); -- Output from Rt address
         o_MEM_pc4_s120_o : out std_logic_vector(N - 1 downto 0); -- Jump address
@@ -70,6 +72,7 @@ architecture mixed of EX_MEM_pipe is
     signal s_EX_jr         : std_logic;                        -- Jump return control signal
     signal s_EX_branch     : std_logic;                        -- Branch output from ALU
     signal s_EX_PCP4       : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_EX_instr31t26 : std_logic_vector(5 downto 0);     -- Itype OpCode signal
     signal s_EX_rs_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rs address
     signal s_EX_rt_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rt address
     signal s_EX_pc4_s120_o : std_logic_vector(N - 1 downto 0); -- Jump address
@@ -87,6 +90,7 @@ architecture mixed of EX_MEM_pipe is
     signal s_MEM_jr         : std_logic;                        -- Jump return control signal
     signal s_MEM_branch     : std_logic;                        -- Branch output from ALU
     signal s_MEM_PCP4       : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_MEM_instr31t26 : std_logic_vector(5 downto 0);     -- Itype OpCode signal
     signal s_MEM_rs_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rs address
     signal s_MEM_rt_data_o  : std_logic_vector(N - 1 downto 0); -- Output from Rt address
     signal s_MEM_pc4_s120_o : std_logic_vector(N - 1 downto 0); -- Jump address
@@ -108,6 +112,7 @@ begin
     o_MEM_jr         <= s_MEM_jr;         -- Jump return control signal
     o_MEM_branch     <= s_MEM_branch;     -- Branch output from ALU
     o_MEM_PCP4       <= s_MEM_PCP4;       -- PC+4 value
+    o_MEM_instr31t26 <= s_MEM_instr31t26; -- Itype OpCode signal
     o_MEM_rs_data_o  <= s_MEM_rs_data_o;  -- Output from Rs address
     o_MEM_rt_data_o  <= s_MEM_rt_data_o;  -- Output from Rt address
     o_MEM_pc4_s120_o <= s_MEM_pc4_s120_o; -- Jump address
@@ -132,6 +137,7 @@ begin
             s_MEM_jr         <= '0';         -- Jump return control signal
             s_MEM_branch     <= '0';         -- Branch output from ALU
             s_MEM_PCP4       <= x"00000000"; -- PC+4 value
+            s_MEM_instr31t26 <= b"000000";   -- Itype OpCode signal
             s_MEM_rs_data_o  <= x"00000000"; -- Output from Rs address
             s_MEM_rt_data_o  <= x"00000000"; -- Output from Rt address
             s_MEM_pc4_s120_o <= x"00000000"; -- Jump address
@@ -149,6 +155,7 @@ begin
             s_MEM_jr         <= i_EX_jr;         -- Jump return control signal
             s_MEM_branch     <= i_EX_branch;     -- Branch output from ALU
             s_MEM_PCP4       <= i_EX_PCP4;       -- PC+4 value
+            s_MEM_instr31t26 <= i_EX_instr31t26; -- Itype OpCode signal
             s_MEM_rs_data_o  <= i_EX_rs_data_o;  -- Output from Rs address
             s_MEM_rt_data_o  <= i_EX_rt_data_o;  -- Output from Rt address
             s_MEM_pc4_s120_o <= i_EX_pc4_s120_o; -- Jump address
@@ -166,6 +173,7 @@ begin
             s_MEM_jr         <= s_MEM_jr;         -- Jump return control signal
             s_MEM_branch     <= s_MEM_branch;     -- Branch output from ALU
             s_MEM_PCP4       <= s_MEM_PCP4;       -- PC+4 value
+            s_MEM_instr31t26 <= s_MEM_instr31t26; -- Itype OpCode signal
             s_MEM_rs_data_o  <= s_MEM_rs_data_o;  -- Output from Rs address
             s_MEM_rt_data_o  <= s_MEM_rt_data_o;  -- Output from Rt address
             s_MEM_pc4_s120_o <= s_MEM_pc4_s120_o; -- Jump address
