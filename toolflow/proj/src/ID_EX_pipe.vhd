@@ -17,7 +17,8 @@ entity ID_EX_pipe is
     port (
         i_CLK            : in std_logic;                        -- Clock input
         i_RST            : in std_logic;                        -- Reset input
-        i_WE             : in std_logic;                        -- Write enable
+        i_WE             : in std_logic;                        -- Write enable (1 when writing, 0 when stalling)
+        i_FLUSH          : in std_logic;                        -- FLUSH
         i_ID_halt        : in std_logic;                        -- Halt control signal
         i_ID_STD_Shift   : in std_logic;                        -- STD Shift control signal
         i_ID_ALU_Src     : in std_logic;                        -- ALU Source control signal
@@ -31,6 +32,8 @@ entity ID_EX_pipe is
         i_ID_jal         : in std_logic;                        -- Jump and link write back control signal
         i_ID_jr          : in std_logic;                        -- Jump return control signal
         i_ID_PCP4        : in std_logic_vector(N - 1 downto 0); -- PC+4 value
+        i_ID_instr31t26  : in std_logic_vector(5 downto 0);     -- Itype OpCode signal
+        i_ID_instr25t21  : in std_logic_vector(4 downto 0);     -- Register Rs address signal
         i_ID_instr20t16  : in std_logic_vector(4 downto 0);     -- Register Rt address signal
         i_ID_instr15t11  : in std_logic_vector(4 downto 0);     -- Register Rd address signal
         i_ID_rs_data_o   : in std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -53,6 +56,8 @@ entity ID_EX_pipe is
         o_EX_jal         : out std_logic;                        -- Jump and link write back control signal
         o_EX_jr          : out std_logic;                        -- Jump return control signal
         o_EX_PCP4        : out std_logic_vector(N - 1 downto 0); -- PC+4 value
+        o_EX_instr31t26  : out std_logic_vector(5 downto 0);     -- Itype OpCode signal
+        o_EX_instr25t21  : out std_logic_vector(4 downto 0);     -- Register Rs address signal
         o_EX_instr20t16  : out std_logic_vector(4 downto 0);     -- Register Rt address signal
         o_EX_instr15t11  : out std_logic_vector(4 downto 0);     -- Register Rd address signal
         o_EX_rs_data_o   : out std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -78,6 +83,8 @@ architecture mixed of ID_EX_pipe is
     signal s_ID_jal         : std_logic;                        -- Jump and link write back control signal
     signal s_ID_jr          : std_logic;                        -- Jump return control signal
     signal s_ID_PCP4        : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_ID_instr31t26  : std_logic_vector(5 downto 0);     -- Itype OpCode signal
+    signal s_ID_instr25t21  : std_logic_vector(4 downto 0);     -- Register Rs address signal
     signal s_ID_instr20t16  : std_logic_vector(4 downto 0);     -- Register Rt address signal
     signal s_ID_instr15t11  : std_logic_vector(4 downto 0);     -- Register Rd address signal
     signal s_ID_rs_data_o   : std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -98,6 +105,8 @@ architecture mixed of ID_EX_pipe is
     signal s_EX_jal         : std_logic;                        -- Jump and link write back control signal
     signal s_EX_jr          : std_logic;                        -- Jump return control signal
     signal s_EX_PCP4        : std_logic_vector(N - 1 downto 0); -- PC+4 value
+    signal s_EX_instr31t26  : std_logic_vector(5 downto 0);     -- Itype OpCode signal
+    signal s_EX_instr25t21  : std_logic_vector(4 downto 0);     -- Register Rs address signal
     signal s_EX_instr20t16  : std_logic_vector(4 downto 0);     -- Register Rt address signal
     signal s_EX_instr15t11  : std_logic_vector(4 downto 0);     -- Register Rd address signal
     signal s_EX_rs_data_o   : std_logic_vector(N - 1 downto 0); -- Output from Rs address
@@ -122,6 +131,8 @@ begin
     o_EX_jal         <= s_EX_jal;         -- Jump and link write back control signal
     o_EX_jr          <= s_EX_jr;          -- Jump return control signal
     o_EX_PCP4        <= s_EX_PCP4;        -- PC+4 value
+    o_EX_instr31t26  <= s_EX_instr31t26;  -- Itype OpCode signal
+    o_EX_instr25t21  <= s_EX_instr25t21;  -- Register Rs address signal
     o_EX_instr20t16  <= s_EX_instr20t16;  -- Register Rt address signal
     o_EX_instr15t11  <= s_EX_instr15t11;  -- Register Rd address signal
     o_EX_rs_data_o   <= s_EX_rs_data_o;   -- Output from Rs address
@@ -135,7 +146,7 @@ begin
     -- glitchy behavior on startup.
     process (i_CLK, i_RST, i_WE)
     begin
-        if (i_RST = '1') then
+        if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
             s_EX_halt        <= '0';         -- Halt control signal
             s_EX_STD_Shift   <= '0';         -- STD Shift control signal
             s_EX_ALU_Src     <= '0';         -- ALU Source control signal
@@ -149,6 +160,8 @@ begin
             s_EX_jal         <= '0';         -- Jump and link write back control signal
             s_EX_jr          <= '0';         -- Jump return control signal
             s_EX_PCP4        <= x"00000000"; -- PC+4 value
+            s_EX_instr31t26  <= b"000000";    -- Itype OpCode signal
+            s_EX_instr25t21  <= b"00000";    -- Register Rs address signal
             s_EX_instr20t16  <= b"00000";    -- Register Rt address signal
             s_EX_instr15t11  <= b"00000";    -- Register Rd address signal
             s_EX_rs_data_o   <= x"00000000"; -- Output from Rs address
@@ -169,6 +182,8 @@ begin
             s_EX_jal         <= i_ID_jal;         -- Jump and link write back control signal
             s_EX_jr          <= i_ID_jr;          -- Jump return control signal
             s_EX_PCP4        <= i_ID_PCP4;        -- PC+4 value
+            s_EX_instr31t26  <= i_ID_instr31t26;  -- Itype OpCode signal
+            s_EX_instr25t21  <= i_ID_instr25t21;  -- Register Rt address signal
             s_EX_instr20t16  <= i_ID_instr20t16;  -- Register Rt address signal
             s_EX_instr15t11  <= i_ID_instr15t11;  -- Register Rd address signal
             s_EX_rs_data_o   <= i_ID_rs_data_o;   -- Output from Rs address
@@ -189,6 +204,8 @@ begin
             s_EX_jal         <= s_EX_jal;         -- Jump and link write back control signal
             s_EX_jr          <= s_EX_jr;          -- Jump return control signal
             s_EX_PCP4        <= s_EX_PCP4;        -- PC+4 value
+            s_EX_instr31t26  <= s_EX_instr31t26;  -- Itype OpCode signal
+            s_EX_instr25t21  <= s_EX_instr25t21;  -- Register Rs address signal
             s_EX_instr20t16  <= s_EX_instr20t16;  -- Register Rt address signal
             s_EX_instr15t11  <= s_EX_instr15t11;  -- Register Rd address signal
             s_EX_rs_data_o   <= s_EX_rs_data_o;   -- Output from Rs address
