@@ -17,7 +17,10 @@ entity HazardDetectionUnit is
     i_MEM_Reg_Dst : in std_logic_vector(4 downto 0); -- Register destination in MEM stage
     i_WB_Reg_Dst  : in std_logic_vector(4 downto 0); -- Register destination in WB stage
 
-    i_WB_We        : in std_logic;                     -- Write enable in ID stage
+    i_EX_We        : in std_logic;                     -- Write enable in EX stage
+    i_MEM_We       : in std_logic;                     -- Write enable in MEM stage
+    i_WB_We        : in std_logic;                     -- Write enable in WB stage
+
     o_Fwd_Mux0_Sel : out std_logic_vector(2 downto 0); -- Forwarding mux 1 control
     o_Fwd_Mux1_Sel : out std_logic_vector(2 downto 0); -- Forwarding mux 2 control
     o_Stall_IFID   : out std_logic;                    -- Signal to Stall IFID Pipeline Register, will also stall PC.
@@ -33,21 +36,25 @@ architecture mixed of HazardDetectionUnit is
   -- signal rtForwarded : std_logic := '0';
 
 begin
-  o_Stall_MEMWB <= '0'; -- Never stall the MEMWB pipe
+  o_Stall_MEMWB  <= '0';   -- Never stall the MEMWB pipe
   o_Fwd_Mux0_Sel <= "000"; -- No Forwarding yet
   o_Fwd_Mux1_Sel <= "000"; -- No Forwarding yet
 
-  o_Stall_IFID <= '1' when (i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt)
+  o_Stall_IFID <= o_Stall_IDEX;
+  -- o_Stall_IFID <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt))
+  --                       or (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)) else
+  --                 '1' when ((i_WB_Reg_Dst /= "00000" and (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rt))
+  --                       or (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rs)) else
+  --                 '0';
+
+  o_Stall_IDEX <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt))
                         or (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)) else
-                  '1' when (i_WB_Reg_Dst /= "00000" and (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rt)
+                  '1' when ((i_WB_Reg_Dst /= "00000" and (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rt))
                         or (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rs)) else
                   '0';
 
-  o_Stall_IDEX <= '1' when (i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt)
+  o_Stall_EXMEM <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt))
                         or (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)) else
-                  '1' when (i_WB_Reg_Dst /= "00000" and (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rt)
-                        or (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rs)) else
-                  '0';
-
-  -- o_Stall_EXMEM               ??????
+                   '0';
+                   
 end architecture;
