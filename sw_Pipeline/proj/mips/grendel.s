@@ -56,10 +56,8 @@ main:
         nop
         sw      $0,24($fp)
         j       main_loop_control
-
 	nop
 	nop	#for jump
-	nop
 	nop
 
 main_loop_body:

@@ -114,7 +114,7 @@ begin
       s_WB_Dmem_Lb <= x"00000000"; -- Output from byte decoder
       s_WB_Dmem_Lh <= x"00000000"; -- Output from word decoder
       s_WB_Ovfl <= '0'; -- Overflow signal
-    elsif (rising_edge(i_CLK) and i_WE = '1') then
+    elsif ((i_CLK = '1') and i_WE = '1') then
       s_WB_halt <= i_MEM_halt; -- Halt control signal
       s_WB_MemToReg <= i_MEM_MemToReg; -- MemToReg control signal
       s_WB_RegWrite <= i_MEM_RegWrite; -- Register write control signal

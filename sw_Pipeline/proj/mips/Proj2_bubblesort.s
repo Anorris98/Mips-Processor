@@ -9,11 +9,9 @@ main:
 	addiu $s2, $zero, 9 	#(n-2)				#initzalize for loop counter to stop at N-2, becasue of i and i++
 	
 	nop
-
+	addiu, $s1, $zero, 0	#i = 0				#initialize for loop counter to 0.
 whileloop:
 	addiu, $s1, $zero, 0	#i = 0				#initialize for loop counter to 0.
-
-
 	beq $s0, $0, fin	# we Need to run this only if swappedsomething == true, else done and print.
 	
 	nop

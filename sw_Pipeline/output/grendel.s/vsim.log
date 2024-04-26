@@ -3,7 +3,7 @@ Reading pref.tcl
 # 2023.2_2
 
 # vsim -postsimdataflow -debugdb -c -voptargs=""+acc"" tb -do "modelsim_framework.do" -gOUTPUT_TRACE=ms.trace 
-# Start time: 15:52:57 on Apr 24,2024
+# Start time: 21:20:07 on Apr 25,2024
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
 # ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
@@ -51,7 +51,6 @@ Reading pref.tcl
 # Loading work.dffg(mixed)#1
 # Loading work.mux32t1(dataflow)#1
 # Loading work.extender16t32(dataflow)#1
-# Loading work.hazarddetectionunit(sel_when)#1
 # Loading work.id_ex_pipe(mixed)#1
 # Loading work.mux4t1_n(dataflow)#1
 # Loading work.alu(mixed)#1
@@ -64,7 +63,6 @@ Reading pref.tcl
 # Loading work.shifter(behavior)#1
 # Loading work.barrelshifter(behavior)#1
 # Loading work.mux8t1_n(dataflow)#1
-# Loading work.mux8t1_n(dataflow)#2
 # Loading work.ex_mem_pipe(mixed)#1
 # Loading ieee.std_logic_arith(body)
 # Loading ieee.std_logic_unsigned(body)
@@ -86,15 +84,11 @@ Reading pref.tcl
 #    Time: 0 ns  Iteration: 0  Instance: /tb/MyMips/regist/rt_bus
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
 #    Time: 0 ns  Iteration: 0  Instance: /tb/MyMips/IMem
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ns  Iteration: 3  Instance: /tb/MyMips/regist/rs_bus
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ns  Iteration: 3  Instance: /tb/MyMips/regist/rt_bus
-# ** Note: Data structure takes 74412128 bytes of memory
-#          Process time 2.22 seconds
+# ** Note: Data structure takes 74147104 bytes of memory
+#          Process time 2.19 seconds
 #          stop
 #    Time: 121800 ns  Iteration: 1  Instance: /tb
-# Break in Process P_DUMP_STATE at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/internal/testpy/tb.vhd line 150
-# Stopped at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/internal/testpy/tb.vhd line 150
-# End time: 15:53:01 on Apr 24,2024, Elapsed time: 0:00:04
-# Errors: 0, Warnings: 7
+# Break in Process P_DUMP_STATE at /home/anorris/CPRE381/ProjectGit/cpre_381/sw_Pipeline/internal/testpy/tb.vhd line 150
+# Stopped at /home/anorris/CPRE381/ProjectGit/cpre_381/sw_Pipeline/internal/testpy/tb.vhd line 150
+# End time: 21:20:11 on Apr 25,2024, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 5

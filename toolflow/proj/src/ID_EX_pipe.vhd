@@ -146,7 +146,7 @@ begin
     -- glitchy behavior on startup.
     process (i_CLK, i_RST, i_WE)
     begin
-        if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
+        if (i_RST = '1' or ((i_CLK = '1') and i_FLUSH = '1')) then
             s_EX_halt        <= '0';         -- Halt control signal
             s_EX_STD_Shift   <= '0';         -- STD Shift control signal
             s_EX_ALU_Src     <= '0';         -- ALU Source control signal
@@ -168,7 +168,7 @@ begin
             s_EX_rt_data_o   <= x"00000000"; -- Output from Rt address
             s_EX_ext_o       <= x"00000000"; -- Extension control output
             s_EX_s120_o      <= x"0000000";  -- Instruction [25:0] shifted left 2
-        elsif (rising_edge(i_CLK) and i_WE = '1') then
+        elsif ((i_CLK = '1') and i_WE = '1') then
             s_EX_halt        <= i_ID_halt;        -- Halt control signal
             s_EX_STD_Shift   <= i_ID_STD_Shift;   -- STD Shift control signal
             s_EX_ALU_Src     <= i_ID_ALU_Src;     -- ALU Source control signal
