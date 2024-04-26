@@ -49,7 +49,7 @@ begin
     -- if (rising_edge(i_CLK) and i_WE = '0') then
     process (i_CLK, i_RST, i_WE)
     begin
-        if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
+        if (i_RST = '1' or ((i_CLK = '1') and i_FLUSH = '1')) then
             s_ID_PC_P4     <= x"00000000"; -- Use "(others => '0')" for N-bit values
             s_ID_instr31t0 <= x"00000000";
         elsif (rising_edge(i_CLK) and i_WE = '1') then

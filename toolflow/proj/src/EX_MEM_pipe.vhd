@@ -132,7 +132,7 @@ begin
   -- glitchy behavior on startup.
   process (i_CLK, i_RST, i_WE)
   begin
-    if (i_RST = '1' or (rising_edge(i_CLK) and i_FLUSH = '1')) then
+    if (i_RST = '1' or ((i_CLK = '1') and i_FLUSH = '1')) then
       s_MEM_halt <= '0'; -- Halt control signal
       s_MEM_MemToReg <= b"00"; -- MemToReg control signal
       s_MEM_MemWrite <= '0'; -- Memory write control signal
@@ -151,7 +151,7 @@ begin
       s_MEM_Dmem_Addr <= x"00000000"; -- Output from the ALU
       s_MEM_add1_mux2 <= x"00000000"; -- Output from Adder 1
       s_MEM_Ovfl <= '0'; -- Overflow signal
-    elsif (rising_edge(i_CLK) and i_WE = '1') then
+    elsif ((i_CLK = '1') and i_WE = '1') then
       s_MEM_halt <= i_EX_halt; -- Halt control signal
       s_MEM_MemToReg <= i_EX_MemToReg; -- MemToReg control signal
       s_MEM_MemWrite <= i_EX_MemWrite; -- Memory write control signal
