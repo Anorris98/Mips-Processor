@@ -23,8 +23,7 @@ entity HazardDetectionUnit is
     o_Stall_IFID   : out std_logic;                    -- Signal to Stall IFID Pipeline Register, will also stall PC.
     o_Stall_IDEX   : out std_logic;                    -- Signal to Stall IDEX Pipeline Register
     o_Stall_EXMEM  : out std_logic;                    -- Signal to Stall EXMEM Pipeline Register
-    o_Stall_MEMWB  : out std_logic;                    -- Signal to Stall MEMWB Pipeline Register
-    o_PC_Stall     : out std_logic                     -- Signal to Stall PC
+    o_Stall_MEMWB  : out std_logic                    -- Signal to Stall MEMWB Pipeline Register
   );
 end entity;
 
@@ -40,14 +39,6 @@ begin
   o_Fwd_Mux0_Sel <= "000"; -- No Forwarding yet
   o_Fwd_Mux1_Sel <= "000"; -- No Forwarding yet
 
-  -- o_Stall_IFID <= o_Stall_IDEX;
-  -- o_Stall_IFID <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt))
-  --                       or (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)) else
-  --                 '1' when ((i_WB_Reg_Dst /= "00000" and (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rt))
-  --                       or (i_WB_We = '1' and i_WB_Reg_Dst = i_ID_Reg_Rs)) else
-  --                 '0';
-  -- o_Stall_IFID <= '1' when ((i_EX_Opcode = "000011" and i_ID_Reg_Rs = x"1F") or (i_MEM_Opcode = "000011" 
-  --                            and i_ID_Reg_Rs = x"1F")) else
    o_Stall_IFID <= '1' when ((i_EX_Reg_Dst /= "00000" and (i_EX_We = '1' and i_EX_Reg_Dst = i_ID_Reg_Rt)) 
                             or (i_EX_Reg_Dst /= "00000" and (i_EX_We = '1' 
                             and i_EX_Reg_Dst = i_ID_Reg_Rs))) else
@@ -55,12 +46,4 @@ begin
                             and i_MEM_Reg_Dst = i_ID_Reg_Rt)) or (i_MEM_Reg_Dst /= "00000" 
                             and (i_MEM_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs))) else
                   '0';
-  -- o_PC_Stall   <= '1' when ((i_EX_Opcode = "000011" and i_ID_Reg_Rs = x"1F") or (i_MEM_Opcode = "000011" and i_ID_Reg_Rs = x"1F")) else
-  --                 '1' when ((i_EX_Reg_Dst /= "00000" and (i_EX_We = '1' and i_EX_Reg_Dst = i_ID_Reg_Rt)) or (i_EX_Reg_Dst /= "00000" and (i_EX_We = '1' 
-  --                           and i_EX_Reg_Dst = i_ID_Reg_Rs))) else
-                  -- '0';
-
-  -- o_Stall_EXMEM <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt))
-  --                       or (i_WB_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)) else
-  --                  '0';
 end architecture;

@@ -363,8 +363,7 @@ architecture structure of MIPS_Processor is
       o_Stall_IFID   : out std_logic;                    -- Signal to Stall IFID Pipeline Register, will also stall PC.
       o_Stall_IDEX   : out std_logic;                    -- Signal to Stall IDEX Pipeline Register
       o_Stall_EXMEM  : out std_logic;                    -- Signal to Stall EXMEM Pipeline Register
-      o_Stall_MEMWB  : out std_logic;                    -- Signal to Stall MEMWB Pipeline Register
-      o_PC_Stall     : out std_logic                     -- Signal to Stall PC
+      o_Stall_MEMWB  : out std_logic                    -- Signal to Stall MEMWB Pipeline Register
     );
 
   end component;
@@ -611,8 +610,7 @@ begin
       o_Stall_IFID   => w_IF_ID_Stall,           -- Signal to Stall IFID Pipeline Register, will also stall PC.
       o_Stall_IDEX   => w_ID_EX_stall,           -- Signal to Stall IDEX Pipeline Register
       o_Stall_EXMEM  => w_EX_MEM_Stall,          -- Signal to Stall EXMEM Pipeline Register
-      o_Stall_MEMWB  => w_MEM_WB_Stall,          -- Signal to Stall MEMWB Pipeline Register
-      o_PC_Stall     => open -- Signal to Stall PC
+      o_Stall_MEMWB  => w_MEM_WB_Stall          -- Signal to Stall MEMWB Pipeline Register
     );
 
   orFlushIDEX: org2
