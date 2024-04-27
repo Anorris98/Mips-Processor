@@ -349,23 +349,30 @@ architecture structure of MIPS_Processor is
       i_ID_Reg_Rt    : in  std_logic_vector(4 downto 0); -- Register Rt in ID stage
       i_ID_Reg_Rs    : in  std_logic_vector(4 downto 0); -- Register Rs in ID stage
 
+      i_EX_ALU_Src   : in  std_logic;                    -- ALU Source control signal
       i_EX_Reg_Rt    : in  std_logic_vector(4 downto 0); -- Register Rt in EX stage
       i_EX_Reg_Rs    : in  std_logic_vector(4 downto 0); -- Register Rs in EX stage
       i_EX_opcode    : in  std_logic_vector(5 downto 0); -- Opcode in EX stage
       i_EX_Reg_Dst   : in  std_logic_vector(4 downto 0); -- Register destination in EX stage
       i_EX_We        : in  std_logic;                    -- Write enable in EX stage
 
+      i_MEM_Func     : in  std_logic_vector(5 downto 0); -- Function in MEM stage
       i_MEM_opcode   : in  std_logic_vector(5 downto 0); -- Opcode in MEM stage
       i_MEM_Reg_Dst  : in  std_logic_vector(4 downto 0); -- Register destination in MEM stage
       i_MEM_We       : in  std_logic;                    -- Write enable in MEM stage
 
+      i_WB_we        : in  std_logic;                             -- Write enable in WB stage
+      i_WB_Reg_Dst   : in  std_logic_vector(4 downto 0);          -- Register destination in WB stage
+
       o_Fwd_Mux0_Sel : out std_logic_vector(2 downto 0); -- Forwarding mux 1 control
       o_Fwd_Mux1_Sel : out std_logic_vector(2 downto 0); -- Forwarding mux 2 control
+      o_Fwd_Mux2_Sel : out std_logic_vector(2 downto 0); -- Forwarding mux 3 control
 
       o_Stall_IFID   : out std_logic;                    -- Signal to Stall IFID Pipeline Register, will also stall PC.
       o_Stall_IDEX   : out std_logic;                    -- Signal to Stall IDEX Pipeline Register
       o_Stall_EXMEM  : out std_logic;                    -- Signal to Stall EXMEM Pipeline Register
-      o_Stall_MEMWB  : out std_logic                     -- Signal to Stall MEMWB Pipeline Register
+      o_Stall_MEMWB  : out std_logic;                              -- Signal to Stall MEMWB Pipeline Register
+      o_Stall_PC     : out std_logic                              -- Signal to Stall PC
     );
 
   end component;
@@ -380,6 +387,8 @@ architecture structure of MIPS_Processor is
   --Hazard Detection Wires
   signal s_MuxFwd0_Sel : std_logic_vector(2 downto 0);
   signal s_MuxFwd1_Sel : std_logic_vector(2 downto 0);
+  signal s_MuxFwd2_Sel : std_logic_vector(2 downto 0);
+  signal s_PC_Stall    : std_logic;
 
   -- IF signals and wires
   signal w_IF_ID_Stall   : std_logic;
@@ -409,7 +418,6 @@ architecture structure of MIPS_Processor is
   signal s_ID_rs_data_o  : std_logic_vector(N - 1 downto 0);
   signal s_ID_rt_data_o  : std_logic_vector(N - 1 downto 0);
   -- EX signals and wires
-  signal w_PC_Stall         : std_logic;
   signal w_ID_EX_FLUSH      : std_logic;
   signal w_EX_MuxFwd0_alu_A : std_logic_vector(N - 1 downto 0);
   signal w_EX_MuxFwd1_alu_B : std_logic_vector(N - 1 downto 0);
@@ -432,7 +440,8 @@ architecture structure of MIPS_Processor is
   signal s_EX_instr20t16    : std_logic_vector(4 downto 0);     -- Register Rt address signal
   signal s_EX_instr15t11    : std_logic_vector(4 downto 0);     -- Register Rd address signal
   signal s_EX_rs_data_o     : std_logic_vector(N - 1 downto 0); -- Output from Rs address
-  signal s_EX_rt_data_o     : std_logic_vector(N - 1 downto 0); -- Output from Rt address
+  signal s_EX_rt_data0_o     : std_logic_vector(N - 1 downto 0); -- Output from Rt address
+  signal s_EX_rt_data1_o     : std_logic_vector(N - 1 downto 0); -- Output from Rt address
   signal s_EX_ext_o         : std_logic_vector(N - 1 downto 0); -- Extension control output
   signal s_EX_s120_o        : std_logic_vector(27 downto 0);    -- Instruction [25:0] shifted left 2
   signal s_EX_pc4_s120_o    : std_logic_vector(N - 1 downto 0); -- Full jump address
@@ -531,7 +540,7 @@ begin
     port map (
       i_CLK => iCLK,                                   -- Clock input
       i_RST => iRST,                                   -- Reset input
-      i_WE  => (not w_IF_ID_Stall) or s_MEM_diff_addr, -- Write enable input
+      i_WE  => (not w_IF_ID_Stall) or (s_MEM_diff_addr) or (s_PC_stall), -- Write enable
       i_D   => w_IF_pc_next,                           -- Data value input
       o_Q   => s_NextInstAddr); -- Data value output
 
@@ -597,23 +606,30 @@ begin
       i_ID_Reg_Rt    => s_ID_Inst(20 downto 16), -- Register Rt in ID stage
       i_ID_Reg_Rs    => s_ID_Inst(25 downto 21), -- Register Rs in ID stage
 
-      i_EX_Reg_Rt    => s_EX_instr20t16,          -- Register Rt in EX stage
-      i_EX_Reg_Rs    => s_EX_instr25t11,          -- Register Rs in EX stage
-      i_EX_opcode    => s_EX_instr31t26,          -- Opcode in EX stage
+      i_EX_ALU_Src   => s_EX_ALU_Src,            -- ALU Source control signal
+      i_EX_Reg_Rt    => s_EX_instr20t16,         -- Register Rt in EX stage
+      i_EX_Reg_Rs    => s_EX_instr25t11,         -- Register Rs in EX stage
+      i_EX_opcode    => s_EX_instr31t26,         -- Opcode in EX stage
       i_EX_Reg_Dst   => s_EX_RegWrAddr,          -- Register destination in EX stage
       i_EX_We        => s_EX_RegWr,              -- Write enable in EX stage
 
-      i_MEM_opcode   => s_MEM_instr31t26,         -- Opcode in MEM stage
+      i_MEM_Func     => s_MEM_instr31t26(5 downto 0), -- Function in MEM stage
+      i_MEM_opcode   => s_MEM_instr31t26,        -- Opcode in MEM stage
       i_MEM_Reg_Dst  => s_MEM_RegWrAddr,         -- Register destination in MEM stage
       i_MEM_We       => s_MEM_RegWr,             -- Write enable in MEM stage
 
+      i_WB_we        => s_WB_RegWr,              -- Write enable in WB stage
+      i_WB_Reg_Dst   => s_WB_RegWrAddr,          -- Register destination in WB stage
+
       o_Fwd_Mux0_Sel => s_MuxFwd0_Sel,           -- Forwarding mux 1 control
       o_Fwd_Mux1_Sel => s_MuxFwd1_Sel,           -- Forwarding mux 2 control
+      o_Fwd_Mux2_Sel => s_MuxFwd2_Sel,           -- Forwarding mux 3 control
 
       o_Stall_IFID   => w_IF_ID_Stall,           -- Signal to Stall IFID Pipeline Register, will also stall PC.
       o_Stall_IDEX   => w_ID_EX_stall,           -- Signal to Stall IDEX Pipeline Register
       o_Stall_EXMEM  => w_EX_MEM_Stall,          -- Signal to Stall EXMEM Pipeline Register
-      o_Stall_MEMWB  => w_MEM_WB_Stall -- Signal to Stall MEMWB Pipeline Register
+      o_Stall_MEMWB  => w_MEM_WB_Stall, -- Signal to Stall MEMWB Pipeline Register
+      o_Stall_PC     => s_PC_Stall -- Signal to Stall PC
     );
 
   orFlushIDEX: org2
@@ -673,7 +689,7 @@ begin
       o_EX_instr20t16  => s_EX_instr20t16,         -- Register Rt address signal
       o_EX_instr15t11  => s_EX_instr15t11,         -- Register Rd address signal
       o_EX_rs_data_o   => s_EX_rs_data_o,          -- Output from Rs address
-      o_EX_rt_data_o   => s_EX_rt_data_o,          -- Output from Rt address
+      o_EX_rt_data_o   => s_EX_rt_data0_o,          -- Output from Rt address
       o_EX_ext_o       => s_EX_ext_o,              -- Extension control output
       o_EX_s120_o      => s_EX_s120_o); -- Instruction [25:0] shifted left 2
 
@@ -706,7 +722,7 @@ begin
   mux1: mux2t1_N
     port map (
       i_S  => s_EX_ALU_Src,
-      i_D0 => s_EX_rt_data_o,
+      i_D0 => s_EX_rt_data1_o,
       i_D1 => s_EX_ext_o,
       o_O  => w_EX_mux1_alu_rtn);
 
@@ -729,7 +745,7 @@ begin
       o_ALU_Zero     => s_EX_ALU_Zero,
       o_ALU_Overflow => s_EX_Ovfl,
       o_branch       => s_EX_branch,
-      o_ALU_I_Result => s_EX_Dmem_Addr);
+      o_ALU_I_Result => s_EX_Dmem_Addr);   
 
   MuxFwd0: mux8t1_N
     generic map (N => 32)
@@ -765,6 +781,22 @@ begin
       o_Y  => w_EX_MuxFwd1_alu_B
     );
 
+    muxFwd3: mux8t1_N
+    generic map (N => 32)
+    port map (
+      i_w0 => s_EX_rt_data0_o, -- [000] from mux1 to the ALU originally.
+      i_w1 => s_DMemOut,         -- [001] from the DMEM Out, used for Load Word
+      i_w2 => s_MEM_Dmem_Lh,     -- [010] from the WordDecoder, used for Load HalfWord
+      i_w3 => s_MEM_Dmem_Lb,     -- [011] from the ByteDecoder, used for Load Byte
+      i_w4 => w_WB_mux_reg_rtn,  -- [100] from the WB stage, final write back of data.
+      i_w5 => s_MEM_Dmem_Addr,   -- [101] from the MEM stage, final data, used to fwd early.
+      i_w6 => x"00000000",       -- [110] Unused Input
+      i_w7 => x"00000000",       -- [111] Unused Input
+      i_s0 => s_MuxFwd2_Sel(0),
+      i_s1 => s_MuxFwd2_Sel(1),
+      i_s2 => s_MuxFwd2_Sel(2),
+      o_Y  => s_EX_rt_data1_o
+    );
   ----------------------------------------------------------------------------------------------------------
   -- PIPE
   ----------------------------------------------------------------------------------------------------------
@@ -786,7 +818,7 @@ begin
       i_EX_PCP4        => s_EX_PCP4,          -- PC+4 value
       i_EX_instr31t26  => s_EX_instr31t26,    -- Itype OpCode signal
       i_EX_rs_data_o   => s_EX_rs_data_o,     -- Output from Rs address
-      i_EX_rt_data_o   => s_EX_rt_data_o,     -- Output from Rt address
+      i_EX_rt_data_o   => s_EX_rt_data1_o,     -- Output from Rt address
       i_EX_pc4_s120_o  => s_EX_pc4_s120_o,    -- Jump address
       i_EX_RegWrAddr   => s_EX_RegWrAddr,     -- Write address
       i_EX_Dmem_Addr   => s_EX_Dmem_Addr,     -- Output from the ALU
