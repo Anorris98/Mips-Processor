@@ -1,0 +1,128 @@
+Warning in /home/anorris/CPRE381/ProjectGit/cpre_381/Project1/toolflow/proj/mips/lbTests/lb_1.s line 5 column 22: "255" is out-of-range for a signed value and possibly truncated
+
+[inst #1] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #2] lb $2,0($1)
+Register Write to Reg: 0x02 Val: 0xFFFFFFFF
+[inst #3] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #4] lb $3,0($1)
+Register Write to Reg: 0x03 Val: 0xFFFFFFFF
+[inst #5] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #6] lb $4,0($1)
+Register Write to Reg: 0x04 Val: 0xFFFFFFFF
+[inst #7] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #8] lb $5,0($1)
+Register Write to Reg: 0x05 Val: 0xFFFFFFFF
+[inst #9] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #10] lb $6,0($1)
+Register Write to Reg: 0x06 Val: 0xFFFFFFFF
+[inst #11] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #12] lb $7,0($1)
+Register Write to Reg: 0x07 Val: 0xFFFFFFFF
+[inst #13] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #14] lb $8,0($1)
+Register Write to Reg: 0x08 Val: 0xFFFFFFFF
+[inst #15] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #16] lb $9,0($1)
+Register Write to Reg: 0x09 Val: 0xFFFFFFFF
+[inst #17] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #18] lb $10,0($1)
+Register Write to Reg: 0x0A Val: 0xFFFFFFFF
+[inst #19] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #20] lb $11,0($1)
+Register Write to Reg: 0x0B Val: 0xFFFFFFFF
+[inst #21] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #22] lb $12,0($1)
+Register Write to Reg: 0x0C Val: 0xFFFFFFFF
+[inst #23] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #24] lb $13,0($1)
+Register Write to Reg: 0x0D Val: 0xFFFFFFFF
+[inst #25] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #26] lb $14,0($1)
+Register Write to Reg: 0x0E Val: 0xFFFFFFFF
+[inst #27] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #28] lb $15,0($1)
+Register Write to Reg: 0x0F Val: 0xFFFFFFFF
+[inst #29] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #30] lb $16,0($1)
+Register Write to Reg: 0x10 Val: 0xFFFFFFFF
+[inst #31] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #32] lb $17,0($1)
+Register Write to Reg: 0x11 Val: 0xFFFFFFFF
+[inst #33] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #34] lb $18,0($1)
+Register Write to Reg: 0x12 Val: 0xFFFFFFFF
+[inst #35] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #36] lb $19,0($1)
+Register Write to Reg: 0x13 Val: 0xFFFFFFFF
+[inst #37] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #38] lb $20,0($1)
+Register Write to Reg: 0x14 Val: 0xFFFFFFFF
+[inst #39] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #40] lb $21,0($1)
+Register Write to Reg: 0x15 Val: 0xFFFFFFFF
+[inst #41] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #42] lb $22,0($1)
+Register Write to Reg: 0x16 Val: 0xFFFFFFFF
+[inst #43] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #44] lb $23,0($1)
+Register Write to Reg: 0x17 Val: 0xFFFFFFFF
+[inst #45] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #46] lb $24,0($1)
+Register Write to Reg: 0x18 Val: 0xFFFFFFFF
+[inst #47] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #48] lb $25,0($1)
+Register Write to Reg: 0x19 Val: 0xFFFFFFFF
+[inst #49] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #50] lb $26,0($1)
+Register Write to Reg: 0x1A Val: 0xFFFFFFFF
+[inst #51] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #52] lb $27,0($1)
+Register Write to Reg: 0x1B Val: 0xFFFFFFFF
+[inst #53] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #54] lb $28,0($1)
+Register Write to Reg: 0x1C Val: 0xFFFFFFFF
+[inst #55] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #56] lb $29,0($1)
+Register Write to Reg: 0x1D Val: 0xFFFFFFFF
+[inst #57] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #58] lb $30,0($1)
+Register Write to Reg: 0x1E Val: 0xFFFFFFFF
+[inst #59] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #60] lb $31,0($1)
+Register Write to Reg: 0x1F Val: 0xFFFFFFFF
+[inst #61] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #62] lb $1,0($1)
+Register Write to Reg: 0x01 Val: 0xFFFFFFFF
+[inst #63] halt 
+

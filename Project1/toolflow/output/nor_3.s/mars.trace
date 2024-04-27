@@ -1,0 +1,4 @@
+[inst #1] nor $10,$8,$9
+Register Write to Reg: 0x0A Val: 0xFFFFFFFF
+[inst #2] halt 
+

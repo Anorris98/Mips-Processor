@@ -1,0 +1,18 @@
+[inst #1] xori $15,$0,1
+Register Write to Reg: 0x0F Val: 0x00000001
+[inst #2] xori $16,$15,2
+Register Write to Reg: 0x10 Val: 0x00000003
+[inst #3] xori $17,$16,4
+Register Write to Reg: 0x11 Val: 0x00000007
+[inst #4] xori $18,$17,8
+Register Write to Reg: 0x12 Val: 0x0000000F
+[inst #5] xori $19,$18,16
+Register Write to Reg: 0x13 Val: 0x0000001F
+[inst #6] xori $20,$19,32
+Register Write to Reg: 0x14 Val: 0x0000003F
+[inst #7] xori $21,$20,64
+Register Write to Reg: 0x15 Val: 0x0000007F
+[inst #8] xori $22,$21,128
+Register Write to Reg: 0x16 Val: 0x000000FF
+[inst #9] halt 
+

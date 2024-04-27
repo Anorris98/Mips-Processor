@@ -1,0 +1,8 @@
+[inst #1] addi $20,$0,15
+Register Write to Reg: 0x14 Val: 0x0000000F
+[inst #2] addi $21,$0,-6
+Register Write to Reg: 0x15 Val: 0xFFFFFFFA
+[inst #3] sub $22,$20,$21
+Register Write to Reg: 0x16 Val: 0x00000015
+[inst #4] halt 
+

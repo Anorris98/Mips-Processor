@@ -1,0 +1,14 @@
+Warning in /home/anorris/CPRE381/ProjectGit/cpre_381/Project1/toolflow/proj/mips/lbTests/lb_2.s line 6 column 21: "0xFF" is out-of-range for a signed value and possibly truncated
+
+[inst #1] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #2] lb $9,0($1)
+Register Write to Reg: 0x09 Val: 0x00000001
+[inst #3] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #4] lb $10,1($1)
+Register Write to Reg: 0x0A Val: 0xFFFFFFFF
+[inst #5] add $11,$9,$10
+Register Write to Reg: 0x0B Val: 0x00000000
+[inst #6] halt 
+

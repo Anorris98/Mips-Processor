@@ -1,0 +1,7 @@
+[inst #1] lui $1,32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #2] addi $1,$1,-1
+Register Write to Reg: 0x01 Val: 0x7FFFFFFF
+Arithmetic Overflow Detected
+[inst #3] halt 
+

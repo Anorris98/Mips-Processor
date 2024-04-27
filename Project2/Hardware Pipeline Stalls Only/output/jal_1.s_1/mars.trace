@@ -1,0 +1,15 @@
+[inst #1] jal 4194312
+Register Write to Reg: 0x1F Val: 0x00400004
+[inst #2] addiu $9,$31,0
+Register Write to Reg: 0x09 Val: 0x00400004
+[inst #3] jal 4194320
+Register Write to Reg: 0x1F Val: 0x00400010
+[inst #4] addiu $10,$31,0
+Register Write to Reg: 0x0A Val: 0x00400010
+[inst #5] addiu $9,$9,12
+Register Write to Reg: 0x09 Val: 0x00400010
+[inst #6] beq $9,$10,1
+[inst #7] addiu $8,$0,1
+Register Write to Reg: 0x08 Val: 0x00000001
+[inst #8] halt 
+

@@ -1,0 +1,16 @@
+[inst #1] addi $5,$0,4
+Register Write to Reg: 0x05 Val: 0x00000004
+[inst #2] addi $9,$0,3855
+Register Write to Reg: 0x09 Val: 0x00000F0F
+[inst #3] addi $15,$0,211
+Register Write to Reg: 0x0F Val: 0x000000D3
+[inst #4] addi $21,$0,164
+Register Write to Reg: 0x15 Val: 0x000000A4
+[inst #5] srlv $9,$9,$5
+Register Write to Reg: 0x09 Val: 0x000000F0
+[inst #6] srlv $15,$15,$5
+Register Write to Reg: 0x0F Val: 0x0000000D
+[inst #7] srlv $21,$21,$5
+Register Write to Reg: 0x15 Val: 0x0000000A
+[inst #8] halt 
+
