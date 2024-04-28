@@ -48,7 +48,7 @@ begin
   -- Stall Section
   -------------------------------------------------------------------------
   o_Stall_IFID <= '1' when ((i_MEM_Reg_Dst /= "00000" and (i_MEM_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rt)) 
-                             or (i_MEM_Reg_Dst /= "00000" and (i_MEM_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs)))
+                             or (i_MEM_Reg_Dst /= "00000" and (i_MEM_We = '1' and i_MEM_Reg_Dst = i_ID_Reg_Rs))) --else
                              or (i_EX_Reg_Dst /= "00000" and (i_EX_We = '1' and i_EX_Reg_Dst = i_ID_Reg_Rs)) else --for jr. small issue with jr if this isnt here.
                   '0';      
 
@@ -63,30 +63,30 @@ begin
   -------------------------------------------------------------------------
   -- Forwarding Unit Section
   -------------------------------------------------------------------------
-  o_fwd_mux0_sel <= "000" when (i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000" and i_WB_Reg_Dst = "00000") else                                                              --No forwarding if we are about to write to reg 0.
+  o_fwd_mux0_sel <= "000" when (i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000" and i_WB_Reg_Dst = "00000") else                                   --No forwarding if we are about to write to reg 0.
                     "001" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_MEM_opcode = "100011")) else                                 --lw MEM, A
                     "011" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100000") or (i_MEM_opcode = "100100"))) else  --Lb, lbu MEM, C
-                    "010" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001") --LH, LHU MEM, B
+                    "010" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001")                                      --LH, LHU MEM, B
                                 or (i_MEM_opcode = "100101"))) else
                     "101" when ((((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1')) and (i_MEM_Reg_Dst /= "00000"))) 
                                 and ((i_MEM_opcode = "001111") or ((i_MEM_opcode = "001111" or i_EX_ALU_Src = '1')) or i_MEM_opcode /= "00000") else --Arithmatic & logic MEM #1, E, --also handles lui if rs is the same as the destination, but if not we dont want to fwd.
                     --  "100" when (((i_EX_Reg_Rs = i_WB_Reg_Dst and i_WB_WE = '1' and  i_EX_ALU_Src = '1'))) else --WB
                     "000"; --No forwarding
 
-  o_Fwd_Mux1_Sel <= "000" when (i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000" and i_WB_Reg_Dst = "00000") else                                                             --No forwarding if we are about to write to reg 0.
-  -- "001" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_Mem_opcode /= "001111")) else --not lui, messes up because of zero reg. 
-                    "001" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_Mem_opcode = "100011")) else                                --catches the lw.
-                    "010" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001") --LH, LHU MEM, B
-                                or (i_MEM_opcode = "100101"))) else
-                    "011" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100000") or (i_MEM_opcode = "100100"))) else --Lb, lbu MEM, C
+  o_Fwd_Mux1_Sel <= "000" when (i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000" and i_WB_Reg_Dst = "00000") else                                  --No forwarding if we are about to write to reg 0.
+                    -- "001" when ((i_EX_Reg_Rs = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_Mem_opcode /= "001111")) else --not lui, messes up because of zero reg. 
+                    "001" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_Mem_opcode = "100011") and (i_EX_opcode /= "101011")) else                                --catches the lw.
+                    "010" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001")                                     --LH, LHU MEM, B
+                                or (i_MEM_opcode = "100101")) and (i_EX_opcode /= "101011")) else
+                    "011" when ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100000") or (i_MEM_opcode = "100100")) and (i_EX_opcode /= "101011")) else --Lb, lbu MEM, C
                     "101" when (((i_EX_Reg_Rt = i_MEM_Reg_Dst and i_MEM_WE = '1') and (i_MEM_Reg_Dst /= "00000")) and (i_EX_ALU_Src /= '1')) else     --Arithmatic & logic MEM #1, E, needs to checks the SRC because of the difference with IMM values, we use rt as the destination and not the source.
                     --  "100" when ((i_EX_Reg_Rt = i_WB_Reg_Dst and i_WB_WE = '1')) and (i_EX_ALU_Src /= '1') else --WB
                     "000"; --No forwarding
 
-  o_Fwd_Mux2_Sel <= "000" when (i_EX_opcode = "101011") and ((i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000")) else                                                              --No forwarding if we are about to write to reg 0.
+  o_Fwd_Mux2_Sel <= "000" when (i_EX_opcode = "101011") and ((i_EX_Reg_Dst = "00000") or (i_MEM_Reg_Dst = "00000")) else                                                            --No forwarding if we are about to write to reg 0.
                     "001" when (i_EX_opcode = "101011") and ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and (i_MEM_opcode = "100011")) else                                 --lw MEM, A
                     "011" when (i_EX_opcode = "101011") and ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100000") or (i_MEM_opcode = "100100"))) else  --Lb, lbu MEM, C
-                    "010" when (i_EX_opcode = "101011") and ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001") --LH, LHU MEM, B
+                    "010" when (i_EX_opcode = "101011") and ((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1') and ((i_MEM_opcode = "100001")                                      --LH, LHU MEM, B
                                 or (i_MEM_opcode = "100101"))) else
                     "101" when (i_EX_opcode = "101011") and (((((i_EX_Reg_Rt = i_MEM_Reg_Dst) and (i_MEM_WE = '1')) and (i_MEM_Reg_Dst /= "00000"))) 
                                 and ((i_MEM_opcode = "001111") or ((i_MEM_opcode = "001111" or i_EX_ALU_Src = '1')) or i_MEM_opcode /= "00000")) else --Arithmatic & logic MEM #1, E, --also handles lui if rs is the same as the destination, but if not we dont want to fwd.
