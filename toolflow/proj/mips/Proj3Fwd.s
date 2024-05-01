@@ -23,5 +23,10 @@ sw $4, 4($fp)
 lhu $4, 8($fp)
 sw $4, 8($fp)
 
+addi $5, $zero, 64
+add $6, $5, $zero
+add $7, $6, $6
+add $8, $7, $6
+
 
 halt
