@@ -1,0 +1,184 @@
+QuestaSim-64 vcom 2023.2_2 Compiler 2023.06 Jun  9 2023
+Start time: 19:30:57 on Apr 26,2024
+vcom -2008 -work internal/ModelSimContainer/work proj/src/MIPS_types.vhd internal/testpy/tb.vhd proj/src/mux8t1_N.vhd proj/src/Shifter.vhd proj/src/mux4t1_N.vhd proj/src/OnesComplementor.vhd proj/src/decoder5_32.vhd proj/src/ByteDecoder.vhd proj/src/BarrelShifter.vhd proj/src/mux32t1.vhd proj/src/andg2.vhd proj/src/ByteShifter.vhd proj/src/MEM_WB_pipe.vhd proj/src/EX_MEM_pipe.vhd proj/src/Adder.vhd proj/src/andg_N.vhd proj/src/RippleCarryAdder.vhd proj/src/invg.vhd proj/src/Controller.vhd proj/src/ID_EX_pipe.vhd proj/src/MIPS_types.vhd proj/src/mux2t1.vhd proj/src/IF_ID_pipe.vhd proj/src/AdderSubtractor.vhd proj/src/ALU.vhd proj/src/dffg.vhd proj/src/extender16t32.vhd proj/src/org2.vhd proj/src/mux2t1_N.vhd proj/src/xorg2.vhd proj/src/reg.vhd proj/src/xorg_N.vhd proj/src/WordDecoder.vhd proj/src/HazardDetectionUnit.vhd proj/src/ControlDecoderLogic.vhd proj/src/WordShifter.vhd proj/src/norg_N.vhd proj/src/org_N.vhd proj/src/dffg_N.vhd proj/src/pc_dffg.vhd proj/src/TopLevel/mem.vhd proj/src/TopLevel/MIPS_Processor.vhd 
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+** Warning: proj/src/MIPS_types.vhd(15): (vcom-1615) Existing package 'MIPS_types' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/MIPS_types.vhd(15) will be overwritten.
+-- Compiling package MIPS_types
+-- Compiling package body MIPS_types
+-- Loading package MIPS_types
+-- Loading package std_logic_textio
+-- Loading package ENV
+** Warning: internal/testpy/tb.vhd(24): (vcom-1615) Existing entity 'tb' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/internal/testpy/tb.vhd(24) will be overwritten.
+-- Compiling entity tb
+** Warning: internal/testpy/tb.vhd(31): (vcom-1615) Existing architecture 'tb(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/internal/testpy/tb.vhd(31) will be overwritten.
+-- Compiling architecture mixed of tb
+-- Loading package NUMERIC_STD
+** Warning: proj/src/mux8t1_N.vhd(16): (vcom-1615) Existing entity 'mux8t1_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux8t1_N.vhd(16) will be overwritten.
+-- Compiling entity mux8t1_N
+** Warning: proj/src/mux8t1_N.vhd(24): (vcom-1615) Existing architecture 'mux8t1_N(Dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux8t1_N.vhd(24) will be overwritten.
+-- Compiling architecture Dataflow of mux8t1_N
+** Warning: proj/src/Shifter.vhd(12): (vcom-1615) Existing entity 'Shifter' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Shifter.vhd(12) will be overwritten.
+-- Compiling entity Shifter
+** Warning: proj/src/Shifter.vhd(23): (vcom-1615) Existing architecture 'Shifter(behavior)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Shifter.vhd(23) will be overwritten.
+-- Compiling architecture behavior of Shifter
+** Warning: proj/src/mux4t1_N.vhd(16): (vcom-1615) Existing entity 'mux4t1_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux4t1_N.vhd(16) will be overwritten.
+-- Compiling entity mux4t1_N
+** Warning: proj/src/mux4t1_N.vhd(23): (vcom-1615) Existing architecture 'mux4t1_N(Dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux4t1_N.vhd(23) will be overwritten.
+-- Compiling architecture Dataflow of mux4t1_N
+** Warning: proj/src/OnesComplementor.vhd(12): (vcom-1615) Existing entity 'OnesComplementor' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/OnesComplementor.vhd(12) will be overwritten.
+-- Compiling entity OnesComplementor
+** Warning: proj/src/OnesComplementor.vhd(21): (vcom-1615) Existing architecture 'OnesComplementor(Structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/OnesComplementor.vhd(21) will be overwritten.
+-- Compiling architecture Structural of OnesComplementor
+** Warning: proj/src/decoder5_32.vhd(7): (vcom-1615) Existing entity 'decoder5_32' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/decoder5_32.vhd(7) will be overwritten.
+-- Compiling entity decoder5_32
+** Warning: proj/src/decoder5_32.vhd(14): (vcom-1615) Existing architecture 'decoder5_32(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/decoder5_32.vhd(14) will be overwritten.
+-- Compiling architecture mixed of decoder5_32
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+** Warning: proj/src/ByteDecoder.vhd(6): (vcom-1615) Existing entity 'ByteDecoder' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ByteDecoder.vhd(6) will be overwritten.
+-- Compiling entity ByteDecoder
+** Warning: proj/src/ByteDecoder.vhd(11): (vcom-1615) Existing architecture 'ByteDecoder(Behavioral)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ByteDecoder.vhd(11) will be overwritten.
+-- Compiling architecture Behavioral of ByteDecoder
+** Warning: proj/src/BarrelShifter.vhd(20): (vcom-1615) Existing entity 'BarrelShifter' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/BarrelShifter.vhd(20) will be overwritten.
+-- Compiling entity BarrelShifter
+** Warning: proj/src/BarrelShifter.vhd(31): (vcom-1615) Existing architecture 'BarrelShifter(behavior)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/BarrelShifter.vhd(31) will be overwritten.
+-- Compiling architecture behavior of BarrelShifter
+-- Loading package MIPS_types
+** Warning: proj/src/mux32t1.vhd(9): (vcom-1615) Existing entity 'mux32t1' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux32t1.vhd(9) will be overwritten.
+-- Compiling entity mux32t1
+** Warning: proj/src/mux32t1.vhd(17): (vcom-1615) Existing architecture 'mux32t1(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux32t1.vhd(17) will be overwritten.
+-- Compiling architecture dataflow of mux32t1
+** Warning: proj/src/andg2.vhd(23): (vcom-1615) Existing entity 'andg2' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/andg2.vhd(23) will be overwritten.
+-- Compiling entity andg2
+** Warning: proj/src/andg2.vhd(31): (vcom-1615) Existing architecture 'andg2(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/andg2.vhd(31) will be overwritten.
+-- Compiling architecture dataflow of andg2
+** Warning: proj/src/ByteShifter.vhd(6): (vcom-1615) Existing entity 'ByteShifter' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ByteShifter.vhd(6) will be overwritten.
+-- Compiling entity ByteShifter
+** Warning: proj/src/ByteShifter.vhd(15): (vcom-1615) Existing architecture 'ByteShifter(behavior)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ByteShifter.vhd(15) will be overwritten.
+-- Compiling architecture behavior of ByteShifter
+** Warning: proj/src/MEM_WB_pipe.vhd(15): (vcom-1615) Existing entity 'MEM_WB_pipe' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/MEM_WB_pipe.vhd(15) will be overwritten.
+-- Compiling entity MEM_WB_pipe
+** Warning: proj/src/MEM_WB_pipe.vhd(52): (vcom-1615) Existing architecture 'MEM_WB_pipe(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/MEM_WB_pipe.vhd(52) will be overwritten.
+-- Compiling architecture mixed of MEM_WB_pipe
+** Warning: proj/src/EX_MEM_pipe.vhd(15): (vcom-1615) Existing entity 'EX_MEM_pipe' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/EX_MEM_pipe.vhd(15) will be overwritten.
+-- Compiling entity EX_MEM_pipe
+** Warning: proj/src/EX_MEM_pipe.vhd(65): (vcom-1615) Existing architecture 'EX_MEM_pipe(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/EX_MEM_pipe.vhd(65) will be overwritten.
+-- Compiling architecture mixed of EX_MEM_pipe
+** Warning: proj/src/Adder.vhd(12): (vcom-1615) Existing entity 'Adder' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Adder.vhd(12) will be overwritten.
+-- Compiling entity Adder
+** Warning: proj/src/Adder.vhd(24): (vcom-1615) Existing architecture 'Adder(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Adder.vhd(24) will be overwritten.
+-- Compiling architecture structure of Adder
+** Warning: proj/src/andg_N.vhd(15): (vcom-1615) Existing entity 'andg_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/andg_N.vhd(15) will be overwritten.
+-- Compiling entity andg_N
+** Warning: proj/src/andg_N.vhd(22): (vcom-1615) Existing architecture 'andg_N(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/andg_N.vhd(22) will be overwritten.
+-- Compiling architecture structure of andg_N
+** Warning: proj/src/RippleCarryAdder.vhd(11): (vcom-1615) Existing entity 'RippleCarryAdder' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/RippleCarryAdder.vhd(11) will be overwritten.
+-- Compiling entity RippleCarryAdder
+** Warning: proj/src/RippleCarryAdder.vhd(22): (vcom-1615) Existing architecture 'RippleCarryAdder(Structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/RippleCarryAdder.vhd(22) will be overwritten.
+-- Compiling architecture Structural of RippleCarryAdder
+** Warning: proj/src/invg.vhd(23): (vcom-1615) Existing entity 'invg' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/invg.vhd(23) will be overwritten.
+-- Compiling entity invg
+** Warning: proj/src/invg.vhd(30): (vcom-1615) Existing architecture 'invg(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/invg.vhd(30) will be overwritten.
+-- Compiling architecture dataflow of invg
+** Warning: proj/src/Controller.vhd(14): (vcom-1615) Existing entity 'Controller' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Controller.vhd(14) will be overwritten.
+-- Compiling entity Controller
+** Warning: proj/src/Controller.vhd(33): (vcom-1615) Existing architecture 'Controller(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/Controller.vhd(33) will be overwritten.
+-- Compiling architecture structure of Controller
+** Warning: proj/src/ID_EX_pipe.vhd(15): (vcom-1615) Existing entity 'ID_EX_pipe' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ID_EX_pipe.vhd(15) will be overwritten.
+-- Compiling entity ID_EX_pipe
+** Warning: proj/src/ID_EX_pipe.vhd(71): (vcom-1615) Existing architecture 'ID_EX_pipe(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ID_EX_pipe.vhd(71) will be overwritten.
+-- Compiling architecture mixed of ID_EX_pipe
+** Warning: proj/src/MIPS_types.vhd(15): (vcom-1615) Existing package 'MIPS_types' at line 15 will be overwritten.
+-- Compiling package MIPS_types
+** Warning: proj/src/MIPS_types.vhd(31): (vcom-1615) Existing package body 'MIPS_types(body)' at line 31 will be overwritten.
+-- Compiling package body MIPS_types
+-- Loading package MIPS_types
+** Warning: proj/src/mux2t1.vhd(15): (vcom-1615) Existing entity 'mux2t1' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux2t1.vhd(15) will be overwritten.
+-- Compiling entity mux2t1
+** Warning: proj/src/mux2t1.vhd(25): (vcom-1615) Existing architecture 'mux2t1(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux2t1.vhd(25) will be overwritten.
+-- Compiling architecture structure of mux2t1
+** Warning: proj/src/IF_ID_pipe.vhd(15): (vcom-1615) Existing entity 'IF_ID_pipe' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/IF_ID_pipe.vhd(15) will be overwritten.
+-- Compiling entity IF_ID_pipe
+** Warning: proj/src/IF_ID_pipe.vhd(30): (vcom-1615) Existing architecture 'IF_ID_pipe(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/IF_ID_pipe.vhd(30) will be overwritten.
+-- Compiling architecture mixed of IF_ID_pipe
+** Warning: proj/src/AdderSubtractor.vhd(14): (vcom-1615) Existing entity 'AdderSubtractor' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/AdderSubtractor.vhd(14) will be overwritten.
+-- Compiling entity AdderSubtractor
+** Warning: proj/src/AdderSubtractor.vhd(30): (vcom-1615) Existing architecture 'AdderSubtractor(Structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/AdderSubtractor.vhd(30) will be overwritten.
+-- Compiling architecture Structural of AdderSubtractor
+** Warning: proj/src/ALU.vhd(13): (vcom-1615) Existing entity 'ALU' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ALU.vhd(13) will be overwritten.
+-- Compiling entity ALU
+** Warning: proj/src/ALU.vhd(25): (vcom-1615) Existing architecture 'ALU(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ALU.vhd(25) will be overwritten.
+-- Compiling architecture mixed of ALU
+** Warning: proj/src/dffg.vhd(23): (vcom-1615) Existing entity 'dffg' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/dffg.vhd(23) will be overwritten.
+-- Compiling entity dffg
+** Warning: proj/src/dffg.vhd(33): (vcom-1615) Existing architecture 'dffg(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/dffg.vhd(33) will be overwritten.
+-- Compiling architecture mixed of dffg
+** Warning: proj/src/extender16t32.vhd(7): (vcom-1615) Existing entity 'extender16t32' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/extender16t32.vhd(7) will be overwritten.
+-- Compiling entity extender16t32
+** Warning: proj/src/extender16t32.vhd(14): (vcom-1615) Existing architecture 'extender16t32(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/extender16t32.vhd(14) will be overwritten.
+-- Compiling architecture dataflow of extender16t32
+** Warning: proj/src/org2.vhd(23): (vcom-1615) Existing entity 'org2' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/org2.vhd(23) will be overwritten.
+-- Compiling entity org2
+** Warning: proj/src/org2.vhd(31): (vcom-1615) Existing architecture 'org2(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/org2.vhd(31) will be overwritten.
+-- Compiling architecture dataflow of org2
+** Warning: proj/src/mux2t1_N.vhd(21): (vcom-1615) Existing entity 'mux2t1_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux2t1_N.vhd(21) will be overwritten.
+-- Compiling entity mux2t1_N
+** Warning: proj/src/mux2t1_N.vhd(30): (vcom-1615) Existing architecture 'mux2t1_N(structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/mux2t1_N.vhd(30) will be overwritten.
+-- Compiling architecture structural of mux2t1_N
+** Warning: proj/src/xorg2.vhd(24): (vcom-1615) Existing entity 'xorg2' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/xorg2.vhd(24) will be overwritten.
+-- Compiling entity xorg2
+** Warning: proj/src/xorg2.vhd(32): (vcom-1615) Existing architecture 'xorg2(dataflow)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/xorg2.vhd(32) will be overwritten.
+-- Compiling architecture dataflow of xorg2
+-- Loading package MIPS_types
+** Warning: proj/src/reg.vhd(9): (vcom-1615) Existing entity 'reg' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/reg.vhd(9) will be overwritten.
+-- Compiling entity reg
+** Warning: proj/src/reg.vhd(24): (vcom-1615) Existing architecture 'reg(structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/reg.vhd(24) will be overwritten.
+-- Compiling architecture structural of reg
+** Warning: proj/src/xorg_N.vhd(14): (vcom-1615) Existing entity 'xorg_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/xorg_N.vhd(14) will be overwritten.
+-- Compiling entity xorg_N
+** Warning: proj/src/xorg_N.vhd(21): (vcom-1615) Existing architecture 'xorg_N(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/xorg_N.vhd(21) will be overwritten.
+-- Compiling architecture structure of xorg_N
+** Warning: proj/src/WordDecoder.vhd(6): (vcom-1615) Existing entity 'WordDecoder' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/WordDecoder.vhd(6) will be overwritten.
+-- Compiling entity WordDecoder
+** Warning: proj/src/WordDecoder.vhd(11): (vcom-1615) Existing architecture 'WordDecoder(Behavioral)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/WordDecoder.vhd(11) will be overwritten.
+-- Compiling architecture Behavioral of WordDecoder
+** Warning: proj/src/HazardDetectionUnit.vhd(7): (vcom-1615) Existing entity 'HazardDetectionUnit' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/HazardDetectionUnit.vhd(7) will be overwritten.
+-- Compiling entity HazardDetectionUnit
+** Warning: proj/src/HazardDetectionUnit.vhd(31): (vcom-1615) Existing architecture 'HazardDetectionUnit(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/HazardDetectionUnit.vhd(31) will be overwritten.
+-- Compiling architecture mixed of HazardDetectionUnit
+** Warning: proj/src/ControlDecoderLogic.vhd(12): (vcom-1615) Existing entity 'ControlDecoderLogic' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ControlDecoderLogic.vhd(12) will be overwritten.
+-- Compiling entity ControlDecoderLogic
+** Warning: proj/src/ControlDecoderLogic.vhd(20): (vcom-1615) Existing architecture 'ControlDecoderLogic(sel_when)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/ControlDecoderLogic.vhd(20) will be overwritten.
+-- Compiling architecture sel_when of ControlDecoderLogic
+** Warning: proj/src/WordShifter.vhd(13): (vcom-1615) Existing entity 'WordShifter' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/WordShifter.vhd(13) will be overwritten.
+-- Compiling entity WordShifter
+** Warning: proj/src/WordShifter.vhd(22): (vcom-1615) Existing architecture 'WordShifter(behavior)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/WordShifter.vhd(22) will be overwritten.
+-- Compiling architecture behavior of WordShifter
+** Warning: proj/src/norg_N.vhd(15): (vcom-1615) Existing entity 'norg_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/norg_N.vhd(15) will be overwritten.
+-- Compiling entity norg_N
+** Warning: proj/src/norg_N.vhd(22): (vcom-1615) Existing architecture 'norg_N(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/norg_N.vhd(22) will be overwritten.
+-- Compiling architecture structure of norg_N
+** Warning: proj/src/org_N.vhd(15): (vcom-1615) Existing entity 'org_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/org_N.vhd(15) will be overwritten.
+-- Compiling entity org_N
+** Warning: proj/src/org_N.vhd(22): (vcom-1615) Existing architecture 'org_N(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/org_N.vhd(22) will be overwritten.
+-- Compiling architecture structure of org_N
+** Warning: proj/src/dffg_N.vhd(21): (vcom-1615) Existing entity 'dffg_N' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/dffg_N.vhd(21) will be overwritten.
+-- Compiling entity dffg_N
+** Warning: proj/src/dffg_N.vhd(32): (vcom-1615) Existing architecture 'dffg_N(structural)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/dffg_N.vhd(32) will be overwritten.
+-- Compiling architecture structural of dffg_N
+** Warning: proj/src/pc_dffg.vhd(17): (vcom-1615) Existing entity 'pc_dffg' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/pc_dffg.vhd(17) will be overwritten.
+-- Compiling entity pc_dffg
+** Warning: proj/src/pc_dffg.vhd(27): (vcom-1615) Existing architecture 'pc_dffg(mixed)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/pc_dffg.vhd(27) will be overwritten.
+-- Compiling architecture mixed of pc_dffg
+** Warning: proj/src/TopLevel/mem.vhd(8): (vcom-1615) Existing entity 'mem' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/TopLevel/mem.vhd(8) will be overwritten.
+-- Compiling entity mem
+** Warning: proj/src/TopLevel/mem.vhd(27): (vcom-1615) Existing architecture 'mem(rtl)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/TopLevel/mem.vhd(27) will be overwritten.
+-- Compiling architecture rtl of mem
+** Warning: proj/src/TopLevel/MIPS_Processor.vhd(20): (vcom-1615) Existing entity 'MIPS_Processor' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/TopLevel/MIPS_Processor.vhd(20) will be overwritten.
+-- Compiling entity MIPS_Processor
+** Warning: proj/src/TopLevel/MIPS_Processor.vhd(32): (vcom-1615) Existing architecture 'MIPS_Processor(structure)' at /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/src/TopLevel/MIPS_Processor.vhd(32) will be overwritten.
+-- Compiling architecture structure of MIPS_Processor
+End time: 19:30:57 on Apr 26,2024, Elapsed time: 0:00:00
+Errors: 0, Warnings: 83

@@ -1,0 +1,66 @@
+# //  Questa Sim-64
+# //  Version 2023.2_2 linux_x86_64 Jun  9 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_D \
+vsim:/tb/MyMips/pc_dff/i_WE \
+vsim:/tb/MyMips/pc_dff/o_Q
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_CLK
+add wave -position insertpoint  \
+vsim:/tb/MyMips/HazardDetectionUnit0/o_Stall_IDEX \
+vsim:/tb/MyMips/HazardDetectionUnit0/o_Stall_IFID
+add wave -position insertpoint  \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_EX_Opcode \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_EX_Reg_Dst \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_EX_We \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_ID_Reg_Rs \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_ID_Reg_Rt \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_MEM_Opcode \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_MEM_Reg_Dst \
+vsim:/tb/MyMips/HazardDetectionUnit0/i_MEM_We
+add wave -position insertpoint  \
+vsim:/tb/MyMips/IDEX_pipe/i_FLUSH
+dataset close vsim
+# Dataset "vsim" closed.
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_D
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_WE \
+vsim:/tb/MyMips/pc_dff/o_Q
+dataset close vsim
+# Dataset "vsim" closed.
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_CLK \
+vsim:/tb/MyMips/pc_dff/i_D \
+vsim:/tb/MyMips/pc_dff/i_WE \
+vsim:/tb/MyMips/pc_dff/o_Q
+add wave -position insertpoint vsim:/tb/MyMips/IFID_pipe/*
+add wave -position insertpoint  \
+vsim:/tb/MyMips/IFID_pipe/i_FLUSH
+add wave -position insertpoint  \
+vsim:/tb/MyMips/HazardDetectionUnit0/o_Stall_IDEX \
+vsim:/tb/MyMips/HazardDetectionUnit0/o_Stall_IFID
+dataset close vsim
+# Dataset "vsim" closed.
+dataset close vsim
+# Dataset "vsim" closed.
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_D \
+vsim:/tb/MyMips/pc_dff/i_WE \
+vsim:/tb/MyMips/pc_dff/o_Q
+add wave -position insertpoint  \
+vsim:/tb/MyMips/pc_dff/i_CLK
+add wave -position insertpoint vsim:/tb/MyMips/or2/*
+add wave -position insertpoint vsim:/tb/MyMips/or1/*

@@ -1,0 +1,66 @@
+[inst #1] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #2] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #3] lw $2,4($1)
+Register Write to Reg: 0x02 Val: 0x00000014
+[inst #4] lw $3,4($1)
+Register Write to Reg: 0x03 Val: 0x00000014
+[inst #5] lw $4,4($1)
+Register Write to Reg: 0x04 Val: 0x00000014
+[inst #6] lw $5,4($1)
+Register Write to Reg: 0x05 Val: 0x00000014
+[inst #7] lw $6,4($1)
+Register Write to Reg: 0x06 Val: 0x00000014
+[inst #8] lw $7,4($1)
+Register Write to Reg: 0x07 Val: 0x00000014
+[inst #9] lw $8,4($1)
+Register Write to Reg: 0x08 Val: 0x00000014
+[inst #10] lw $9,4($1)
+Register Write to Reg: 0x09 Val: 0x00000014
+[inst #11] lw $10,4($1)
+Register Write to Reg: 0x0A Val: 0x00000014
+[inst #12] lw $11,4($1)
+Register Write to Reg: 0x0B Val: 0x00000014
+[inst #13] lw $12,4($1)
+Register Write to Reg: 0x0C Val: 0x00000014
+[inst #14] lw $13,4($1)
+Register Write to Reg: 0x0D Val: 0x00000014
+[inst #15] lw $14,4($1)
+Register Write to Reg: 0x0E Val: 0x00000014
+[inst #16] lw $15,4($1)
+Register Write to Reg: 0x0F Val: 0x00000014
+[inst #17] lw $16,4($1)
+Register Write to Reg: 0x10 Val: 0x00000014
+[inst #18] lw $17,4($1)
+Register Write to Reg: 0x11 Val: 0x00000014
+[inst #19] lw $18,4($1)
+Register Write to Reg: 0x12 Val: 0x00000014
+[inst #20] lw $19,4($1)
+Register Write to Reg: 0x13 Val: 0x00000014
+[inst #21] lw $20,4($1)
+Register Write to Reg: 0x14 Val: 0x00000014
+[inst #22] lw $21,4($1)
+Register Write to Reg: 0x15 Val: 0x00000014
+[inst #23] lw $22,4($1)
+Register Write to Reg: 0x16 Val: 0x00000014
+[inst #24] lw $23,4($1)
+Register Write to Reg: 0x17 Val: 0x00000014
+[inst #25] lw $24,4($1)
+Register Write to Reg: 0x18 Val: 0x00000014
+[inst #26] lw $25,4($1)
+Register Write to Reg: 0x19 Val: 0x00000014
+[inst #27] lw $26,4($1)
+Register Write to Reg: 0x1A Val: 0x00000014
+[inst #28] lw $27,4($1)
+Register Write to Reg: 0x1B Val: 0x00000014
+[inst #29] lw $28,4($1)
+Register Write to Reg: 0x1C Val: 0x00000014
+[inst #30] lw $29,4($1)
+Register Write to Reg: 0x1D Val: 0x00000014
+[inst #31] lw $30,4($1)
+Register Write to Reg: 0x1E Val: 0x00000014
+[inst #32] lw $31,4($1)
+Register Write to Reg: 0x1F Val: 0x00000014
+[inst #33] halt 
+

@@ -1,0 +1,12 @@
+[inst #1] addi $1,$0,1
+Register Write to Reg: 0x01 Val: 0x00000001
+[inst #2] addi $1,$1,1
+Register Write to Reg: 0x01 Val: 0x00000002
+[inst #3] addi $1,$1,1
+Register Write to Reg: 0x01 Val: 0x00000003
+[inst #4] addi $1,$1,1
+Register Write to Reg: 0x01 Val: 0x00000004
+[inst #5] addi $1,$1,1
+Register Write to Reg: 0x01 Val: 0x00000005
+[inst #6] halt 
+

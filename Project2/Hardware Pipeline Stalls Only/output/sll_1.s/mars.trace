@@ -1,0 +1,28 @@
+Warning in /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/mips/sllTests/sll_1.s line 6 column 1: MARS does not recognize the .global directive.  Ignored.
+
+[inst #1] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #2] lw $8,12($1)
+Register Write to Reg: 0x08 Val: 0x00000002
+[inst #3] sll $9,$8,31
+Register Write to Reg: 0x09 Val: 0x00000000
+[inst #4] addiu $10,$0,0
+Register Write to Reg: 0x0A Val: 0x00000000
+[inst #5] addiu $10,$10,4
+Register Write to Reg: 0x0A Val: 0x00000004
+[inst #6] addiu $2,$0,4
+Register Write to Reg: 0x02 Val: 0x00000004
+[inst #7] lui $1,4097
+Register Write to Reg: 0x01 Val: 0x10010000
+[inst #8] ori $4,$1,0
+Register Write to Reg: 0x04 Val: 0x10010000
+[inst #9] syscall 
+Value : [inst #10] addiu $2,$0,1
+Register Write to Reg: 0x02 Val: 0x00000001
+[inst #11] addu $4,$0,$9
+Register Write to Reg: 0x04 Val: 0x00000000
+[inst #12] syscall 
+0[inst #13] addiu $2,$0,10
+Register Write to Reg: 0x02 Val: 0x0000000A
+[inst #14] syscall 
+

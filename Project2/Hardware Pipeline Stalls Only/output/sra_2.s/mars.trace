@@ -1,0 +1,250 @@
+[inst #1] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #2] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #3] add $2,$0,$1
+Register Write to Reg: 0x02 Val: 0x80000000
+[inst #4] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #5] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #6] add $3,$0,$1
+Register Write to Reg: 0x03 Val: 0x80000000
+[inst #7] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #8] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #9] add $4,$0,$1
+Register Write to Reg: 0x04 Val: 0x80000000
+[inst #10] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #11] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #12] add $5,$0,$1
+Register Write to Reg: 0x05 Val: 0x80000000
+[inst #13] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #14] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #15] add $6,$0,$1
+Register Write to Reg: 0x06 Val: 0x80000000
+[inst #16] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #17] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #18] add $7,$0,$1
+Register Write to Reg: 0x07 Val: 0x80000000
+[inst #19] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #20] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #21] add $8,$0,$1
+Register Write to Reg: 0x08 Val: 0x80000000
+[inst #22] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #23] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #24] add $9,$0,$1
+Register Write to Reg: 0x09 Val: 0x80000000
+[inst #25] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #26] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #27] add $10,$0,$1
+Register Write to Reg: 0x0A Val: 0x80000000
+[inst #28] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #29] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #30] add $11,$0,$1
+Register Write to Reg: 0x0B Val: 0x80000000
+[inst #31] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #32] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #33] add $12,$0,$1
+Register Write to Reg: 0x0C Val: 0x80000000
+[inst #34] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #35] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #36] add $13,$0,$1
+Register Write to Reg: 0x0D Val: 0x80000000
+[inst #37] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #38] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #39] add $14,$0,$1
+Register Write to Reg: 0x0E Val: 0x80000000
+[inst #40] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #41] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #42] add $15,$0,$1
+Register Write to Reg: 0x0F Val: 0x80000000
+[inst #43] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #44] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #45] add $16,$0,$1
+Register Write to Reg: 0x10 Val: 0x80000000
+[inst #46] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #47] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #48] add $17,$0,$1
+Register Write to Reg: 0x11 Val: 0x80000000
+[inst #49] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #50] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #51] add $18,$0,$1
+Register Write to Reg: 0x12 Val: 0x80000000
+[inst #52] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #53] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #54] add $19,$0,$1
+Register Write to Reg: 0x13 Val: 0x80000000
+[inst #55] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #56] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #57] add $20,$0,$1
+Register Write to Reg: 0x14 Val: 0x80000000
+[inst #58] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #59] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #60] add $21,$0,$1
+Register Write to Reg: 0x15 Val: 0x80000000
+[inst #61] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #62] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #63] add $22,$0,$1
+Register Write to Reg: 0x16 Val: 0x80000000
+[inst #64] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #65] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #66] add $23,$0,$1
+Register Write to Reg: 0x17 Val: 0x80000000
+[inst #67] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #68] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #69] add $24,$0,$1
+Register Write to Reg: 0x18 Val: 0x80000000
+[inst #70] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #71] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #72] add $25,$0,$1
+Register Write to Reg: 0x19 Val: 0x80000000
+[inst #73] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #74] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #75] add $26,$0,$1
+Register Write to Reg: 0x1A Val: 0x80000000
+[inst #76] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #77] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #78] add $27,$0,$1
+Register Write to Reg: 0x1B Val: 0x80000000
+[inst #79] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #80] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #81] add $28,$0,$1
+Register Write to Reg: 0x1C Val: 0x80000000
+[inst #82] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #83] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #84] add $29,$0,$1
+Register Write to Reg: 0x1D Val: 0x80000000
+[inst #85] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #86] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #87] add $30,$0,$1
+Register Write to Reg: 0x1E Val: 0x80000000
+[inst #88] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #89] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #90] add $31,$0,$1
+Register Write to Reg: 0x1F Val: 0x80000000
+[inst #91] lui $1,-32768
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #92] ori $1,$1,0
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #93] add $1,$0,$1
+Register Write to Reg: 0x01 Val: 0x80000000
+[inst #94] sra $1,$1,1
+Register Write to Reg: 0x01 Val: 0xC0000000
+[inst #95] sra $2,$2,2
+Register Write to Reg: 0x02 Val: 0xE0000000
+[inst #96] sra $3,$3,3
+Register Write to Reg: 0x03 Val: 0xF0000000
+[inst #97] sra $4,$4,4
+Register Write to Reg: 0x04 Val: 0xF8000000
+[inst #98] sra $5,$5,5
+Register Write to Reg: 0x05 Val: 0xFC000000
+[inst #99] sra $6,$6,6
+Register Write to Reg: 0x06 Val: 0xFE000000
+[inst #100] sra $7,$7,7
+Register Write to Reg: 0x07 Val: 0xFF000000
+[inst #101] sra $8,$8,8
+Register Write to Reg: 0x08 Val: 0xFF800000
+[inst #102] sra $9,$9,9
+Register Write to Reg: 0x09 Val: 0xFFC00000
+[inst #103] sra $10,$10,10
+Register Write to Reg: 0x0A Val: 0xFFE00000
+[inst #104] sra $11,$11,11
+Register Write to Reg: 0x0B Val: 0xFFF00000
+[inst #105] sra $12,$12,12
+Register Write to Reg: 0x0C Val: 0xFFF80000
+[inst #106] sra $13,$13,13
+Register Write to Reg: 0x0D Val: 0xFFFC0000
+[inst #107] sra $14,$14,14
+Register Write to Reg: 0x0E Val: 0xFFFE0000
+[inst #108] sra $15,$15,15
+Register Write to Reg: 0x0F Val: 0xFFFF0000
+[inst #109] sra $16,$16,16
+Register Write to Reg: 0x10 Val: 0xFFFF8000
+[inst #110] sra $17,$17,17
+Register Write to Reg: 0x11 Val: 0xFFFFC000
+[inst #111] sra $18,$18,18
+Register Write to Reg: 0x12 Val: 0xFFFFE000
+[inst #112] sra $19,$19,19
+Register Write to Reg: 0x13 Val: 0xFFFFF000
+[inst #113] sra $20,$20,20
+Register Write to Reg: 0x14 Val: 0xFFFFF800
+[inst #114] sra $21,$21,21
+Register Write to Reg: 0x15 Val: 0xFFFFFC00
+[inst #115] sra $22,$22,22
+Register Write to Reg: 0x16 Val: 0xFFFFFE00
+[inst #116] sra $23,$23,23
+Register Write to Reg: 0x17 Val: 0xFFFFFF00
+[inst #117] sra $24,$24,24
+Register Write to Reg: 0x18 Val: 0xFFFFFF80
+[inst #118] sra $25,$25,25
+Register Write to Reg: 0x19 Val: 0xFFFFFFC0
+[inst #119] sra $26,$26,26
+Register Write to Reg: 0x1A Val: 0xFFFFFFE0
+[inst #120] sra $27,$27,27
+Register Write to Reg: 0x1B Val: 0xFFFFFFF0
+[inst #121] sra $28,$28,28
+Register Write to Reg: 0x1C Val: 0xFFFFFFF8
+[inst #122] sra $29,$29,29
+Register Write to Reg: 0x1D Val: 0xFFFFFFFC
+[inst #123] sra $30,$30,30
+Register Write to Reg: 0x1E Val: 0xFFFFFFFE
+[inst #124] sra $31,$31,31
+Register Write to Reg: 0x1F Val: 0xFFFFFFFF
+[inst #125] halt 
+

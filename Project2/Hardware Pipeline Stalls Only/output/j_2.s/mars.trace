@@ -1,0 +1,5 @@
+[inst #1] nop 
+[inst #2] j 4194324
+[inst #3] nop 
+[inst #4] halt 
+

@@ -1,0 +1,30 @@
+Warning in /home/anorris/CPRE381/ProjectGit/cpre_381/toolflow/proj/mips/lbuTests/lbu_4.s line 5 column 17: "0xFF" is out-of-range for a signed value and possibly truncated
+
+[inst #1] lui $4,4097
+Register Write to Reg: 0x04 Val: 0x10010000
+[inst #2] ori $4,$4,0
+Register Write to Reg: 0x04 Val: 0x10010000
+[inst #3] lbu $0,0($4)
+Register Write to Reg: 0x00 Val: 0x000000FF
+[inst #4] lbu $1,0($4)
+Register Write to Reg: 0x01 Val: 0x000000FF
+[inst #5] lbu $2,0($4)
+Register Write to Reg: 0x02 Val: 0x000000FF
+[inst #6] lbu $5,0($4)
+Register Write to Reg: 0x05 Val: 0x000000FF
+[inst #7] lbu $8,0($4)
+Register Write to Reg: 0x08 Val: 0x000000FF
+[inst #8] lbu $16,0($4)
+Register Write to Reg: 0x10 Val: 0x000000FF
+[inst #9] lbu $26,0($4)
+Register Write to Reg: 0x1A Val: 0x000000FF
+[inst #10] lbu $28,0($4)
+Register Write to Reg: 0x1C Val: 0x000000FF
+[inst #11] lbu $29,0($4)
+Register Write to Reg: 0x1D Val: 0x000000FF
+[inst #12] lbu $30,0($4)
+Register Write to Reg: 0x1E Val: 0x000000FF
+[inst #13] lbu $31,0($4)
+Register Write to Reg: 0x1F Val: 0x000000FF
+[inst #14] halt 
+

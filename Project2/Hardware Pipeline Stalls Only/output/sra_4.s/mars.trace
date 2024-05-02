@@ -1,0 +1,10 @@
+[inst #1] lui $8,43981
+Register Write to Reg: 0x08 Val: 0xABCD0000
+[inst #2] ori $8,$8,61185
+Register Write to Reg: 0x08 Val: 0xABCDEF01
+[inst #3] sra $9,$8,2
+Register Write to Reg: 0x09 Val: 0xEAF37BC0
+[inst #4] sra $9,$8,4
+Register Write to Reg: 0x09 Val: 0xFABCDEF0
+[inst #5] halt 
+
